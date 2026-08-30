@@ -22,12 +22,12 @@ jobs:
 
       - name: Fetch menu from LinqConnect
         run: |
-          set -euo pipefail
+          set -uo pipefail
           # Maple Avenue Elementary, Hamilton School District (WI).
           BID="a513a71a-22d7-ee11-a71c-a811a99a3020"
           DID="37aa0b35-eba0-ee11-839d-b338dc280a64"
-          # The API rejects non-browser clients with 403, so send a real UA.
-          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
+          # The API 403s non-browser clients, so send a realistic UA.
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
 
           # Prefer next month (this runs on the 25th, when it is usually
           # posted); fall back to the current month if next month is not up.
@@ -36,27 +36,18 @@ jobs:
 
           for START in "$NEXT" "$CUR"; do
             echo "=== Trying startDate=$START ==="
-            CODE=$(curl -sS -A "$UA"               -H "Accept: application/json"               -H "Accept-Language: en-US,en;q=0.9"               -H "Referer: https://linqconnect.com/"               -o FamilyMenu.json -w '%{http_code}'               "https://api.linqconnect.com/api/FamilyMenu?buildingId=${BID}&districtId=${DID}&startDate=${START}") || true
+            CODE=$(curl -sS -A "$UA" -H "Accept: application/json" -H "Accept-Language: en-US,en;q=0.9" -H "Origin: https://linqconnect.com" -H "Referer: https://linqconnect.com/" -o FamilyMenu.json -w '%{http_code}' "https://api.linqconnect.com/api/FamilyMenu?buildingId=${BID}&districtId=${DID}&startDate=${START}")
             echo "HTTP $CODE, $(wc -c < FamilyMenu.json) bytes"
-            echo "First 200 bytes:"; head -c 200 FamilyMenu.json; echo
-
+            echo "--- first 300 bytes ---"
+            head -c 300 FamilyMenu.json || true
+            echo ""
             if [ "$CODE" != "200" ]; then
               echo "Non-200 response; trying next candidate."
               continue
             fi
-
-            # Must be JSON with at least one session. Any parse failure => 0.
-            N=$(python3 -c "
-import json,sys
-try:
-    d=json.load(open('FamilyMenu.json'))
-    print(len(d.get('FamilyMenuSessions') or []))
-except Exception as e:
-    print('0', file=sys.stdout)
-    print('parse error:', e, file=sys.stderr)
-")
+            N=$(python3 -c "import json;d=json.load(open('FamilyMenu.json'));print(len(d.get('FamilyMenuSessions') or []))" 2>/dev/null || echo 0)
             echo "FamilyMenuSessions: $N"
-            if [ "$N" -gt 0 ] 2>/dev/null; then
+            if [ "$N" -gt 0 ]; then
               echo "Using menu for startDate=$START"
               echo "MENU_START=$START" >> "$GITHUB_ENV"
               exit 0
@@ -68,56 +59,29 @@ except Exception as e:
 
       - name: Generate ICS
         run: |
+          set -euo pipefail
           mkdir -p public
-          python3 linq_ics.py FamilyMenu.json -o candidate.ics \
-            --detail full --name "Maple Ave Lunch"
-
-          # Never publish an empty calendar over a good one.
+          python3 linq_ics.py FamilyMenu.json -o candidate.ics --detail full --name "Maple Ave Lunch"
           EVENTS=$(grep -c '^BEGIN:VEVENT' candidate.ics || true)
           echo "Generated $EVENTS events for $MENU_START"
-          if [ "$EVENTS" -lt 1 ]; then
-            echo "::error::Generated feed has no events — refusing to overwrite."
+          if [ "${EVENTS:-0}" -lt 1 ]; then
+            echo "::error::Generated feed has no events - refusing to overwrite."
             exit 1
           fi
           mv candidate.ics public/maple_ave_lunch.ics
 
       - name: Validate iCalendar output
-        run: |
-          python3 - <<'PY'
-          import datetime, re, sys
-          raw = open('public/maple_ave_lunch.ics','rb').read()
-          txt = raw.decode('utf-8')
-          errs = []
-          if raw.count(b'\n') != raw.count(b'\r\n'):
-              errs.append('line endings are not all CRLF')
-          if txt.count('BEGIN:VEVENT') != txt.count('END:VEVENT'):
-              errs.append('unbalanced BEGIN/END:VEVENT')
-          if txt.count('BEGIN:VCALENDAR') != 1 or txt.count('END:VCALENDAR') != 1:
-              errs.append('unbalanced VCALENDAR')
-          ds = re.findall(r'DTSTART;VALUE=DATE:(\d{8})', txt)
-          de = re.findall(r'DTEND;VALUE=DATE:(\d{8})', txt)
-          if len(ds) != len(de) or len(ds) != txt.count('BEGIN:VEVENT'):
-              errs.append('DTSTART/DTEND count mismatch')
-          for a, b in zip(ds, de):
-              d = datetime.datetime.strptime(b, '%Y%m%d') - datetime.datetime.strptime(a, '%Y%m%d')
-              if d != datetime.timedelta(days=1):
-                  errs.append(f'event {a} spans {d.days} days, expected 1')
-          uids = re.findall(r'^UID:(.+)$', txt, re.M)
-          if len(uids) != len(set(uids)):
-              errs.append('duplicate UIDs')
-          for line in txt.split('\r\n'):
-              if len(line.encode('utf-8')) > 75:
-                  errs.append(f'line exceeds 75 octets: {line[:40]}...')
-          if errs:
-              print('INVALID:'); [print(' -', e) for e in errs]; sys.exit(1)
-          print(f'Valid iCalendar: {len(uids)} events, {len(raw)} bytes, CRLF OK')
-          PY
+        run: python3 validate_ics.py public/maple_ave_lunch.ics
 
       - name: Commit updated feed
         run: |
+          set -euo pipefail
           git config user.name  "menu-bot"
           git config user.email "menu-bot@users.noreply.github.com"
           git add public/maple_ave_lunch.ics
-          git diff --cached --quiet && { echo "No changes."; exit 0; }
+          if git diff --cached --quiet; then
+            echo "No changes."
+            exit 0
+          fi
           git commit -m "Update lunch menu ($MENU_START)"
           git push
