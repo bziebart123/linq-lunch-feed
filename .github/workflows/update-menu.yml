@@ -22,34 +22,48 @@ jobs:
 
       - name: Fetch menu from LinqConnect
         run: |
+          set -euo pipefail
           # Maple Avenue Elementary, Hamilton School District (WI).
           BID="a513a71a-22d7-ee11-a71c-a811a99a3020"
           DID="37aa0b35-eba0-ee11-839d-b338dc280a64"
           # The API rejects non-browser clients with 403, so send a real UA.
-          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
 
-          fetch() {
-            curl -sS --fail-with-body -A "$UA" -H "Accept: application/json" \
-              "https://api.linqconnect.com/api/FamilyMenu?buildingId=${BID}&districtId=${DID}&startDate=$1" \
-              -o FamilyMenu.json
-            python3 -c "import json;print(len(json.load(open('FamilyMenu.json')).get('FamilyMenuSessions',[])))"
-          }
-
-          # Prefer next month (this runs on the 25th, when it is usually posted);
-          # fall back to the current month if next month is not up yet.
+          # Prefer next month (this runs on the 25th, when it is usually
+          # posted); fall back to the current month if next month is not up.
           NEXT=$(date -u -d "$(date -u +%Y-%m-01) +1 month" +%-m-1-%Y)
           CUR=$(date -u +%-m-1-%Y)
 
           for START in "$NEXT" "$CUR"; do
-            echo "Trying startDate=$START"
-            if [ "$(fetch "$START")" != "0" ]; then
+            echo "=== Trying startDate=$START ==="
+            CODE=$(curl -sS -A "$UA"               -H "Accept: application/json"               -H "Accept-Language: en-US,en;q=0.9"               -H "Referer: https://linqconnect.com/"               -o FamilyMenu.json -w '%{http_code}'               "https://api.linqconnect.com/api/FamilyMenu?buildingId=${BID}&districtId=${DID}&startDate=${START}") || true
+            echo "HTTP $CODE, $(wc -c < FamilyMenu.json) bytes"
+            echo "First 200 bytes:"; head -c 200 FamilyMenu.json; echo
+
+            if [ "$CODE" != "200" ]; then
+              echo "Non-200 response; trying next candidate."
+              continue
+            fi
+
+            # Must be JSON with at least one session. Any parse failure => 0.
+            N=$(python3 -c "
+import json,sys
+try:
+    d=json.load(open('FamilyMenu.json'))
+    print(len(d.get('FamilyMenuSessions') or []))
+except Exception as e:
+    print('0', file=sys.stdout)
+    print('parse error:', e, file=sys.stderr)
+")
+            echo "FamilyMenuSessions: $N"
+            if [ "$N" -gt 0 ] 2>/dev/null; then
               echo "Using menu for startDate=$START"
               echo "MENU_START=$START" >> "$GITHUB_ENV"
               exit 0
             fi
           done
 
-          echo "::error::No menu posted for $NEXT or $CUR — leaving existing feed untouched."
+          echo "::error::No usable menu for $NEXT or $CUR - existing feed left untouched."
           exit 1
 
       - name: Generate ICS
