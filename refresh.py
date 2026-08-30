@@ -245,7 +245,7 @@ def write_index(results, repo_url, base_url):
             .format("" if kind == "menu" else " alt",
                     base_url.rstrip("/") + "/" + os.path.basename(p),
                     label,
-                    "PDF" if kind == "menu" else "ALLERGENS")
+                    "PDF" if kind == "menu" else "PDF with allergens")
             for label, p, kind in pdfs)
         pdf_group = ("""
         <div class="opt">
@@ -331,7 +331,8 @@ def write_index(results, repo_url, base_url):
   .ext {{ font-size: .72em; font-weight: 700; letter-spacing: .05em;
           background: var(--soft); border-radius: 4px; padding: .15em .45em;
           opacity: .8; }}
-  a.chip.alt .ext {{ background: rgba(198,40,40,.14); color: #c62828; }}
+  a.chip.alt .ext {{ background: rgba(198,40,40,.14); color: #c62828;
+                     letter-spacing: 0; font-weight: 600; }}
   @media (prefers-color-scheme: dark) {{
     a.chip.alt .ext {{ background: rgba(255,138,128,.18); color: #ff8a80; }}
   }}
@@ -375,11 +376,10 @@ def write_index(results, repo_url, base_url):
    or <strong>Build Your Own</strong> at the high school.</p>
 
 <h2>Allergens</h2>
-<p>Each day lists the allergens the district records for the hot lunch, and the
-   calendar spells them out for every item. The standard printable keeps them
-   short as letter codes with a key at the bottom. If you need them at a
-   glance, use the <strong>Allergens</strong> printable instead, which lists
-   them in full for each item.</p>
+<p>The calendar lists the allergens the district records for every item. For
+   printing, use the <strong>PDF with allergens</strong> version, which lists
+   them in full for each item. The standard PDF leaves them out to stay
+   readable.</p>
 <p>This information comes from the district and can change. Confirm with the
    school before relying on it.</p>
 

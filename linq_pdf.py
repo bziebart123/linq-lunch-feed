@@ -41,26 +41,6 @@ MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July",
                "August", "September", "October", "November", "December"]
 DAY_NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
 
-# Short codes keep allergens to one quiet line on the standard sheet. The
-# allergen sheet spells them out instead.
-ALLERGEN_CODES = {
-    "Egg": "E", "Milk": "M", "Wheat": "W", "Soy": "S",
-    "Sesame Seeds": "Se", "Sesame": "Se", "Fish": "F",
-    "Shellfish": "SF", "Peanut": "P", "Peanuts": "P",
-    "Tree Nuts": "TN", "Tree Nut": "TN",
-}
-
-
-def allergen_code(name):
-    return ALLERGEN_CODES.get(name) or name[:2].title()
-
-
-def legend_for(names):
-    """'E=Egg, M=Milk, ...' for whatever allergens appear this month."""
-    seen = {}
-    for n in names:
-        seen.setdefault(allergen_code(n), n)
-    return ", ".join(f"{c}={seen[c]}" for c in sorted(seen))
 
 
 def school_year(month, year):
@@ -114,16 +94,17 @@ def build_pdf(MENU, month, year, school_name, out_path,
         served = [d for d, v in MENU.items() if v]
         last_posted_day = max(served) if served else 0
 
-    # Only the allergens actually used this month go in the footer legend.
+    # Only the allergen sheet carries an allergen footer line. The standard
+    # sheet stays exactly as it was before allergens existed.
     used_allergens = set()
-    for v in MENU.values():
-        if not v:
-            continue
-        used_allergens.update(v.get("allergens") or [])
-        for a in v.get("alts") or []:
-            used_allergens.update(a.get("allergens") or [])
-        if allergen_sheet:
+    if allergen_sheet:
+        for v in MENU.values():
+            if not v:
+                continue
+            used_allergens.update(v.get("allergens") or [])
             used_allergens.update(v.get("side_allergens") or [])
+            for a in v.get("alts") or []:
+                used_allergens.update(a.get("allergens") or [])
 
     # Build the Mon-Fri grid, dropping any week with no menu at all (spring
     # break, winter break) so the calendar stays on a single sheet.
@@ -264,14 +245,11 @@ def build_pdf(MENU, month, year, school_name, out_path,
                     blocks.append((cell.get("fruit", ""), 7.2, FRUIT_FG, False, 2))
                     blocks.append((cell.get("veg", ""), 7.2, VEG_FG, False, 2))
                     blocks.append((cell.get("extra", ""), 7.2, EXTRA_FG, False, 2))
+                # No allergens on this sheet. They live on the allergen sheet,
+                # where they can be read properly instead of as letter codes.
                 for alt in cell.get("alts") or []:
                     blocks.append((alt["label"] + ": " + alt["items"]
                                    + halal_tag(alt), 8, BISTRO_RED, True, 2))
-                # Allergens stay secondary here: one small grey line of codes,
-                # with the legend in the footer.
-                if cell.get("allergens"):
-                    codes = ", ".join(allergen_code(a) for a in cell["allergens"])
-                    blocks.append(("Contains " + codes, 6.4, ALLERGEN_FG, False, 2))
             blocks = [b for b in blocks if b[0]]
 
             def layout(scale):
@@ -312,19 +290,12 @@ def build_pdf(MENU, month, year, school_name, out_path,
     base_y = MARGIN + 2
 
     if used_allergens:
-        legend_y = base_y + 8
-        if allergen_sheet:
-            legend = ("Allergen and Halal information comes from the district "
-                      "and can change. Confirm with the school before relying "
-                      "on it.")
-        else:
-            legend = (legend_for(used_allergens)
-                      + ". Codes cover the hot lunch; see the allergen sheet "
-                        "for every item. Confirm with the school.")
+        legend = ("Allergen and Halal information comes from the district and "
+                  "can change. Confirm with the school before relying on it.")
         while c.stringWidth(legend, "Helvetica", 6) > uw and len(legend) > 10:
             legend = legend[:-2]
         c.setFillColor(ALLERGEN_FG)
-        c.drawString(ux, legend_y, legend)
+        c.drawString(ux, base_y + 8, legend)
         c.setFillColor(GRAY_TEXT)
 
     if note:

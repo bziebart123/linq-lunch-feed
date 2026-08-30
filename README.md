@@ -34,8 +34,8 @@ These never change, so they are safe to bookmark or pass along:
 
 ### Printable PDFs
 
-Each school gets two printables per month: the standard menu, and an allergen
-version. PDF links are not listed here on purpose. Each filename contains its
+Each school gets two printables per month: the standard menu, and a
+"PDF with allergens" version. PDF links are not listed here on purpose. Each filename contains its
 month (`maple_ave_lunch_September_2026.pdf`,
 `maple_ave_lunch_September_2026_allergens.pdf`), so any list written here goes
 stale as soon as a new month is posted. The [menu
@@ -53,10 +53,9 @@ Sesame Seeds, and Fish. Items the district marks Halal are labelled as such.
 
 - **Calendar links** spell allergens out in full for each item, including the
   sides.
-- **The standard printable** keeps them to one small grey line of letter codes
-  per day, with a key at the bottom of the page.
-- **The Allergens printable** lists them in full for every item. Use this one if
-  you need to read them at a glance.
+- **The PDF with allergens** lists them in full for every item. Use this one if
+  you want them on paper.
+- **The standard PDF** leaves allergens out so the menu stays easy to read.
 
 This information comes from the district and can change. Confirm with the school
 before relying on it.

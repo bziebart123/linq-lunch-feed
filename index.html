@@ -62,7 +62,8 @@
   .ext { font-size: .72em; font-weight: 700; letter-spacing: .05em;
           background: var(--soft); border-radius: 4px; padding: .15em .45em;
           opacity: .8; }
-  a.chip.alt .ext { background: rgba(198,40,40,.14); color: #c62828; }
+  a.chip.alt .ext { background: rgba(198,40,40,.14); color: #c62828;
+                     letter-spacing: 0; font-weight: 600; }
   @media (prefers-color-scheme: dark) {
     a.chip.alt .ext { background: rgba(255,138,128,.18); color: #ff8a80; }
   }
@@ -98,7 +99,7 @@
         <div class="opt">
           <div class="opt-label">Print</div>
           <a class="chip" href="https://bziebart123.github.io/linq-lunch-feed/public/maple_ave_lunch_September_2026.pdf">September 2026<span class="ext">PDF</span></a>
-          <a class="chip alt" href="https://bziebart123.github.io/linq-lunch-feed/public/maple_ave_lunch_September_2026_allergens.pdf">September 2026<span class="ext">ALLERGENS</span></a>
+          <a class="chip alt" href="https://bziebart123.github.io/linq-lunch-feed/public/maple_ave_lunch_September_2026_allergens.pdf">September 2026<span class="ext">PDF with allergens</span></a>
         </div>
     </li>
     <li>
@@ -117,7 +118,7 @@
         <div class="opt">
           <div class="opt-label">Print</div>
           <a class="chip" href="https://bziebart123.github.io/linq-lunch-feed/public/hamilton_high_school_lunch_September_2026.pdf">September 2026<span class="ext">PDF</span></a>
-          <a class="chip alt" href="https://bziebart123.github.io/linq-lunch-feed/public/hamilton_high_school_lunch_September_2026_allergens.pdf">September 2026<span class="ext">ALLERGENS</span></a>
+          <a class="chip alt" href="https://bziebart123.github.io/linq-lunch-feed/public/hamilton_high_school_lunch_September_2026_allergens.pdf">September 2026<span class="ext">PDF with allergens</span></a>
         </div>
     </li>
     <li>
@@ -136,7 +137,7 @@
         <div class="opt">
           <div class="opt-label">Print</div>
           <a class="chip" href="https://bziebart123.github.io/linq-lunch-feed/public/lannon_elementary_school_lunch_September_2026.pdf">September 2026<span class="ext">PDF</span></a>
-          <a class="chip alt" href="https://bziebart123.github.io/linq-lunch-feed/public/lannon_elementary_school_lunch_September_2026_allergens.pdf">September 2026<span class="ext">ALLERGENS</span></a>
+          <a class="chip alt" href="https://bziebart123.github.io/linq-lunch-feed/public/lannon_elementary_school_lunch_September_2026_allergens.pdf">September 2026<span class="ext">PDF with allergens</span></a>
         </div>
     </li>
     <li>
@@ -155,7 +156,7 @@
         <div class="opt">
           <div class="opt-label">Print</div>
           <a class="chip" href="https://bziebart123.github.io/linq-lunch-feed/public/marcy_elementary_school_lunch_September_2026.pdf">September 2026<span class="ext">PDF</span></a>
-          <a class="chip alt" href="https://bziebart123.github.io/linq-lunch-feed/public/marcy_elementary_school_lunch_September_2026_allergens.pdf">September 2026<span class="ext">ALLERGENS</span></a>
+          <a class="chip alt" href="https://bziebart123.github.io/linq-lunch-feed/public/marcy_elementary_school_lunch_September_2026_allergens.pdf">September 2026<span class="ext">PDF with allergens</span></a>
         </div>
     </li>
     <li>
@@ -174,7 +175,7 @@
         <div class="opt">
           <div class="opt-label">Print</div>
           <a class="chip" href="https://bziebart123.github.io/linq-lunch-feed/public/silver_spring_intermediate_lunch_September_2026.pdf">September 2026<span class="ext">PDF</span></a>
-          <a class="chip alt" href="https://bziebart123.github.io/linq-lunch-feed/public/silver_spring_intermediate_lunch_September_2026_allergens.pdf">September 2026<span class="ext">ALLERGENS</span></a>
+          <a class="chip alt" href="https://bziebart123.github.io/linq-lunch-feed/public/silver_spring_intermediate_lunch_September_2026_allergens.pdf">September 2026<span class="ext">PDF with allergens</span></a>
         </div>
     </li>
     <li>
@@ -193,7 +194,7 @@
         <div class="opt">
           <div class="opt-label">Print</div>
           <a class="chip" href="https://bziebart123.github.io/linq-lunch-feed/public/templeton_middle_school_lunch_September_2026.pdf">September 2026<span class="ext">PDF</span></a>
-          <a class="chip alt" href="https://bziebart123.github.io/linq-lunch-feed/public/templeton_middle_school_lunch_September_2026_allergens.pdf">September 2026<span class="ext">ALLERGENS</span></a>
+          <a class="chip alt" href="https://bziebart123.github.io/linq-lunch-feed/public/templeton_middle_school_lunch_September_2026_allergens.pdf">September 2026<span class="ext">PDF with allergens</span></a>
         </div>
     </li>
     <li>
@@ -212,7 +213,7 @@
         <div class="opt">
           <div class="opt-label">Print</div>
           <a class="chip" href="https://bziebart123.github.io/linq-lunch-feed/public/woodside_elementary_school_lunch_September_2026.pdf">September 2026<span class="ext">PDF</span></a>
-          <a class="chip alt" href="https://bziebart123.github.io/linq-lunch-feed/public/woodside_elementary_school_lunch_September_2026_allergens.pdf">September 2026<span class="ext">ALLERGENS</span></a>
+          <a class="chip alt" href="https://bziebart123.github.io/linq-lunch-feed/public/woodside_elementary_school_lunch_September_2026_allergens.pdf">September 2026<span class="ext">PDF with allergens</span></a>
         </div>
     </li>
 </ul>
@@ -238,11 +239,10 @@
    or <strong>Build Your Own</strong> at the high school.</p>
 
 <h2>Allergens</h2>
-<p>Each day lists the allergens the district records for the hot lunch, and the
-   calendar spells them out for every item. The standard printable keeps them
-   short as letter codes with a key at the bottom. If you need them at a
-   glance, use the <strong>Allergens</strong> printable instead, which lists
-   them in full for each item.</p>
+<p>The calendar lists the allergens the district records for every item. For
+   printing, use the <strong>PDF with allergens</strong> version, which lists
+   them in full for each item. The standard PDF leaves them out to stay
+   readable.</p>
 <p>This information comes from the district and can change. Confirm with the
    school before relying on it.</p>
 
