@@ -34,15 +34,35 @@ These never change, so they are safe to bookmark or pass along:
 
 ### Printable PDFs
 
-PDF links are not listed here on purpose. Each filename contains its month
-(`maple_ave_lunch_September_2026.pdf`), so any list written here goes stale as
-soon as a new month is posted. The [menu
+Each school gets two printables per month: the standard menu, and an allergen
+version. PDF links are not listed here on purpose. Each filename contains its
+month (`maple_ave_lunch_September_2026.pdf`,
+`maple_ave_lunch_September_2026_allergens.pdf`), so any list written here goes
+stale as soon as a new month is posted. The [menu
 page](https://bziebart123.github.io/linq-lunch-feed/) always has the current
 ones.
 
 The layout matches the calendar: hot lunch in bold, fruit in green, vegetable
 in brown, extras in purple, and the alternative option in red. Print at 100%
 scale (not "fit to page") on letter paper, landscape.
+
+### Allergens and Halal
+
+Every day lists the allergens the district records: Egg, Milk, Wheat, Soy,
+Sesame Seeds, and Fish. Items the district marks Halal are labelled as such.
+
+- **Calendar links** spell allergens out in full for each item, including the
+  sides.
+- **The standard printable** keeps them to one small grey line of letter codes
+  per day, with a key at the bottom of the page.
+- **The Allergens printable** lists them in full for every item. Use this one if
+  you need to read them at a glance.
+
+This information comes from the district and can change. Confirm with the school
+before relying on it.
+
+Allergens are tracked per item, not pooled for the day, so the entree is never
+credited with an allergen that was only in the cookie.
 
 ### The alternative lunch option
 
@@ -152,6 +172,7 @@ country, not just Wisconsin.
 
 ```
 GET https://api.linqconnect.com/api/FamilyDistrictSearch?searchText=<name>
+GET https://api.linqconnect.com/api/FamilyMenuFilter?districtId=<GUID>
 GET https://api.linqconnect.com/api/FamilyMenuIdentifier?identifier=<code>
 GET https://api.linqconnect.com/api/FamilyMenu
       ?buildingId=<GUID>&districtId=<GUID>&startDate=M-D-YYYY&endDate=M-D-YYYY
@@ -163,6 +184,11 @@ Three things that cost real debugging time:
 - **`endDate` is mandatory.** With `startDate` alone the API silently returns
   only the first *week* of the month. There is no error and nothing in the
   response marking the result partial.
+- **Allergens arrive as bare GUIDs.** The menu response tags each recipe with
+  allergen ids and nothing else. `FamilyMenuFilter?districtId=` is the map that
+  turns them into "Milk" and "Halal". It also lists the district's serving
+  sessions, which is how you can tell this district serves lunch only and there
+  is no breakfast menu to publish.
 - **Datacenter IPs are blocked.** The same request returns 200 from a home
   connection and 403 from GitHub Actions, Render, or a VPN. A scheduled
   workflow was built and tested against this and failed every run, which is why
@@ -197,6 +223,10 @@ python -c "import json,linq_api;d=json.loads(linq_api.fetch_menu(BID,DID,'9-1-20
 ```
 
 then add them to `ALT_CATS` in `linq_parse.py`.
+
+Allergen and Halal names come from `linq_api.district_lookups()`. If that call
+fails the run continues without allergen data rather than dropping the feeds,
+so a lookup outage degrades the output instead of breaking it.
 
 ## Determinism
 
