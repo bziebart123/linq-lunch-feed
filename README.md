@@ -71,6 +71,12 @@ GET https://api.linqconnect.com/api/FamilyMenu
       ?buildingId=a513a71a-22d7-ee11-a71c-a811a99a3020   # Maple Avenue Elementary
       &districtId=37aa0b35-eba0-ee11-839d-b338dc280a64   # Hamilton School District
       &startDate=M-D-YYYY
+      &endDate=M-D-YYYY
 ```
 
-Requires a browser `User-Agent`; plain `curl` gets a 403.
+Two non-obvious requirements:
+
+- **A browser `User-Agent` is mandatory.** Plain `curl` gets a 403.
+- **`endDate` is mandatory.** With `startDate` alone the API silently returns
+  only the first *week* of the month, not the whole month, with no error and no
+  indication the result is partial.

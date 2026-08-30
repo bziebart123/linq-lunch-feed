@@ -14,6 +14,7 @@ It refuses to publish an empty or invalid calendar over a good one.
 """
 
 import argparse
+import calendar
 import datetime
 import json
 import subprocess
@@ -35,6 +36,16 @@ def month_str(d):
     return f"{d.month}-1-{d.year}"
 
 
+def month_end(start):
+    """Last day of the month named by a 'M-1-YYYY' start string.
+
+    The API returns only the first WEEK unless an explicit endDate is sent,
+    so every request must carry one.
+    """
+    m, _, y = (int(x) for x in start.split("-"))
+    return f"{m}-{calendar.monthrange(y, m)[1]}-{y}"
+
+
 def candidates():
     today = datetime.date.today()
     first = today.replace(day=1)
@@ -43,7 +54,9 @@ def candidates():
 
 
 def fetch(start):
-    url = f"{API}?buildingId={BUILDING_ID}&districtId={DISTRICT_ID}&startDate={start}"
+    end = month_end(start)
+    url = (f"{API}?buildingId={BUILDING_ID}&districtId={DISTRICT_ID}"
+           f"&startDate={start}&endDate={end}")
     req = urllib.request.Request(url, headers={
         "User-Agent": UA,
         "Accept": "application/json",
@@ -65,7 +78,10 @@ def fetch(start):
         print(f"  Response was not JSON for startDate={start}")
         return None
     n = len(data.get("FamilyMenuSessions") or [])
-    print(f"  startDate={start}: {n} session(s)")
+    n_days = sum(len(pl.get("Days") or [])
+                 for se in (data.get("FamilyMenuSessions") or [])
+                 for pl in (se.get("MenuPlans") or []))
+    print(f"  {start}..{end}: {n} session(s), {n_days} day(s)")
     return body if n > 0 else None
 
 
@@ -75,7 +91,7 @@ def run(cmd, **kw):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--month", help="startDate as M-1-YYYY (e.g. 10-1-2026)")
+    ap.add_argument("--month", help="month to fetch as M-1-YYYY (e.g. 10-1-2026)")
     ap.add_argument("--detail", default="full",
                     choices=["full", "hot+bistro", "hot"])
     ap.add_argument("--no-push", action="store_true")
