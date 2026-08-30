@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-linq_ics.py — Turn a LinqConnect FamilyMenu response into an .ics calendar feed.
+linq_ics.py - Turn a LinqConnect FamilyMenu response into an .ics calendar feed.
 
 Reuses linq_parse.build_menu() (same parser as the PDF generator), then writes a
 standards-compliant iCalendar file with one all-day event per school day.
 
 Skylight (and Google/iCloud/Outlook) can subscribe to the resulting .ics by URL.
-Host the file somewhere public — e.g. GitHub Pages / raw.githubusercontent.com —
-and paste that URL into Skylight: My Skylight Menu -> Synced Calendars ->
+Host the file somewhere public, such as GitHub Pages, then paste that URL
+into Skylight: My Skylight Menu -> Synced Calendars ->
 Sync new calendar -> Calendar URL.
 
 Usage:

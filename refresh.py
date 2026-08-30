@@ -224,7 +224,7 @@ def write_index(results, repo_url, base_url):
         <span class="meta">{ev} school days</span>
       </div>
       <div class="opt">
-        <div class="opt-label">Subscribe <span class="hint">&mdash; stays up to date</span></div>
+        <div class="opt-label">Subscribe</div>
         <div class="urlrow">
           <code>{url}</code>
           <button type="button" data-url="{url}"
@@ -304,14 +304,12 @@ def write_index(results, repo_url, base_url):
             border-top: 1px solid var(--line); padding-top: 1rem; }}
 </style>
 <h1>School lunch menus</h1>
-<p class="lede">Hamilton School District &mdash; every school, two ways to use
-   it.</p>
+<p class="lede">Hamilton School District. All seven schools.</p>
 
 <div class="legend">
-  <div><b>Subscribe</b><span>Add the menu to Skylight, Google, Apple, or Outlook.
-       Set it up once; it keeps itself current all year.</span></div>
-  <div><b>Print</b><span>A one-page calendar for the fridge, one file per
-       month.</span></div>
+  <div><b>Subscribe</b><span>Add the menu to Skylight, Google, Apple, or
+       Outlook. You set it up once and it updates on its own.</span></div>
+  <div><b>Print</b><span>A printable page for each month.</span></div>
 </div>
 
 <ul class="schools">
@@ -324,24 +322,22 @@ def write_index(results, repo_url, base_url):
       <a href="https://app.ourskylight.com">app.ourskylight.com</a>.</li>
   <li>Pick your frame, then <strong>Calendar &rarr; Synced Calendars &rarr;
       Sync new calendar</strong>.</li>
-  <li>Choose <strong>Calendar by URL</strong> &mdash; not the Google, Apple, or
+  <li>Choose <strong>Calendar by URL</strong>. Do not use the Google, Apple, or
       Outlook buttons.</li>
   <li>Paste the link, give it a name, and save.</li>
 </ol>
-<p>Skylight refetches on its own schedule, so a new menu can take a few hours to
-   reach the frame.</p>
+<p>Skylight checks for updates on its own schedule. A new menu can take a few
+   hours to show up on the frame.</p>
 
 <h2>What you will see each day</h2>
-<p>The hot lunch, plus the fruit, vegetable and any extra &mdash; and the
-   alternative your child can choose <em>instead</em> of the hot lunch. That
-   alternative is called <strong>Bistro Box</strong> at the elementary and
-   intermediate schools, <strong>Grab &amp; Go</strong> at Templeton, and
-   <strong>The Grill</strong> or <strong>Build Your Own</strong> at the high
-   school.</p>
+<p>The hot lunch, the fruit, the vegetable, and any extra. Each day also lists
+   the alternative your child can choose instead of the hot lunch. It is called
+   <strong>Bistro Box</strong> at the elementary and intermediate schools,
+   <strong>Grab &amp; Go</strong> at Templeton, and <strong>The Grill</strong>
+   or <strong>Build Your Own</strong> at the high school.</p>
 
 <footer>
-  Built from the LinqConnect public menu API and refreshed weekly, so a newly
-  posted month appears within a few days.
+  Menus come from the LinqConnect public API and are refreshed weekly.
   <a href="{repo_url}">Source and setup instructions</a>.
 </footer>
 <script>

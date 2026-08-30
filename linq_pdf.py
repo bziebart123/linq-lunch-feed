@@ -118,7 +118,7 @@ def build_pdf(MENU, month, year, school_name, out_path,
     # invariant=1 strips the creation timestamp and document id, so identical
     # input yields identical bytes and no spurious weekly commit.
     c = canvas.Canvas(out_path, pagesize=landscape(letter), invariant=1)
-    c.setTitle("{} Lunch — {} {}".format(
+    c.setTitle("{} Lunch, {} {}".format(
         school_name, MONTH_NAMES[month - 1], year))
     c.setAuthor("Hamilton School District lunch feeds")
     c.setSubject("Printable monthly lunch menu")

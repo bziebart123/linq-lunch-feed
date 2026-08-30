@@ -10,13 +10,13 @@ day, in Skylight, Google Calendar, Apple Calendar, or Outlook.
 
 **Everything is on one page: [the lunch menu
 page](https://bziebart123.github.io/linq-lunch-feed/).** Find your school and
-pick one of two things — you can stop reading here, the rest of this file is
+pick one of two things. You can stop reading here. The rest of this file is
 for people who want to run or change the code.
 
 | | What it is | Best for |
 |---|---|---|
-| **Subscribe** | A calendar link you add once. It stays current all year on its own. | Skylight frames, phone calendars |
-| **Print** | A one-page landscape calendar, one file per month. | The fridge |
+| **Subscribe** | A calendar link you add once. It updates on its own. | Skylight frames, phone calendars |
+| **Print** | One landscape page per month. | Printing |
 
 ### Calendar links
 
@@ -34,15 +34,15 @@ These never change, so they are safe to bookmark or pass along:
 
 ### Printable PDFs
 
-PDF links are **not listed here on purpose** — each filename contains its month
-(`maple_ave_lunch_September_2026.pdf`), so any list written here goes stale the
-moment a new month is posted. The [menu
-page](https://bziebart123.github.io/linq-lunch-feed/) always shows the current
+PDF links are not listed here on purpose. Each filename contains its month
+(`maple_ave_lunch_September_2026.pdf`), so any list written here goes stale as
+soon as a new month is posted. The [menu
+page](https://bziebart123.github.io/linq-lunch-feed/) always has the current
 ones.
 
-Same layout as the calendar, just on paper: hot lunch in bold, fruit in green,
-vegetable in brown, extras in purple, and the alternative option in red. Print
-at 100% scale (not "fit to page") on letter paper, landscape.
+The layout matches the calendar: hot lunch in bold, fruit in green, vegetable
+in brown, extras in purple, and the alternative option in red. Print at 100%
+scale (not "fit to page") on letter paper, landscape.
 
 ### The alternative lunch option
 
@@ -59,13 +59,14 @@ level names it differently, so the label follows the school:
 
 ### Adding it to Skylight
 
-Do this from a phone or computer browser — the frame itself has no way to type
+Do this from a phone or computer browser. The frame itself has no way to type
 a URL.
 
 1. Sign in at [app.ourskylight.com](https://app.ourskylight.com) and pick your
    frame.
 2. **Calendar → Synced Calendars → Sync new calendar**.
-3. Choose **Calendar by URL** — not the Google, Apple, or Outlook buttons.
+3. Choose **Calendar by URL**. Do not use the Google, Apple, or Outlook
+   buttons.
 4. Paste your school's link, give it a name, and save.
 
 Give it its own color so lunch doesn't blend into family events.
@@ -78,8 +79,8 @@ Give it its own color so lunch doesn't blend into family events.
   within a few days of the district publishing it.
 - **The current month and next month are both included**, so the rest of this
   month never disappears when the next one is posted.
-- **Weekends, holidays, and no-school days are simply absent** — that's
-  expected, not a gap in the data.
+- **Weekends, holidays, and no-school days are absent.** That is expected and
+  not a gap in the data.
 
 ---
 
@@ -99,10 +100,10 @@ validates each calendar, and pushes. Publishing only the newest available
 month would erase the rest of the current month from subscribers' calendars the
 moment the district posts the next one. Flags:
 
-- `--month 10-1-2026` — one specific month only
-- `--only maple` — just the feeds whose name matches
-- `--no-push` — rebuild locally without committing
-- `--base-url` / `--repo-url` — if you host it somewhere else
+- `--month 10-1-2026` fetches one specific month only
+- `--only maple` limits the run to feeds whose name matches
+- `--no-push` rebuilds locally without committing
+- `--base-url` / `--repo-url` point at a different host
 
 Per-feed `detail` in `config.json` controls how much text lands on each day:
 `full` (hot lunch, fruit, vegetable, extra, bistro box), `hot+bistro`, or `hot`.
@@ -132,7 +133,7 @@ cloud scheduler can do it.
 
 ## Using this for a different district
 
-Nothing in the code is specific to Hamilton — district and school IDs live in
+Nothing in the code is specific to Hamilton. District and school IDs live in
 `config.json`, and you can discover them:
 
 ```bash
@@ -160,8 +161,8 @@ Three things that cost real debugging time:
 
 - **A browser `User-Agent` is mandatory.** Plain clients get HTTP 403.
 - **`endDate` is mandatory.** With `startDate` alone the API silently returns
-  only the first *week* of the month — no error, nothing in the response
-  marking the result partial.
+  only the first *week* of the month. There is no error and nothing in the
+  response marking the result partial.
 - **Datacenter IPs are blocked.** The same request returns 200 from a home
   connection and 403 from GitHub Actions, Render, or a VPN. A scheduled
   workflow was built and tested against this and failed every run, which is why
@@ -185,9 +186,9 @@ plausible-looking but incorrect menus:
   Real components arrive in the separate `With` / `Grain` / `And` categories.
   Without that split, "Domino's Pizza Slice" and "Papa Murphy's Cheese Pizza"
   merge into one impossible entree.
-- **The high school uses its own category names** — `The Grill` and
+- **The high school uses its own category names**, `The Grill` and
   `Build Your Own`. Anything not in `ALT_CATS` is silently dropped, so an
-  unknown name means a school's alternatives quietly vanish rather than error.
+  unknown name makes a school's alternatives vanish rather than error.
 
 If another district shows no alternatives, dump its category names first:
 
@@ -210,7 +211,7 @@ noise.
 
 A feed is only replaced when the new one is real. `refresh.py` aborts on an
 empty API response (summer months return nothing), on a calendar with zero
-events, and on any validation failure — so a bad fetch can't destroy a good
+events, and on any validation failure, so a bad fetch cannot destroy a good
 feed. `validate_ics.py` enforces CRLF line endings, balanced `BEGIN`/`END`
 blocks, all-day `DTSTART`/`DTEND` spans of exactly one day, unique UIDs, and no
 line over 75 octets. `.gitattributes` marks `*.ics` binary so git never

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-linq_parse.py — Convert a LinqConnect FamilyMenu response into the MENU dict
+linq_parse.py - Convert a LinqConnect FamilyMenu response into the MENU dict
 used by lunch_menu_template.py.
 
 Handles BOTH formats the LinqConnect API can return:
@@ -36,13 +36,11 @@ NS = "{http://schemas.datacontract.org/2004/07/Titan.Model.Family.Menu}"
 # LinqConnect emits these category names (seen in Hamilton SD elementary lunch):
 #   Hot Lunch, With, Grain, Fruit, Vegetable, Extra Item, Condiment, Bistro, And
 #
-# "With"/"Grain"/"And" are sub-components of the hot entree (e.g. Pancakes +
-# "With" Sausage Links). "Condiment" (Syrup, etc.) is minor — folded into extra.
-HOT_CATS   = ("Hot Lunch", "With", "Grain", "And")
-# The entree itself comes from "Hot Lunch"; "With"/"Grain"/"And" are genuine
-# sub-components of it (Pancakes + "And" Sausage Links). A *second* recipe
-# inside "Hot Lunch" is never a component — it is another choice for that day
-# (e.g. "Domino's Pizza Slice" or "Papa Murphy's Cheese Pizza").
+# The entree comes from "Hot Lunch". "With"/"Grain"/"And" are sub-components of
+# it (Pancakes + "And" Sausage Links). A *second* recipe inside "Hot Lunch" is
+# never a component. It is another choice for that day, such as "Domino's Pizza
+# Slice" or "Papa Murphy's Cheese Pizza". "Condiment" (Syrup, etc.) is minor,
+# so it is folded into extra.
 ENTREE_CAT      = "Hot Lunch"
 COMPONENT_CATS  = ("With", "Grain", "And")
 FRUIT_CATS = ("Fruit",)
@@ -51,7 +49,7 @@ EXTRA_CATS = ("Extra Item", "Condiment", "Dessert")
 
 # Alternative lunch options: a student picks ONE of these *instead of* the hot
 # entree, so they must never be joined onto it. Each school level names them
-# differently — elementary and intermediate use "Bistro", the middle school
+# differently. Elementary and intermediate use "Bistro", the middle school
 # "Grab n Go", the high school "The Grill" and "Build Your Own".
 ALT_CATS = {
     "Bistro":         "Bistro Box",
@@ -60,8 +58,6 @@ ALT_CATS = {
     "The Grill":      "The Grill",
     "Build Your Own": "Build Your Own",
 }
-BISTRO_CATS = ("Bistro",)   # retained for the legacy cell["bistro"] alias
-
 # The middle school hides its alternative inside the Hot Lunch category as a
 # second recipe named "Grab and Go-<item>". Left alone, the entree and the
 # alternative get merged into one nonsensical combined meal.
@@ -85,7 +81,7 @@ def _strip_bistro(name: str) -> str:
     """'Bistro Box (Cereal)' -> 'Cereal'; 'Bistro Variety (...)' -> '' (filler)."""
     s = _clean(name)
     if s.lower().startswith("bistro variety"):
-        return ""  # "Weekly Extras Available" placeholder — not a real choice
+        return ""  # "Weekly Extras Available" placeholder, not a real choice
     m = re.match(r"bistro box\s*\((.+)\)\s*$", s, re.IGNORECASE)
     if m:
         return m.group(1).strip()
