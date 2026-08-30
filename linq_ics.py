@@ -107,8 +107,12 @@ def build_ics(menu_file, session="Lunch", detail="full",
                 desc_parts.append(f"Vegetable: {cell['veg']}")
             if cell.get("extra"):
                 desc_parts.append(f"Extra: {cell['extra']}")
-        if detail in ("full", "hot+bistro") and cell.get("bistro"):
-            desc_parts.append(f"Bistro Box: {cell['bistro']}")
+        # Alternative options (Bistro Box / Grab & Go / The Grill / Build Your
+        # Own / a second entree). These are picked *instead of* the hot lunch,
+        # so they are always listed alongside it.
+        if detail in ("full", "hot+bistro"):
+            for alt in cell.get("alts") or []:
+                desc_parts.append(f"{alt['label']}: {alt['items']}")
         description = "\n".join(desc_parts)
 
         start = _fmt_date(year, month, day)

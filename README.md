@@ -33,6 +33,19 @@ or change the code.
 | Templeton Middle School | `https://bziebart123.github.io/linq-lunch-feed/public/templeton_middle_school_lunch.ics` |
 | Woodside Elementary School | `https://bziebart123.github.io/linq-lunch-feed/public/woodside_elementary_school_lunch.ics` |
 
+### The alternative lunch option
+
+Every school offers a daily alternative you can pick *instead of* the hot
+lunch, and it is listed on every day of both the calendar and the PDF. Each
+level names it differently, so the label follows the school:
+
+| School level | Shown as |
+|---|---|
+| Elementary and intermediate | **Bistro Box** |
+| Templeton Middle School | **Grab & Go** |
+| Hamilton High School | **The Grill**, **Build Your Own** |
+| Any school, on days with a second entree | **Also Offered** |
+
 ### Printable PDFs
 
 Each school also gets a one-page landscape calendar per month, linked from the
@@ -154,6 +167,31 @@ Three things that cost real debugging time:
 The district search and building list are undocumented endpoints found in the
 LinqConnect web app's JS bundle. They need no authentication today, but nothing
 guarantees they stay that way.
+
+## Parsing notes
+
+The alternative option is easy to get wrong, and three separate traps produce
+plausible-looking but incorrect menus:
+
+- **The middle school hides it inside `Hot Lunch`** as a second recipe named
+  `Grab and Go-<item>`. Joined naively onto the entree it reads as one combined
+  meal ("Chicken Sandwich Sliders w/ Grab and Go-Pizza Bagel Bites") rather
+  than a choice between two.
+- **A second `Hot Lunch` recipe is always another choice, never a component.**
+  Real components arrive in the separate `With` / `Grain` / `And` categories.
+  Without that split, "Domino's Pizza Slice" and "Papa Murphy's Cheese Pizza"
+  merge into one impossible entree.
+- **The high school uses its own category names** — `The Grill` and
+  `Build Your Own`. Anything not in `ALT_CATS` is silently dropped, so an
+  unknown name means a school's alternatives quietly vanish rather than error.
+
+If another district shows no alternatives, dump its category names first:
+
+```bash
+python -c "import json,linq_api;d=json.loads(linq_api.fetch_menu(BID,DID,'9-1-2026')[0]);print({c['CategoryName'] for s in d['FamilyMenuSessions'] for p in s['MenuPlans'] for y in p['Days'] for m in y['MenuMeals'] for c in m['RecipeCategories']})"
+```
+
+then add them to `ALT_CATS` in `linq_parse.py`.
 
 ## Determinism
 

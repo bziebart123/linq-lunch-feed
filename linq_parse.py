@@ -39,10 +39,33 @@ NS = "{http://schemas.datacontract.org/2004/07/Titan.Model.Family.Menu}"
 # "With"/"Grain"/"And" are sub-components of the hot entree (e.g. Pancakes +
 # "With" Sausage Links). "Condiment" (Syrup, etc.) is minor — folded into extra.
 HOT_CATS   = ("Hot Lunch", "With", "Grain", "And")
+# The entree itself comes from "Hot Lunch"; "With"/"Grain"/"And" are genuine
+# sub-components of it (Pancakes + "And" Sausage Links). A *second* recipe
+# inside "Hot Lunch" is never a component — it is another choice for that day
+# (e.g. "Domino's Pizza Slice" or "Papa Murphy's Cheese Pizza").
+ENTREE_CAT      = "Hot Lunch"
+COMPONENT_CATS  = ("With", "Grain", "And")
 FRUIT_CATS = ("Fruit",)
 VEG_CATS   = ("Vegetable",)
-EXTRA_CATS = ("Extra Item", "Condiment")
-BISTRO_CATS = ("Bistro",)
+EXTRA_CATS = ("Extra Item", "Condiment", "Dessert")
+
+# Alternative lunch options: a student picks ONE of these *instead of* the hot
+# entree, so they must never be joined onto it. Each school level names them
+# differently — elementary and intermediate use "Bistro", the middle school
+# "Grab n Go", the high school "The Grill" and "Build Your Own".
+ALT_CATS = {
+    "Bistro":         "Bistro Box",
+    "Grab n Go":      "Grab & Go",
+    "Grab and Go":    "Grab & Go",
+    "The Grill":      "The Grill",
+    "Build Your Own": "Build Your Own",
+}
+BISTRO_CATS = ("Bistro",)   # retained for the legacy cell["bistro"] alias
+
+# The middle school hides its alternative inside the Hot Lunch category as a
+# second recipe named "Grab and Go-<item>". Left alone, the entree and the
+# alternative get merged into one nonsensical combined meal.
+GRAB_RE = re.compile(r"^grab\s*(?:and|n)\s*go\s*[-:–]?\s*", re.IGNORECASE)
 
 
 def _clean(name: str) -> str:
@@ -52,6 +75,9 @@ def _clean(name: str) -> str:
     s = name.strip()
     s = re.sub(r"\s+", " ", s)          # collapse double spaces
     s = s.replace(" ^", "").replace("^", "")   # drop Halal marker glyph
+    # Secondary-school recipes carry a school-code suffix ("Hamburger-HS",
+    # "Cheese Pizza Slice- HS") that is pure noise on that school's own menu.
+    s = re.sub(r"\s*-\s*(HS|MS|IS|SSIS|TMS)\s*$", "", s)
     return s.strip()
 
 
@@ -171,37 +197,55 @@ def build_menu(path, session="Lunch"):
     for m, d, y, cats in parsed_days:
         if (m, y) != (month, year):
             continue
-        hot, fruit, veg, extra, bistro = [], [], [], [], []
+        entrees, components, fruit, veg, extra = [], [], [], [], []
+        alts = {}          # label -> [item, ...], insertion-ordered
         def _dedupe(seq):
             seen, out = set(), []
             for x in seq:
                 if x not in seen:
                     seen.add(x); out.append(x)
             return out
+        def _add_alt(label, items):
+            bucket = alts.setdefault(label, [])
+            for it in items:
+                if it and it not in bucket:
+                    bucket.append(it)
         for cname, recs in cats:
             names = _dedupe([_clean(n) for n in recs if _clean(n)])
-            if cname in HOT_CATS:
-                hot += names
+            if cname == ENTREE_CAT:
+                # Split off any "Grab and Go-<item>" hiding in here; it is a
+                # choice instead of the entree, not part of it.
+                grabbed = [GRAB_RE.sub("", n) for n in names if GRAB_RE.match(n)]
+                if grabbed:
+                    _add_alt(ALT_CATS["Grab n Go"], grabbed)
+                entrees += [n for n in names if not GRAB_RE.match(n)]
+            elif cname in COMPONENT_CATS:
+                components += names
             elif cname in FRUIT_CATS:
                 fruit += names
             elif cname in VEG_CATS:
                 veg += names
             elif cname in EXTRA_CATS:
                 extra += names
-            elif cname in BISTRO_CATS:
-                b = [_strip_bistro(n) for n in recs]
-                bistro += [x for x in b if x]
+            elif cname in ALT_CATS:
+                cleaned = [_strip_bistro(n) for n in recs]
+                _add_alt(ALT_CATS[cname], [x for x in cleaned if x])
         def _ddup(seq):
             seen, out = set(), []
             for x in seq:
                 if x not in seen:
                     seen.add(x); out.append(x)
             return out
-        hot, fruit, veg, extra, bistro = map(_ddup, (hot, fruit, veg, extra, bistro))
+        entrees, components, fruit, veg, extra = map(
+            _ddup, (entrees, components, fruit, veg, extra))
         cell = {}
-        if hot:
-            # first is the entree; join sub-items with "w/"
-            cell["hot"] = hot[0] + (" w/ " + ", ".join(hot[1:]) if len(hot) > 1 else "")
+        if entrees:
+            # The first entree, plus its genuine sub-components joined by "w/".
+            cell["hot"] = entrees[0] + (
+                " w/ " + ", ".join(components) if components else "")
+            # Any further "Hot Lunch" recipes are separate choices for the day.
+            if len(entrees) > 1:
+                _add_alt("Also Offered", entrees[1:])
         else:
             cell["hot"] = ""
         if fruit:
@@ -210,8 +254,14 @@ def build_menu(path, session="Lunch"):
             cell["veg"] = ", ".join(veg)
         if extra:
             cell["extra"] = ", ".join(extra)
-        if bistro:
-            cell["bistro"] = bistro[0]  # primary box; extras dropped
+        if alts:
+            cell["alts"] = [{"label": lbl, "items": ", ".join(items)}
+                            for lbl, items in alts.items() if items]
+            # Legacy alias: the elementary Bistro Box, when there is one.
+            for a in cell["alts"]:
+                if a["label"] == "Bistro Box":
+                    cell["bistro"] = a["items"]
+                    break
         MENU[d] = cell
 
     meta = {

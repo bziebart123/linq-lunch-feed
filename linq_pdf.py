@@ -186,29 +186,55 @@ def build_pdf(MENU, month, year, school_name, out_path,
 
             pad_x = x + 4
             max_w = cell_w - 8
-            state = {"ty": y + cell_h - 24}
-            floor = y + 4
+            top = y + cell_h - 24
+            floor = y + 3
 
-            def block(text, size, color, bold, max_lines):
-                if not text or state["ty"] < floor:
-                    return
-                font = "Helvetica-Bold" if bold else "Helvetica"
-                c.setFont(font, size)
-                c.setFillColor(color)
-                for ln in _wrap(c, text, font, size, max_w, max_lines):
-                    if state["ty"] < floor:
-                        return
-                    c.drawString(pad_x, state["ty"], ln)
-                    state["ty"] -= size + 1.6
-                state["ty"] -= 1.5
-
-            block(cell.get("hot", ""), 8.5, HOT_FG, True, 3)
+            # Collect what this cell has to say, then size it to fit. A high
+            # school day carries an entree plus two or three alternatives, and
+            # at a fixed font that overruns the cell and clips a line
+            # mid-phrase ("Build Your Own: BYO Mac and").
+            blocks = [(cell.get("hot", ""), 8.5, HOT_FG, True, 3)]
             if detail == "full":
-                block(cell.get("fruit", ""), 7.2, FRUIT_FG, False, 2)
-                block(cell.get("veg", ""), 7.2, VEG_FG, False, 2)
-                block(cell.get("extra", ""), 7.2, EXTRA_FG, False, 2)
-            if detail in ("full", "hot+bistro") and cell.get("bistro"):
-                block("Bistro Box: " + cell["bistro"], 8, BISTRO_RED, True, 2)
+                blocks.append((cell.get("fruit", ""), 7.2, FRUIT_FG, False, 2))
+                blocks.append((cell.get("veg", ""), 7.2, VEG_FG, False, 2))
+                blocks.append((cell.get("extra", ""), 7.2, EXTRA_FG, False, 2))
+            if detail in ("full", "hot+bistro"):
+                for alt in cell.get("alts") or []:
+                    blocks.append((alt["label"] + ": " + alt["items"],
+                                   8, BISTRO_RED, True, 2))
+            blocks = [b for b in blocks if b[0]]
+
+            def layout(scale):
+                """Wrap every block at `scale`; return (lines, total height)."""
+                out = []
+                height = 0.0
+                for text, size, color, bold, max_lines in blocks:
+                    sz = size * scale
+                    font = "Helvetica-Bold" if bold else "Helvetica"
+                    wrapped = _wrap(c, text, font, sz, max_w, max_lines)
+                    out.append((wrapped, sz, color, font))
+                    height += len(wrapped) * (sz + 1.6 * scale) + 1.5 * scale
+                return out, height
+
+            avail = top - floor
+            chosen, _h = layout(1.0)
+            if _h > avail:
+                for step in range(1, 13):          # down to 70% before clipping
+                    scale = 1.0 - step * 0.025
+                    chosen, _h = layout(scale)
+                    if _h <= avail:
+                        break
+
+            ty = top
+            for wrapped, sz, color, font in chosen:
+                c.setFont(font, sz)
+                c.setFillColor(color)
+                for ln in wrapped:
+                    if ty < floor:
+                        break
+                    c.drawString(pad_x, ty, ln)
+                    ty -= sz + 1.6
+                ty -= 1.5
 
     # Footer
     c.setFont("Helvetica", 6)
