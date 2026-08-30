@@ -1,54 +1,99 @@
 # linq-lunch-feed
 
-Turns Maple Avenue Elementary's (Hamilton SD, WI) LinqConnect lunch menu into a
-subscribable iCalendar feed for Skylight / Google / iCloud / Outlook.
+Subscribable lunch-menu calendars for **Hamilton School District** (Sussex, WI),
+built from LinqConnect's public menu API. Point Skylight, Google Calendar,
+Apple Calendar, or Outlook at a URL and the school lunch menu shows up as an
+all-day event on every school day.
 
-**Feed URL — paste this into Skylight:**
+## Feeds
 
-```
-https://bziebart123.github.io/linq-lunch-feed/public/maple_ave_lunch.ics
-```
+Browse them all at
+**https://bziebart123.github.io/linq-lunch-feed/**
 
-Skylight: *My Skylight Menu → Synced Calendars → Sync new calendar → Calendar URL*.
+| School | Feed URL |
+|---|---|
+| Maple Avenue Elementary | `.../public/maple_ave_lunch.ics` |
+| Hamilton High School | `.../public/hamilton_high_school_lunch.ics` |
+| Lannon Elementary School | `.../public/lannon_elementary_school_lunch.ics` |
+| Marcy Elementary School | `.../public/marcy_elementary_school_lunch.ics` |
+| Silver Spring Intermediate | `.../public/silver_spring_intermediate_lunch.ics` |
+| Templeton Middle School | `.../public/templeton_middle_school_lunch.ics` |
+| Woodside Elementary School | `.../public/woodside_elementary_school_lunch.ics` |
 
-## Updating the feed
+Prefix each with `https://bziebart123.github.io/linq-lunch-feed`.
+
+### Subscribing in Skylight
+
+Do this from a phone or computer browser, not the frame itself:
+
+1. Sign in at **app.ourskylight.com** and pick your frame.
+2. **Calendar → Synced Calendars → Sync new calendar**.
+3. Choose **Calendar by URL** — not the Google/Apple/Outlook buttons.
+4. Paste your school's URL, name it, save.
+
+Skylight refetches on its own schedule (a few hours, sometimes a day), so
+updates are not instant.
+
+## Updating
 
 ```bash
 python refresh.py
 ```
 
-That fetches the newest posted menu (next month, falling back to the current
-month), regenerates `public/maple_ave_lunch.ics`, validates it, and pushes.
-GitHub Pages redeploys about a minute later. Useful flags:
+Rebuilds every feed in `config.json` for the newest posted month (next month,
+falling back to the current one), validates each, and pushes. Flags:
 
-- `--month 10-1-2026` — fetch a specific month
-- `--detail hot+bistro` or `--detail hot` — less text per day if the wall
-  display is too busy (default is `full`)
-- `--no-push` — regenerate locally without committing
+- `--month 10-1-2026` — a specific month
+- `--only maple` — just the feeds whose name matches
+- `--detail` is per-feed in `config.json`: `full`, `hot+bistro`, or `hot` if a
+  wall display is too crowded
+- `--no-push` — rebuild locally without committing
 
-Run it whenever the menu looks stale — typically once a month, after the school
-posts the next month's menu.
+Run it once a month, after the district posts the next month's menus.
 
-### Why this isn't automated
+## Using this for a different district
 
-LinqConnect's API returns **403 to datacenter IPs**. A GitHub Actions workflow
-was built and tested, and it fails on every run regardless of request headers —
-the same request returns 200 from a home connection and 403 from a runner. Any
-cloud-hosted scheduler (Actions, Render, Fly, Lambda) will hit the same wall, so
-the fetch has to originate from a residential network. If `refresh.py` ever
-reports 403 from your own machine, check whether a VPN is on.
+Nothing about the code is specific to Hamilton — the district and school IDs
+all live in `config.json`, and you can discover them:
 
-## Safety guarantees
+```bash
+python discover.py --search "Hamilton"                  # find your district
+python discover.py --district ZHSWGT                    # list its schools
+python discover.py --district ZHSWGT --add "Marcy Elementary School"
+python refresh.py
+```
 
-`refresh.py` will not publish over a good feed unless the new one is real. It
-aborts if the API returns no sessions (summer months return an empty list), if
-the generated calendar has zero events, or if `validate_ics.py` fails. That
-validator enforces CRLF line endings, balanced `BEGIN`/`END` blocks, all-day
-`DTSTART`/`DTEND` spans of exactly one day, unique UIDs, and no line over 75
-octets. `.gitattributes` marks `*.ics` binary so git never rewrites the CRLF
-that RFC 5545 requires.
+`--add` appends a ready-made entry to `config.json`, so no GUID is ever copied
+by hand. Fork the repo, clear the `feeds` list, and add your own schools.
 
-Validate any feed by hand with:
+## API notes
+
+```
+GET https://api.linqconnect.com/api/FamilyDistrictSearch?searchText=<name>
+GET https://api.linqconnect.com/api/FamilyMenuIdentifier?identifier=<code>
+GET https://api.linqconnect.com/api/FamilyMenu
+      ?buildingId=<GUID>&districtId=<GUID>&startDate=M-D-YYYY&endDate=M-D-YYYY
+```
+
+Three things that cost real debugging time:
+
+- **A browser `User-Agent` is mandatory.** Plain clients get HTTP 403.
+- **`endDate` is mandatory.** With `startDate` alone the API silently returns
+  only the first *week* of the month — no error, nothing in the response
+  marking the result partial.
+- **Datacenter IPs are blocked.** The same request returns 200 from a home
+  connection and 403 from GitHub Actions, Render, or a VPN. A scheduled
+  workflow was built and tested against this and fails every run, which is why
+  refreshing is a manual command. If `refresh.py` reports 403, check your VPN.
+
+## Safety
+
+A feed is only replaced when the new one is real: `refresh.py` aborts on an
+empty API response (summer months return nothing), on a calendar with zero
+events, and on any validation failure. `validate_ics.py` enforces CRLF line
+endings, balanced `BEGIN`/`END` blocks, all-day `DTSTART`/`DTEND` spans of
+exactly one day, unique UIDs, and no line over 75 octets. `.gitattributes`
+marks `*.ics` binary so git never rewrites the CRLF that RFC 5545 requires.
 
 ```bash
 python validate_ics.py public/maple_ave_lunch.ics
@@ -58,25 +103,11 @@ python validate_ics.py public/maple_ave_lunch.ics
 
 | File | Purpose |
 |---|---|
-| `refresh.py` | Fetch → generate → validate → push. The only command you need. |
-| `linq_ics.py` | Builds the `.ics` from a LinqConnect response |
-| `linq_parse.py` | Parses both the JSON and XML forms of that response |
+| `config.json` | Which schools to build feeds for |
+| `refresh.py` | Fetch → generate → validate → push, for every configured feed |
+| `discover.py` | Find district and school IDs |
+| `linq_api.py` | Client for the three public LinqConnect endpoints |
+| `linq_ics.py` | Builds the `.ics` from a menu response |
+| `linq_parse.py` | Parses the JSON and XML forms of that response |
 | `validate_ics.py` | Standalone iCalendar validator |
-| `public/maple_ave_lunch.ics` | The published feed |
-
-## Source data
-
-```
-GET https://api.linqconnect.com/api/FamilyMenu
-      ?buildingId=a513a71a-22d7-ee11-a71c-a811a99a3020   # Maple Avenue Elementary
-      &districtId=37aa0b35-eba0-ee11-839d-b338dc280a64   # Hamilton School District
-      &startDate=M-D-YYYY
-      &endDate=M-D-YYYY
-```
-
-Two non-obvious requirements:
-
-- **A browser `User-Agent` is mandatory.** Plain `curl` gets a 403.
-- **`endDate` is mandatory.** With `startDate` alone the API silently returns
-  only the first *week* of the month, not the whole month, with no error and no
-  indication the result is partial.
+| `public/` | The published feeds and index page |

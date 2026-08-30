@@ -1,145 +1,194 @@
 #!/usr/bin/env python3
 """
-refresh.py - Fetch the latest Maple Ave lunch menu and republish the feed.
+refresh.py - Rebuild every feed listed in config.json and publish them.
 
-Run this from your own machine: LinqConnect returns 403 to datacenter IPs
-(GitHub Actions, most cloud hosts), so this cannot be automated server-side.
-
-    python refresh.py              # next month, falling back to this month
+    python refresh.py                  # next month, falling back to this month
     python refresh.py --month 10-1-2026
-    python refresh.py --no-push    # regenerate locally, don't commit
+    python refresh.py --only maple     # just feeds whose name matches
+    python refresh.py --no-push        # rebuild locally, don't commit
 
-It fetches, regenerates public/maple_ave_lunch.ics, validates it, and pushes.
-It refuses to publish an empty or invalid calendar over a good one.
+Run this from your own machine: LinqConnect returns 403 to datacenter IPs, so
+it cannot be automated on a server. A feed is only replaced if the new one is
+non-empty and passes validation, so a bad fetch never destroys a good feed.
 """
 
 import argparse
-import calendar
 import datetime
 import json
+import os
 import subprocess
 import sys
-import urllib.error
-import urllib.request
 
-BUILDING_ID = "a513a71a-22d7-ee11-a71c-a811a99a3020"   # Maple Avenue Elementary
-DISTRICT_ID = "37aa0b35-eba0-ee11-839d-b338dc280a64"   # Hamilton SD, WI
-API = "https://api.linqconnect.com/api/FamilyMenu"
-UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-      "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36")
+import linq_api
+from linq_ics import build_ics
+from validate_ics import validate
 
-OUT = "public/maple_ave_lunch.ics"
-RAW = "FamilyMenu.json"
+CONFIG = "config.json"
+PUBLIC = "public"
 
 
-def month_str(d):
-    return f"{d.month}-1-{d.year}"
-
-
-def month_end(start):
-    """Last day of the month named by a 'M-1-YYYY' start string.
-
-    The API returns only the first WEEK unless an explicit endDate is sent,
-    so every request must carry one.
-    """
-    m, _, y = (int(x) for x in start.split("-"))
-    return f"{m}-{calendar.monthrange(y, m)[1]}-{y}"
-
-
-def candidates():
+def candidate_months():
     today = datetime.date.today()
     first = today.replace(day=1)
     nxt = (first + datetime.timedelta(days=32)).replace(day=1)
-    return [month_str(nxt), month_str(first)]
+    return [f"{nxt.month}-1-{nxt.year}", f"{first.month}-1-{first.year}"]
 
 
-def fetch(start):
-    end = month_end(start)
-    url = (f"{API}?buildingId={BUILDING_ID}&districtId={DISTRICT_ID}"
-           f"&startDate={start}&endDate={end}")
-    req = urllib.request.Request(url, headers={
-        "User-Agent": UA,
-        "Accept": "application/json",
-        "Accept-Language": "en-US,en;q=0.9",
-        "Referer": "https://linqconnect.com/",
-    })
-    try:
-        with urllib.request.urlopen(req, timeout=30) as r:
-            body = r.read()
-    except urllib.error.HTTPError as e:
-        print(f"  HTTP {e.code} for startDate={start}")
-        if e.code == 403:
-            print("  (403 usually means you are on a blocked network - "
-                  "LinqConnect rejects datacenter/VPN IPs. Try your home wifi.)")
+def load_config():
+    if not os.path.exists(CONFIG):
+        sys.exit(f"No {CONFIG}. Run: python discover.py --search \"<district>\"")
+    cfg = json.load(open(CONFIG, encoding="utf-8"))
+    feeds = cfg.get("feeds") or []
+    if not feeds:
+        sys.exit(f"{CONFIG} has no feeds. "
+                 "Add one with: python discover.py --district <CODE> --add \"<school>\"")
+    return feeds
+
+
+def build_one(feed, months):
+    """Fetch, generate, validate. Returns (path, n_events, month) or None."""
+    name = feed["name"]
+    out = os.path.join(PUBLIC, feed["file"])
+    print(f"\n{name}")
+
+    raw = None
+    used = None
+    for month in months:
+        try:
+            raw, n_days = linq_api.fetch_menu(
+                feed["buildingId"], feed["districtId"], month)
+        except linq_api.LinqError as e:
+            print(f"  {month}: {e}")
+            return None
+        if raw:
+            print(f"  {month}: {n_days} school day(s)")
+            used = month
+            break
+        print(f"  {month}: nothing posted")
+
+    if not raw:
+        print(f"  -> no menu available; leaving existing feed untouched")
         return None
+
+    tmp = os.path.join(PUBLIC, feed["file"] + ".tmp")
+    scratch = "_menu.json"
+    with open(scratch, "wb") as f:
+        f.write(raw)
     try:
-        data = json.loads(body)
-    except json.JSONDecodeError:
-        print(f"  Response was not JSON for startDate={start}")
+        ics, meta = build_ics(scratch,
+                              session=feed.get("session", "Lunch"),
+                              detail=feed.get("detail", "full"),
+                              calendar_name=name)
+    except Exception as e:
+        print(f"  -> could not build calendar: {e}")
+        os.remove(scratch)
         return None
-    n = len(data.get("FamilyMenuSessions") or [])
-    n_days = sum(len(pl.get("Days") or [])
-                 for se in (data.get("FamilyMenuSessions") or [])
-                 for pl in (se.get("MenuPlans") or []))
-    print(f"  {start}..{end}: {n} session(s), {n_days} day(s)")
-    return body if n > 0 else None
+    os.remove(scratch)
+
+    n_events = ics.count("BEGIN:VEVENT")
+    if n_events < 1:
+        print("  -> generated calendar has no events; refusing to publish")
+        return None
+
+    os.makedirs(PUBLIC, exist_ok=True)
+    with open(tmp, "w", encoding="utf-8", newline="") as f:
+        f.write(ics)
+    if validate(tmp):
+        print("  -> failed validation; refusing to publish")
+        os.remove(tmp)
+        return None
+    os.replace(tmp, out)
+    print(f"  -> {out} ({n_events} events)")
+    return out, n_events, used
 
 
-def run(cmd, **kw):
-    return subprocess.run(cmd, check=True, **kw)
+def write_index(results, repo_url):
+    """A landing page at the Pages root listing every published feed."""
+    rows = "\n".join(
+        f'      <li><a href="{os.path.basename(p)}">{n}</a> '
+        f'<span class="meta">{ev} days &middot; {mo}</span></li>'
+        for n, p, ev, mo in results)
+    html = f"""<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>School Lunch Calendar Feeds</title>
+<style>
+  :root {{ color-scheme: light dark; }}
+  body {{ font: 16px/1.6 system-ui, sans-serif; max-width: 42rem;
+         margin: 3rem auto; padding: 0 1.25rem; }}
+  h1 {{ font-size: 1.4rem; }}
+  ul {{ padding-left: 1.2rem; }}
+  li {{ margin: .4rem 0; }}
+  .meta {{ opacity: .6; font-size: .85em; }}
+  code {{ background: rgba(128,128,128,.15); padding: .1em .35em;
+          border-radius: 3px; word-break: break-all; }}
+  footer {{ margin-top: 2.5rem; font-size: .9em; opacity: .75; }}
+</style>
+<h1>School lunch calendar feeds</h1>
+<p>Subscribe to any of these by URL in Skylight, Google Calendar, Apple
+   Calendar, or Outlook. Right-click a link to copy its address.</p>
+<ul>
+{rows}
+</ul>
+<p>In Skylight: <em>Calendar &rarr; Synced Calendars &rarr; Sync new calendar
+   &rarr; Calendar by URL</em>.</p>
+<footer>
+  Generated from the LinqConnect public menu API.
+  Source and setup instructions: <a href="{repo_url}">{repo_url}</a>
+</footer>
+</html>
+"""
+    with open(os.path.join(PUBLIC, "index.html"), "w",
+              encoding="utf-8", newline="\n") as f:
+        f.write(html)
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--month", help="month to fetch as M-1-YYYY (e.g. 10-1-2026)")
-    ap.add_argument("--detail", default="full",
-                    choices=["full", "hot+bistro", "hot"])
+    ap.add_argument("--only", help="only feeds whose name contains this text")
     ap.add_argument("--no-push", action="store_true")
+    ap.add_argument("--repo-url",
+                    default="https://github.com/bziebart123/linq-lunch-feed")
     args = ap.parse_args()
 
-    tries = [args.month] if args.month else candidates()
-    body = None
-    used = None
-    print("Fetching menu...")
-    for start in tries:
-        body = fetch(start)
-        if body:
-            used = start
-            break
-    if not body:
-        print(f"\nNo menu posted for {' or '.join(tries)}. "
-              "Existing feed left untouched.")
+    feeds = load_config()
+    if args.only:
+        feeds = [f for f in feeds if args.only.lower() in f["name"].lower()]
+        if not feeds:
+            sys.exit(f"No feed name contains {args.only!r}.")
+
+    months = [args.month] if args.month else candidate_months()
+    print(f"Building {len(feeds)} feed(s); trying {' then '.join(months)}")
+
+    built, results = [], []
+    for feed in feeds:
+        r = build_one(feed, months)
+        if r:
+            path, ev, mo = r
+            built.append(path)
+            results.append((feed["name"], path, ev, mo))
+
+    if not built:
+        print("\nNothing was rebuilt.")
         return 1
 
-    with open(RAW, "wb") as f:
-        f.write(body)
-
-    print(f"\nGenerating feed from {used}...")
-    run([sys.executable, "linq_ics.py", RAW, "-o", "candidate.ics",
-         "--detail", args.detail, "--name", "Maple Ave Lunch"])
-
-    if subprocess.run([sys.executable, "validate_ics.py", "candidate.ics"]).returncode:
-        print("\nCandidate feed is invalid - refusing to publish.")
-        return 1
-
-    import os
-    os.replace("candidate.ics", OUT)
-    os.remove(RAW)
-    print(f"\nWrote {OUT}")
+    write_index(results, args.repo_url)
+    print(f"\nRebuilt {len(built)} of {len(feeds)} feed(s).")
 
     if args.no_push:
         print("--no-push set; not committing.")
         return 0
 
-    if not subprocess.run(["git", "diff", "--quiet", "--", OUT]).returncode:
-        print("No change since last publish; nothing to push.")
+    subprocess.run(["git", "add", PUBLIC], check=True)
+    if subprocess.run(["git", "diff", "--cached", "--quiet"]).returncode == 0:
+        print("No changes since last publish; nothing to push.")
         return 0
-
-    run(["git", "add", OUT])
-    run(["git", "commit", "-m", f"Update lunch menu ({used})"])
-    run(["git", "push"])
-    print("\nPushed. GitHub Pages redeploys in about a minute:")
-    print("  https://bziebart123.github.io/linq-lunch-feed/public/maple_ave_lunch.ics")
+    subprocess.run(["git", "commit", "-m",
+                    f"Update lunch menus ({months[0]})"], check=True)
+    subprocess.run(["git", "push"], check=True)
+    print("\nPushed. GitHub Pages redeploys in about a minute.")
     return 0
 
 

@@ -1,0 +1,234 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//linqconnect-menu//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Templeton Middle School Lunch
+X-WR-TIMEZONE:America/Chicago
+BEGIN:VEVENT
+UID:df85d1522fca758b@linqconnect-menu.local
+DTSTAMP:20260830T172417Z
+DTSTART;VALUE=DATE:20260901
+DTEND;VALUE=DATE:20260902
+SUMMARY:🍴 Chicken Sandwich Sliders w/ Grab and Go-Pizza Bagel Bites
+DESCRIPTION:Hot Lunch: Chicken Sandwich Sliders w/ Grab and Go-Pizza Bage
+ l Bites\nFruit: Seasonal Fresh Fruit\, Pear\nVegetable: Baked Beans\nExt
+ ra: Oreo Cookies
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:47ed8bb754005dee@linqconnect-menu.local
+DTSTAMP:20260830T172417Z
+DTSTART;VALUE=DATE:20260902
+DTEND;VALUE=DATE:20260903
+SUMMARY:🍴 French Toast Sticks w/ Grab and Go-Stuffed Crust Pepperoni P
+ izza\, Sausage Links (2)
+DESCRIPTION:Hot Lunch: French Toast Sticks w/ Grab and Go-Stuffed Crust P
+ epperoni Pizza\, Sausage Links (2)\nFruit: Seasonal Fresh Fruit\, Apple 
+ Juice\nVegetable: Emoji Potatoes\nExtra: Syrup
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:efd3de016f02a547@linqconnect-menu.local
+DTSTAMP:20260830T172417Z
+DTSTART;VALUE=DATE:20260903
+DTEND;VALUE=DATE:20260904
+SUMMARY:🍴 General Tso's Rice Box w/ Grab and Go- Personal Pan Pizza
+DESCRIPTION:Hot Lunch: General Tso's Rice Box w/ Grab and Go- Personal Pa
+ n Pizza\nFruit: Seasonal Fresh Fruit\, Pineapple\nVegetable: Broccoli\nE
+ xtra: Fortune Cookie
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:a6076171d6a67d7d@linqconnect-menu.local
+DTSTAMP:20260830T172417Z
+DTSTART;VALUE=DATE:20260904
+DTEND;VALUE=DATE:20260905
+SUMMARY:🍴 Domino's Pizza Slice (Cheese)
+DESCRIPTION:Hot Lunch: Domino's Pizza Slice (Cheese)\nFruit: Seasonal Fre
+ sh Fruit\nVegetable: Baby Carrots
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:e5ebe962f15b8eca@linqconnect-menu.local
+DTSTAMP:20260830T172417Z
+DTSTART;VALUE=DATE:20260908
+DTEND;VALUE=DATE:20260909
+SUMMARY:🍴 Taco Quesadilla Bites w/ Grab and Go-Mini Cheese Calzones
+DESCRIPTION:Hot Lunch: Taco Quesadilla Bites w/ Grab and Go-Mini Cheese C
+ alzones\nFruit: Seasonal Fresh Fruit\, Banana\nVegetable: Black Beans
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:5a28089352e5da96@linqconnect-menu.local
+DTSTAMP:20260830T172417Z
+DTSTART;VALUE=DATE:20260909
+DTEND;VALUE=DATE:20260910
+SUMMARY:🍴 Bacon Cheeseburger on Bun
+DESCRIPTION:Hot Lunch: Bacon Cheeseburger on Bun\nFruit: Seasonal Fresh F
+ ruit\, Apple Slices\nVegetable: Carrot Coins
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:8e041018997e4106@linqconnect-menu.local
+DTSTAMP:20260830T172417Z
+DTSTART;VALUE=DATE:20260910
+DTEND;VALUE=DATE:20260911
+SUMMARY:🍴 Boneless Chicken Wings w/ Grab and Go- Grilled Cheese Sandwi
+ ch\, Dinner Roll
+DESCRIPTION:Hot Lunch: Boneless Chicken Wings w/ Grab and Go- Grilled Che
+ ese Sandwich\, Dinner Roll\nFruit: Seasonal Fresh Fruit\, Orange Slices\
+ nVegetable: Waffle Fries
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:fb7be4606a1f527d@linqconnect-menu.local
+DTSTAMP:20260830T172417Z
+DTSTART;VALUE=DATE:20260911
+DTEND;VALUE=DATE:20260912
+SUMMARY:🍴 Brat on Bun
+DESCRIPTION:Hot Lunch: Brat on Bun\nFruit: Seasonal Fresh Fruit\nVegetabl
+ e: Celery Sticks\nExtra: String Cheese
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:77e3370bfdaee4ad@linqconnect-menu.local
+DTSTAMP:20260830T172417Z
+DTSTART;VALUE=DATE:20260914
+DTEND;VALUE=DATE:20260915
+SUMMARY:🍴 Spicy Chicken Sandwich w/ Grab and Go-Pizza Bagel Bites
+DESCRIPTION:Hot Lunch: Spicy Chicken Sandwich w/ Grab and Go-Pizza Bagel 
+ Bites\nFruit: Seasonal Fresh Fruit\, Apple Slices\nVegetable: Waffle Fri
+ es
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:8535377738ab95d6@linqconnect-menu.local
+DTSTAMP:20260830T172417Z
+DTSTART;VALUE=DATE:20260915
+DTEND;VALUE=DATE:20260916
+SUMMARY:🍴 Loaded Tots w/ Mini Cheese Calzones
+DESCRIPTION:Hot Lunch: Loaded Tots w/ Mini Cheese Calzones\nFruit: Season
+ al Fresh Fruit\, Grapes\nVegetable: Black Beans
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:17e25f4c41c5ec43@linqconnect-menu.local
+DTSTAMP:20260830T172417Z
+DTSTART;VALUE=DATE:20260916
+DTEND;VALUE=DATE:20260917
+SUMMARY:🍴 Chicken Nuggets w/ Mac & Cheese w/ Grab and Go- Hamburger
+DESCRIPTION:Hot Lunch: Chicken Nuggets w/ Mac & Cheese w/ Grab and Go- Ha
+ mburger\nFruit: Seasonal Fresh Fruit\, Mixed Berry Cup\nVegetable: Brocc
+ oli
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:bb7275b67c73f4b1@linqconnect-menu.local
+DTSTAMP:20260830T172417Z
+DTSTART;VALUE=DATE:20260917
+DTEND;VALUE=DATE:20260918
+SUMMARY:🍴 Crispy Chicken Sandwich w/ Grab and Go- Mozzarella Dippers\,
+  Chick-fil-A Sauce
+DESCRIPTION:Hot Lunch: Crispy Chicken Sandwich w/ Grab and Go- Mozzarella
+  Dippers\, Chick-fil-A Sauce\nFruit: Seasonal Fresh Fruit\, Banana\nVege
+ table: Carrot Coins
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:f7db67085881aa18@linqconnect-menu.local
+DTSTAMP:20260830T172417Z
+DTSTART;VALUE=DATE:20260918
+DTEND;VALUE=DATE:20260919
+SUMMARY:🍴 Four Cheese Pizza Slice: Big Daddy's w/ Grab and Go- Hot Dog
+  on Bun
+DESCRIPTION:Hot Lunch: Four Cheese Pizza Slice: Big Daddy's w/ Grab and G
+ o- Hot Dog on Bun\nFruit: Seasonal Fresh Fruit\nVegetable: Celery Sticks
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:685e676eb4c93f56@linqconnect-menu.local
+DTSTAMP:20260830T172417Z
+DTSTART;VALUE=DATE:20260921
+DTEND;VALUE=DATE:20260922
+SUMMARY:🍴 Chicken Tenders w/ Grab and Go- Personal Pan Pizza\, Waffle
+DESCRIPTION:Hot Lunch: Chicken Tenders w/ Grab and Go- Personal Pan Pizza
+ \, Waffle\nFruit: Seasonal Fresh Fruit\, Strawberries\nVegetable: Sweet 
+ Potato Fries\nExtra: Syrup
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:5ac8061202ee4347@linqconnect-menu.local
+DTSTAMP:20260830T172417Z
+DTSTART;VALUE=DATE:20260922
+DTEND;VALUE=DATE:20260923
+SUMMARY:🍴 Nachos w/ Grab and Go-Cheese Quesadilla
+DESCRIPTION:Hot Lunch: Nachos w/ Grab and Go-Cheese Quesadilla\nFruit: Se
+ asonal Fresh Fruit\, Mandarin Oranges\nVegetable: Refried Beans
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ad12759752f3177c@linqconnect-menu.local
+DTSTAMP:20260830T172417Z
+DTSTART;VALUE=DATE:20260923
+DTEND;VALUE=DATE:20260924
+SUMMARY:🍴 Mini Corn Dogs w/ Stuffed Crust Cheese Pizza
+DESCRIPTION:Hot Lunch: Mini Corn Dogs w/ Stuffed Crust Cheese Pizza\nFrui
+ t: Seasonal Fresh Fruit\, Kiwi\nVegetable: Broccoli
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:7c1eb6df58bf5c19@linqconnect-menu.local
+DTSTAMP:20260830T172417Z
+DTSTART;VALUE=DATE:20260924
+DTEND;VALUE=DATE:20260925
+SUMMARY:🍴 Mashed Potato Bowl with Popcorn Chicken w/ Dinner Roll
+DESCRIPTION:Hot Lunch: Mashed Potato Bowl with Popcorn Chicken w/ Dinner 
+ Roll\nFruit: Seasonal Fresh Fruit\, Apple\nVegetable: Corn
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:bbef0f7e1cdc8f04@linqconnect-menu.local
+DTSTAMP:20260830T172417Z
+DTSTART;VALUE=DATE:20260925
+DTEND;VALUE=DATE:20260926
+SUMMARY:🍴 Soft Pretzel with Cheese Dip w/ Grab and Go-Stuffed Crust Pe
+ pperoni Pizza\, String Cheese
+DESCRIPTION:Hot Lunch: Soft Pretzel with Cheese Dip w/ Grab and Go-Stuffe
+ d Crust Pepperoni Pizza\, String Cheese\nFruit: Seasonal Fresh Fruit\nVe
+ getable: Baby Carrots
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:423978530b61e77f@linqconnect-menu.local
+DTSTAMP:20260830T172417Z
+DTSTART;VALUE=DATE:20260928
+DTEND;VALUE=DATE:20260929
+SUMMARY:🍴 Mozzarella Dippers w/ Corn Dog on a Stick (Chicken)
+DESCRIPTION:Hot Lunch: Mozzarella Dippers w/ Corn Dog on a Stick (Chicken
+ )\nFruit: Banana\, Seasonal Fresh Fruit\nVegetable: Broccoli\nExtra: Cho
+ colate Pudding Cup
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:f774b73ad17fd5a8@linqconnect-menu.local
+DTSTAMP:20260830T172417Z
+DTSTART;VALUE=DATE:20260929
+DTEND;VALUE=DATE:20260930
+SUMMARY:🍴 Walking Taco w/ Grab and Go- Personal Pan Pizza
+DESCRIPTION:Hot Lunch: Walking Taco w/ Grab and Go- Personal Pan Pizza\nF
+ ruit: Seasonal Fresh Fruit\, Pear\nVegetable: Black Beans
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:e05238953bfb5f81@linqconnect-menu.local
+DTSTAMP:20260830T172417Z
+DTSTART;VALUE=DATE:20260930
+DTEND;VALUE=DATE:20261001
+SUMMARY:🍴 WI Burger on Pretzel Bun w/ Grab and Go-Cheese Pizza Slice
+DESCRIPTION:Hot Lunch: WI Burger on Pretzel Bun w/ Grab and Go-Cheese Piz
+ za Slice\nFruit: Seasonal Fresh Fruit\, Apple Slices\nVegetable: Carrot 
+ Coins
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

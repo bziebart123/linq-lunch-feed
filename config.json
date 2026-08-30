@@ -1,0 +1,65 @@
+{
+  "district": {
+    "name": "Hamilton School District",
+    "identifier": "ZHSWGT",
+    "note": "Choice of Milk offered daily.\nFresh Salad Bar at SSIS, TMS, HHS. \nHot Vegetable available w/Bistro upon request.\n Halal friendly items indicated by ^."
+  },
+  "feeds": [
+    {
+      "name": "Maple Avenue Elementary Lunch",
+      "file": "maple_ave_lunch.ics",
+      "districtId": "37aa0b35-eba0-ee11-839d-b338dc280a64",
+      "buildingId": "a513a71a-22d7-ee11-a71c-a811a99a3020",
+      "session": "Lunch",
+      "detail": "full"
+    },
+    {
+      "name": "Hamilton High School Lunch",
+      "file": "hamilton_high_school_lunch.ics",
+      "districtId": "37aa0b35-eba0-ee11-839d-b338dc280a64",
+      "buildingId": "b4c1acab-d8d4-ee11-a71c-ce7a637acccc",
+      "session": "Lunch",
+      "detail": "full"
+    },
+    {
+      "name": "Lannon Elementary School Lunch",
+      "file": "lannon_elementary_school_lunch.ics",
+      "districtId": "37aa0b35-eba0-ee11-839d-b338dc280a64",
+      "buildingId": "2c8619ee-21d7-ee11-a71c-a47227c88067",
+      "session": "Lunch",
+      "detail": "full"
+    },
+    {
+      "name": "Marcy Elementary School Lunch",
+      "file": "marcy_elementary_school_lunch.ics",
+      "districtId": "37aa0b35-eba0-ee11-839d-b338dc280a64",
+      "buildingId": "ff05b302-22d7-ee11-a71c-a811a99a3020",
+      "session": "Lunch",
+      "detail": "full"
+    },
+    {
+      "name": "Silver Spring Intermediate Lunch",
+      "file": "silver_spring_intermediate_lunch.ics",
+      "districtId": "37aa0b35-eba0-ee11-839d-b338dc280a64",
+      "buildingId": "ffaac18e-21d7-ee11-a71c-abeaa023e439",
+      "session": "Lunch",
+      "detail": "full"
+    },
+    {
+      "name": "Templeton Middle School Lunch",
+      "file": "templeton_middle_school_lunch.ics",
+      "districtId": "37aa0b35-eba0-ee11-839d-b338dc280a64",
+      "buildingId": "6746423b-22d7-ee11-a71c-abeaa023e439",
+      "session": "Lunch",
+      "detail": "full"
+    },
+    {
+      "name": "Woodside Elementary School Lunch",
+      "file": "woodside_elementary_school_lunch.ics",
+      "districtId": "37aa0b35-eba0-ee11-839d-b338dc280a64",
+      "buildingId": "92018332-22d7-ee11-a71c-ea5e35c0294c",
+      "session": "Lunch",
+      "detail": "full"
+    }
+  ]
+}
