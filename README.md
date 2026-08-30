@@ -11,9 +11,15 @@ day, in Skylight, Google Calendar, Apple Calendar, or Outlook.
 **Everything you need is on one page:
 [the feed list](https://bziebart123.github.io/linq-lunch-feed/).**
 
-Open it, find your school, tap **Copy**, and follow the steps on that page. You
-can stop reading here — the rest of this file is for people who want to run or
-change the code.
+Find your school, then either:
+
+- **Copy the calendar link** to subscribe in Skylight, Google, Apple, or
+  Outlook — it updates itself, or
+- **Open the printable PDF** — a one-page landscape month you can print for the
+  fridge.
+
+You can stop reading here — the rest of this file is for people who want to run
+or change the code.
 
 ### Your school's link
 
@@ -26,6 +32,13 @@ change the code.
 | Silver Spring Intermediate | `https://bziebart123.github.io/linq-lunch-feed/public/silver_spring_intermediate_lunch.ics` |
 | Templeton Middle School | `https://bziebart123.github.io/linq-lunch-feed/public/templeton_middle_school_lunch.ics` |
 | Woodside Elementary School | `https://bziebart123.github.io/linq-lunch-feed/public/woodside_elementary_school_lunch.ics` |
+
+### Printable PDFs
+
+Each school also gets a one-page landscape calendar per month, linked from the
+feed list page. Same layout as the calendar link, just on paper — hot lunch in
+bold, fruit in green, vegetable in brown, extras in purple, Bistro Box in red.
+Print it at 100% scale (not "fit to page") on letter paper, landscape.
 
 ### Adding it to Skylight
 
@@ -64,7 +77,8 @@ python refresh.py
 ```
 
 Rebuilds every feed in `config.json`, publishing **this month and next month
-together**, validates each, and pushes. Publishing only the newest available
+together** as both an `.ics` feed and a one-page printable PDF per month,
+validates each calendar, and pushes. Publishing only the newest available
 month would erase the rest of the current month from subscribers' calendars the
 moment the district posts the next one. Flags:
 
@@ -141,6 +155,15 @@ The district search and building list are undocumented endpoints found in the
 LinqConnect web app's JS bundle. They need no authentication today, but nothing
 guarantees they stay that way.
 
+## Determinism
+
+Both outputs are built to be byte-stable so a weekly run with no menu change
+produces no commit at all. The `.ics` comparison ignores `DTSTAMP` (the
+generation time), and the PDF is written with reportlab's `invariant=1`, which
+strips the creation timestamp and document id. Without both, every run would
+commit, push, and redeploy Pages for nothing, burying real menu changes in
+noise.
+
 ## Safety
 
 A feed is only replaced when the new one is real. `refresh.py` aborts on an
@@ -164,6 +187,7 @@ python validate_ics.py public/maple_ave_lunch.ics
 | `discover.py` | Find district and school IDs |
 | `linq_api.py` | Client for the three public LinqConnect endpoints |
 | `linq_ics.py` | Builds the `.ics` from a menu response |
+| `linq_pdf.py` | Builds the one-page printable PDF calendar |
 | `linq_parse.py` | Parses the JSON and XML forms of that response |
 | `validate_ics.py` | Standalone iCalendar validator |
 | `run_weekly.ps1` | What the scheduled task executes |
