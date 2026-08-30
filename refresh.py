@@ -102,45 +102,94 @@ def build_one(feed, months):
     return out, n_events, used
 
 
-def write_index(results, repo_url):
-    """A landing page at the Pages root listing every published feed."""
-    rows = "\n".join(
-        f'      <li><a href="{os.path.basename(p)}">{n}</a> '
-        f'<span class="meta">{ev} days &middot; {mo}</span></li>'
-        for n, p, ev, mo in results)
+def write_index(results, repo_url, base_url):
+    """A landing page at the Pages root listing every published feed.
+
+    Each row shows the complete URL, not a relative link, so a parent can read
+    or copy it without having to assemble it from a prefix.
+    """
+    items = []
+    for name, path, ev, mo in results:
+        url = base_url.rstrip("/") + "/" + os.path.basename(path)
+        items.append(f"""    <li>
+      <div class="school">{name}</div>
+      <div class="meta">{ev} school days &middot; {mo.replace('-1-', '/')}</div>
+      <div class="row">
+        <code>{url}</code>
+        <button type="button" data-url="{url}">Copy</button>
+      </div>
+    </li>""")
+    rows = chr(10).join(items)
     html = f"""<!doctype html>
 <html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>School Lunch Calendar Feeds</title>
 <style>
-  :root {{ color-scheme: light dark; }}
-  body {{ font: 16px/1.6 system-ui, sans-serif; max-width: 42rem;
-         margin: 3rem auto; padding: 0 1.25rem; }}
-  h1 {{ font-size: 1.4rem; }}
-  ul {{ padding-left: 1.2rem; }}
-  li {{ margin: .4rem 0; }}
+  :root {{ color-scheme: light dark; --line: rgba(128,128,128,.28);
+           --soft: rgba(128,128,128,.12); }}
+  body {{ font: 16px/1.6 system-ui, -apple-system, sans-serif;
+         max-width: 46rem; margin: 3rem auto; padding: 0 1.25rem; }}
+  h1 {{ font-size: 1.5rem; margin-bottom: .25rem; }}
+  h2 {{ font-size: 1.05rem; margin-top: 2.5rem; }}
+  .lede {{ opacity: .8; margin-top: 0; }}
+  ul {{ list-style: none; padding: 0; }}
+  li {{ border: 1px solid var(--line); border-radius: 8px;
+        padding: .85rem 1rem; margin: .7rem 0; }}
+  .school {{ font-weight: 600; }}
   .meta {{ opacity: .6; font-size: .85em; }}
-  code {{ background: rgba(128,128,128,.15); padding: .1em .35em;
-          border-radius: 3px; word-break: break-all; }}
-  footer {{ margin-top: 2.5rem; font-size: .9em; opacity: .75; }}
+  .row {{ display: flex; gap: .5rem; align-items: center;
+          margin-top: .5rem; flex-wrap: wrap; }}
+  code {{ background: var(--soft); padding: .3em .5em; border-radius: 4px;
+          font-size: .8em; word-break: break-all; flex: 1 1 20rem; }}
+  button {{ font: inherit; font-size: .85em; padding: .3em .9em;
+            border: 1px solid var(--line); border-radius: 4px;
+            background: var(--soft); cursor: pointer; }}
+  button:hover {{ background: rgba(128,128,128,.22); }}
+  ol {{ padding-left: 1.3rem; }}
+  footer {{ margin-top: 2.5rem; font-size: .9em; opacity: .7;
+            border-top: 1px solid var(--line); padding-top: 1rem; }}
 </style>
 <h1>School lunch calendar feeds</h1>
-<p>Subscribe to any of these by URL in Skylight, Google Calendar, Apple
-   Calendar, or Outlook. Right-click a link to copy its address.</p>
+<p class="lede">Hamilton School District. Copy your school's link below, then
+   add it to Skylight, Google Calendar, Apple Calendar, or Outlook.</p>
 <ul>
 {rows}
 </ul>
-<p>In Skylight: <em>Calendar &rarr; Synced Calendars &rarr; Sync new calendar
-   &rarr; Calendar by URL</em>.</p>
+
+<h2>Adding it to Skylight</h2>
+<ol>
+  <li>On a phone or computer (not the frame), sign in at
+      <a href="https://app.ourskylight.com">app.ourskylight.com</a>.</li>
+  <li>Pick your frame, then <strong>Calendar &rarr; Synced Calendars &rarr;
+      Sync new calendar</strong>.</li>
+  <li>Choose <strong>Calendar by URL</strong> &mdash; not the Google, Apple, or
+      Outlook buttons.</li>
+  <li>Paste the link, give it a name, and save.</li>
+</ol>
+<p>Skylight refetches on its own schedule, so new menus can take a few hours to
+   appear on the frame.</p>
+
 <footer>
-  Generated from the LinqConnect public menu API.
-  Source and setup instructions: <a href="{repo_url}">{repo_url}</a>
+  Built from the LinqConnect public menu API. Menus are updated manually about
+  once a month, after the district posts them.
+  <a href="{repo_url}">Source and setup instructions</a>.
 </footer>
+<script>
+document.querySelectorAll('button[data-url]').forEach(function (b) {{
+  b.addEventListener('click', function () {{
+    navigator.clipboard.writeText(b.dataset.url).then(function () {{
+      var t = b.textContent;
+      b.textContent = 'Copied';
+      setTimeout(function () {{ b.textContent = t; }}, 1400);
+    }});
+  }});
+}});
+</script>
 </html>
 """
     with open(os.path.join(PUBLIC, "index.html"), "w",
-              encoding="utf-8", newline="\n") as f:
+              encoding="utf-8", newline=chr(10)) as f:
         f.write(html)
 
 
@@ -151,6 +200,9 @@ def main():
     ap.add_argument("--no-push", action="store_true")
     ap.add_argument("--repo-url",
                     default="https://github.com/bziebart123/linq-lunch-feed")
+    ap.add_argument("--base-url",
+                    default="https://bziebart123.github.io/linq-lunch-feed/public",
+                    help="public URL of the folder the feeds are served from")
     args = ap.parse_args()
 
     feeds = load_config()
@@ -174,7 +226,7 @@ def main():
         print("\nNothing was rebuilt.")
         return 1
 
-    write_index(results, args.repo_url)
+    write_index(results, args.repo_url, args.base_url)
     print(f"\nRebuilt {len(built)} of {len(feeds)} feed(s).")
 
     if args.no_push:
