@@ -44,8 +44,10 @@ Give it its own color so lunch doesn't blend into family events.
 
 - **Updates are not instant.** Skylight refetches on its own schedule, usually
   within a few hours.
-- **Menus are refreshed by hand, about once a month**, after the district posts
-  the next month. If a new month looks missing, it hasn't been pulled in yet.
+- **Menus refresh automatically once a week**, so a newly posted month shows up
+  within a few days of the district publishing it.
+- **The current month and next month are both included**, so the rest of this
+  month never disappears when the next one is posted.
 - **Weekends, holidays, and no-school days are simply absent** — that's
   expected, not a gap in the data.
 
@@ -61,10 +63,12 @@ Everything below is about running, changing, or reusing the code.
 python refresh.py
 ```
 
-Rebuilds every feed in `config.json` for the newest posted month (next month,
-falling back to the current one), validates each, and pushes. Flags:
+Rebuilds every feed in `config.json`, publishing **this month and next month
+together**, validates each, and pushes. Publishing only the newest available
+month would erase the rest of the current month from subscribers' calendars the
+moment the district posts the next one. Flags:
 
-- `--month 10-1-2026` — a specific month
+- `--month 10-1-2026` — one specific month only
 - `--only maple` — just the feeds whose name matches
 - `--no-push` — rebuild locally without committing
 - `--base-url` / `--repo-url` — if you host it somewhere else
@@ -72,6 +76,28 @@ falling back to the current one), validates each, and pushes. Flags:
 Per-feed `detail` in `config.json` controls how much text lands on each day:
 `full` (hot lunch, fruit, vegetable, extra, bistro box), `hot+bistro`, or `hot`.
 Drop it down if a wall display looks crowded.
+
+## The weekly schedule
+
+A Windows Scheduled Task runs `run_weekly.ps1` every Sunday at 9:00am. That
+script pulls, runs `refresh.py`, and pushes only if a menu actually changed.
+Output goes to `logs/refresh-YYYY-MM-DD.log` (last 12 kept); a failed run pops
+a desktop notification rather than failing silently for weeks.
+
+```powershell
+powershell -ExecutionPolicy Bypass -File setup_schedule.ps1                          # register
+powershell -ExecutionPolicy Bypass -File setup_schedule.ps1 -DayOfWeek Wed -At 7:30am
+powershell -ExecutionPolicy Bypass -File setup_schedule.ps1 -Remove
+Start-ScheduledTask -TaskName 'LinqLunchFeed Weekly Refresh'                          # run now
+```
+
+`StartWhenAvailable` is set, so a run missed because the machine was off or
+asleep fires at the next opportunity instead of waiting a full week. The task
+runs as the current user while logged on, so no password is stored and no admin
+rights are needed. It needs a passphrase-free SSH key to push unattended.
+
+This has to run on a home machine. LinqConnect blocks datacenter IPs, so no
+cloud scheduler can do it.
 
 ## Using this for a different district
 
@@ -140,4 +166,6 @@ python validate_ics.py public/maple_ave_lunch.ics
 | `linq_ics.py` | Builds the `.ics` from a menu response |
 | `linq_parse.py` | Parses the JSON and XML forms of that response |
 | `validate_ics.py` | Standalone iCalendar validator |
+| `run_weekly.ps1` | What the scheduled task executes |
+| `setup_schedule.ps1` | Registers, retimes, or removes that task |
 | `public/` | The published feeds and the index page |

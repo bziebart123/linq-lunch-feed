@@ -24,14 +24,50 @@ from linq_ics import build_ics
 from validate_ics import validate
 
 CONFIG = "config.json"
+CRLF = chr(13) + chr(10)
 PUBLIC = "public"
 
 
 def candidate_months():
+    """This month and next, in order.
+
+    Both are published together. Taking only the newest available month would
+    erase the rest of the current month from every subscriber's calendar the
+    moment the district posts the next one.
+    """
     today = datetime.date.today()
     first = today.replace(day=1)
     nxt = (first + datetime.timedelta(days=32)).replace(day=1)
-    return [f"{nxt.month}-1-{nxt.year}", f"{first.month}-1-{first.year}"]
+    return [f"{first.month}-1-{first.year}", f"{nxt.month}-1-{nxt.year}"]
+
+
+def merge_calendars(parts):
+    """Splice several one-month calendars into a single VCALENDAR.
+
+    Keeps the first calendar's header, concatenates every VEVENT, and drops
+    duplicate UIDs so an overlapping response cannot double-book a day.
+    """
+    if len(parts) == 1:
+        return parts[0]
+    header, events, seen = [], [], set()
+    for part in parts:
+        lines = part.split(CRLF)
+        if "BEGIN:VEVENT" not in lines:
+            continue
+        first = lines.index("BEGIN:VEVENT")
+        last = len(lines) - 1 - lines[::-1].index("END:VEVENT")
+        if not header:
+            header = lines[:first]
+        block = []
+        for line in lines[first:last + 1]:
+            block.append(line)
+            if line == "END:VEVENT":
+                uid = next((x[4:] for x in block if x.startswith("UID:")), None)
+                if uid and uid not in seen:
+                    seen.add(uid)
+                    events.extend(block)
+                block = []
+    return CRLF.join(header + events + ["END:VCALENDAR"]) + CRLF
 
 
 def load_config():
@@ -51,8 +87,8 @@ def build_one(feed, months):
     out = os.path.join(PUBLIC, feed["file"])
     print(f"\n{name}")
 
-    raw = None
-    used = None
+    parts, got = [], []
+    scratch = "_menu.json"
     for month in months:
         try:
             raw, n_days = linq_api.fetch_menu(
@@ -60,30 +96,32 @@ def build_one(feed, months):
         except linq_api.LinqError as e:
             print(f"  {month}: {e}")
             return None
-        if raw:
-            print(f"  {month}: {n_days} school day(s)")
-            used = month
-            break
-        print(f"  {month}: nothing posted")
-
-    if not raw:
-        print(f"  -> no menu available; leaving existing feed untouched")
-        return None
-
-    tmp = os.path.join(PUBLIC, feed["file"] + ".tmp")
-    scratch = "_menu.json"
-    with open(scratch, "wb") as f:
-        f.write(raw)
-    try:
-        ics, meta = build_ics(scratch,
-                              session=feed.get("session", "Lunch"),
-                              detail=feed.get("detail", "full"),
-                              calendar_name=name)
-    except Exception as e:
-        print(f"  -> could not build calendar: {e}")
+        if not raw:
+            print(f"  {month}: nothing posted")
+            continue
+        with open(scratch, "wb") as f:
+            f.write(raw)
+        try:
+            ics, _ = build_ics(scratch,
+                               session=feed.get("session", "Lunch"),
+                               detail=feed.get("detail", "full"),
+                               calendar_name=name)
+        except Exception as e:
+            print(f"  {month}: could not build calendar: {e}")
+            os.remove(scratch)
+            continue
         os.remove(scratch)
+        print(f"  {month}: {n_days} school day(s)")
+        parts.append(ics)
+        got.append(month)
+
+    if not parts:
+        print("  -> no menu available; leaving existing feed untouched")
         return None
-    os.remove(scratch)
+
+    ics = merge_calendars(parts)
+    used = " + ".join(got)
+    tmp = os.path.join(PUBLIC, feed["file"] + ".tmp")
 
     n_events = ics.count("BEGIN:VEVENT")
     if n_events < 1:
@@ -238,8 +276,9 @@ def main():
     if subprocess.run(["git", "diff", "--cached", "--quiet"]).returncode == 0:
         print("No changes since last publish; nothing to push.")
         return 0
+    stamp = datetime.date.today().isoformat()
     subprocess.run(["git", "commit", "-m",
-                    f"Update lunch menus ({months[0]})"], check=True)
+                    f"Update lunch menus ({stamp})"], check=True)
     subprocess.run(["git", "push"], check=True)
     print("\nPushed. GitHub Pages redeploys in about a minute.")
     return 0
