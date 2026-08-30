@@ -103,6 +103,24 @@ def load_config():
     return feeds
 
 
+_LOOKUPS = {}
+
+
+def lookups_for(district_id):
+    """Allergen/Halal name maps, fetched once per district per run.
+
+    A failure here must not take down the feeds, so it degrades to no
+    allergen data rather than raising.
+    """
+    if district_id not in _LOOKUPS:
+        try:
+            _LOOKUPS[district_id] = linq_api.district_lookups(district_id)
+        except linq_api.LinqError as e:
+            print(f"  (allergen names unavailable: {e})")
+            _LOOKUPS[district_id] = {}
+    return _LOOKUPS[district_id]
+
+
 def build_one(feed, months):
     """Fetch, generate, validate. Returns (path, n_events, month) or None."""
     name = feed["name"]
@@ -113,6 +131,7 @@ def build_one(feed, months):
     # The calendar name carries "Lunch"; the PDF header should not repeat it.
     school_label = name[:-6] if name.endswith(" Lunch") else name
     note = feed.get("note", DISTRICT_NOTE)
+    lookups = lookups_for(feed["districtId"])
     scratch = "_menu.json"
     for month in months:
         try:
@@ -130,7 +149,7 @@ def build_one(feed, months):
             ics, _ = build_ics(scratch,
                                session=feed.get("session", "Lunch"),
                                detail=feed.get("detail", "full"),
-                               calendar_name=name)
+                               calendar_name=name, lookups=lookups)
         except Exception as e:
             print(f"  {month}: could not build calendar: {e}")
             os.remove(scratch)
@@ -140,24 +159,36 @@ def build_one(feed, months):
                 raise RuntimeError(
                     f"PDF support unavailable ({_PDF_ERROR}); "
                     "install it with: pip install reportlab")
-            MENU, meta = build_menu(scratch, session=feed.get("session", "Lunch"))
+            MENU, meta = build_menu(scratch, session=feed.get("session", "Lunch"),
+                                    lookups=lookups)
             base = os.path.splitext(feed["file"])[0]
             mname = MONTH_NAMES[meta["month"] - 1]
-            pdf_name = f"{base}_{mname}_{meta['year']}.pdf"
-            pdf_tmp = os.path.join(PUBLIC, pdf_name + ".tmp")
+            stamp = f"{mname} {meta['year']}"
             os.makedirs(PUBLIC, exist_ok=True)
-            if build_pdf(MENU, meta["month"], meta["year"], school_label,
-                         pdf_tmp, note=note,
-                         detail=feed.get("detail", "full")):
+
+            # Two sheets: the normal menu, and one that puts allergens front
+            # and centre for families who need to read them at a glance.
+            variants = [("", feed.get("detail", "full"), "menu")]
+            if any((v or {}).get("allergens") for v in MENU.values()):
+                variants.append(("_allergens", "allergens", "allergens"))
+
+            for suffix, mode, kind in variants:
+                pdf_name = f"{base}_{mname}_{meta['year']}{suffix}.pdf"
+                pdf_tmp = os.path.join(PUBLIC, pdf_name + ".tmp")
+                made = build_pdf(MENU, meta["month"], meta["year"], school_label,
+                                 pdf_tmp, note=note, detail=mode,
+                                 no_school=meta.get("no_school"))
+                if not made:
+                    if os.path.exists(pdf_tmp):
+                        os.remove(pdf_tmp)
+                    continue
                 pdf_out = os.path.join(PUBLIC, pdf_name)
                 new = open(pdf_tmp, "rb").read()
                 if os.path.exists(pdf_out) and open(pdf_out, "rb").read() == new:
                     os.remove(pdf_tmp)
                 else:
                     os.replace(pdf_tmp, pdf_out)
-                pdfs.append((f"{mname} {meta['year']}", pdf_out))
-            elif os.path.exists(pdf_tmp):
-                os.remove(pdf_tmp)
+                pdfs.append((stamp, pdf_out, kind))
         except Exception as e:
             print(f"  {month}: could not build PDF: {e}")
 
@@ -210,9 +241,12 @@ def write_index(results, repo_url, base_url):
         school = name[:-6] if name.endswith(" Lunch") else name
         url = base_url.rstrip("/") + "/" + os.path.basename(path)
         chips = chr(10).join(
-            '          <a class="chip" href="{}">{}<span class="ext">PDF</span></a>'
-            .format(base_url.rstrip("/") + "/" + os.path.basename(p), label)
-            for label, p in pdfs)
+            '          <a class="chip{}" href="{}">{}<span class="ext">{}</span></a>'
+            .format("" if kind == "menu" else " alt",
+                    base_url.rstrip("/") + "/" + os.path.basename(p),
+                    label,
+                    "PDF" if kind == "menu" else "ALLERGENS")
+            for label, p, kind in pdfs)
         pdf_group = ("""
         <div class="opt">
           <div class="opt-label">Print</div>
@@ -297,6 +331,10 @@ def write_index(results, repo_url, base_url):
   .ext {{ font-size: .72em; font-weight: 700; letter-spacing: .05em;
           background: var(--soft); border-radius: 4px; padding: .15em .45em;
           opacity: .8; }}
+  a.chip.alt .ext {{ background: rgba(198,40,40,.14); color: #c62828; }}
+  @media (prefers-color-scheme: dark) {{
+    a.chip.alt .ext {{ background: rgba(255,138,128,.18); color: #ff8a80; }}
+  }}
 
   ol {{ padding-left: 1.3rem; }}
   ol li {{ margin: .3rem 0; }}
@@ -335,6 +373,15 @@ def write_index(results, repo_url, base_url):
    <strong>Bistro Box</strong> at the elementary and intermediate schools,
    <strong>Grab &amp; Go</strong> at Templeton, and <strong>The Grill</strong>
    or <strong>Build Your Own</strong> at the high school.</p>
+
+<h2>Allergens</h2>
+<p>Each day lists the allergens the district records for the hot lunch, and the
+   calendar spells them out for every item. The standard printable keeps them
+   short as letter codes with a key at the bottom. If you need them at a
+   glance, use the <strong>Allergens</strong> printable instead, which lists
+   them in full for each item.</p>
+<p>This information comes from the district and can change. Confirm with the
+   school before relying on it.</p>
 
 <footer>
   Menus come from the LinqConnect public API and are refreshed weekly.

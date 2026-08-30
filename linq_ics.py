@@ -67,8 +67,8 @@ def _fmt_date(y, m, d):
 
 
 def build_ics(menu_file, session="Lunch", detail="full",
-              calendar_name="School Lunch"):
-    MENU, meta = build_menu(menu_file, session=session)
+              calendar_name="School Lunch", lookups=None):
+    MENU, meta = build_menu(menu_file, session=session, lookups=lookups)
     year, month = meta["year"], meta["month"]
 
     now = datetime.datetime.now(datetime.timezone.utc)
@@ -96,10 +96,21 @@ def build_ics(menu_file, session="Lunch", detail="full",
         # Title
         title = TITLE_PREFIX + hot
 
-        # Description body scales with --detail
+        def _tags(item):
+            """' (Halal; contains Milk, Soy)' for one menu item, or ''."""
+            bits = []
+            if item.get("halal"):
+                bits.append("Halal")
+            if item.get("allergens"):
+                bits.append("contains " + ", ".join(item["allergens"]))
+            return f" ({'; '.join(bits)})" if bits else ""
+
+        # Description body scales with --detail. A calendar description has no
+        # space pressure, so allergens are spelled out in full here rather than
+        # abbreviated the way the printable sheet has to.
         desc_parts = []
         if detail in ("full", "hot+bistro", "hot"):
-            desc_parts.append(f"Hot Lunch: {hot}")
+            desc_parts.append(f"Hot Lunch: {hot}{_tags(cell)}")
         if detail == "full":
             if cell.get("fruit"):
                 desc_parts.append(f"Fruit: {cell['fruit']}")
@@ -112,7 +123,14 @@ def build_ics(menu_file, session="Lunch", detail="full",
         # so they are always listed alongside it.
         if detail in ("full", "hot+bistro"):
             for alt in cell.get("alts") or []:
-                desc_parts.append(f"{alt['label']}: {alt['items']}")
+                desc_parts.append(f"{alt['label']}: {alt['items']}{_tags(alt)}")
+        if detail == "full" and cell.get("side_allergens"):
+            desc_parts.append(
+                "Sides contain: " + ", ".join(cell["side_allergens"]))
+        if cell.get("allergens") or cell.get("side_allergens"):
+            desc_parts.append(
+                "Allergen info comes from the district and can change. "
+                "Confirm with the school before relying on it.")
         description = "\n".join(desc_parts)
 
         start = _fmt_date(year, month, day)

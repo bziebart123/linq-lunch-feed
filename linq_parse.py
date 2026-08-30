@@ -112,14 +112,17 @@ def _parse_xml(raw: str):
                         continue
                     for cat in rc:
                         cname = _xml_text(cat, "CategoryName")
+                        # The XML form carries no allergen data; callers get
+                        # empty lists rather than wrong ones.
                         recs = [
-                            _xml_text(r, "RecipeName")
+                            {"name": _xml_text(r, "RecipeName"),
+                             "allergens": [], "religious": []}
                             for r in cat.find(NS + "Recipes")
                         ]
                         cats.append((cname, recs))
                 days.append((date, cats))
         sessions.append((session_name, plan_name, days))
-    return sessions
+    return sessions, {}
 
 
 # ─────────────────────────── JSON path ───────────────────────────
@@ -138,11 +141,22 @@ def _parse_json(raw: str):
                 for meal in day.get("MenuMeals", []):
                     for cat in meal.get("RecipeCategories", []):
                         cname = cat.get("CategoryName")
-                        recs = [r.get("RecipeName") for r in cat.get("Recipes", [])]
+                        recs = [{
+                            "name": r.get("RecipeName"),
+                            "allergens": r.get("Allergens") or [],
+                            "religious": r.get("ReligiousRestrictions") or [],
+                        } for r in cat.get("Recipes", [])]
                         cats.append((cname, recs))
                 days.append((date, cats))
         sessions.append((session_name, plan_name, days))
-    return sessions
+
+    # Named no-school days ("9/7/2026" -> "Labor Day").
+    academic = {}
+    for ac in d.get("AcademicCalendars") or []:
+        for day in ac.get("Days") or []:
+            if day.get("Date") and day.get("Note"):
+                academic[day["Date"]] = day["Note"].strip()
+    return sessions, academic
 
 
 # ─────────────────────────── public API ───────────────────────────
@@ -156,7 +170,7 @@ def _load(path):
     return _parse_json(raw)
 
 
-def build_menu(path, session="Lunch"):
+def build_menu(path, session="Lunch", lookups=None):
     """
     Returns (MENU, meta).
       MENU: {day_number: {"hot":..,"fruit":..,"veg":..,"extra":..,"bistro":..}}
@@ -165,9 +179,23 @@ def build_menu(path, session="Lunch"):
     days fall in a single month (the modal month of the response); if a
     response ever straddles two months, pass a tighter date range to the API.
     """
-    sessions = _load(path)
+    sessions, academic = _load(path)
     if not sessions:
         raise ValueError("No FamilyMenuSessions found in response.")
+
+    lookups = lookups or {}
+    allergen_names = lookups.get("allergens") or {}
+    religious_names = lookups.get("religious") or {}
+
+    def _labels(recs, key, names):
+        """Decode the GUIDs on a set of recipes into sorted display names."""
+        out = set()
+        for r in recs:
+            for guid in r.get(key) or []:
+                label = names.get(guid)
+                if label and label.lower() != "none":
+                    out.add(label)
+        return sorted(out)
 
     # pick requested session, else first
     chosen = None
@@ -201,31 +229,46 @@ def build_menu(path, session="Lunch"):
                 if x not in seen:
                     seen.add(x); out.append(x)
             return out
-        def _add_alt(label, items):
+        # Allergens are tracked per displayed item, not pooled for the whole
+        # day. Pooling would imply the entree contains whatever was only ever
+        # in the cookie.
+        alt_allergens, alt_halal = {}, {}
+        hot_recs, side_recs = [], []
+
+        def _add_alt(label, items, recs=()):
             bucket = alts.setdefault(label, [])
             for it in items:
                 if it and it not in bucket:
                     bucket.append(it)
+            if recs:
+                alt_allergens.setdefault(label, []).extend(recs)
+
         for cname, recs in cats:
-            names = _dedupe([_clean(n) for n in recs if _clean(n)])
+            names = _dedupe([_clean(r["name"]) for r in recs if _clean(r["name"])])
             if cname == ENTREE_CAT:
                 # Split off any "Grab and Go-<item>" hiding in here; it is a
                 # choice instead of the entree, not part of it.
+                grab_recs = [r for r in recs if GRAB_RE.match(_clean(r["name"]))]
                 grabbed = [GRAB_RE.sub("", n) for n in names if GRAB_RE.match(n)]
                 if grabbed:
-                    _add_alt(ALT_CATS["Grab n Go"], grabbed)
+                    _add_alt(ALT_CATS["Grab n Go"], grabbed, grab_recs)
                 entrees += [n for n in names if not GRAB_RE.match(n)]
+                hot_recs += [r for r in recs if not GRAB_RE.match(_clean(r["name"]))]
             elif cname in COMPONENT_CATS:
                 components += names
+                hot_recs += recs
             elif cname in FRUIT_CATS:
                 fruit += names
+                side_recs += recs
             elif cname in VEG_CATS:
                 veg += names
+                side_recs += recs
             elif cname in EXTRA_CATS:
                 extra += names
+                side_recs += recs
             elif cname in ALT_CATS:
-                cleaned = [_strip_bistro(n) for n in recs]
-                _add_alt(ALT_CATS[cname], [x for x in cleaned if x])
+                cleaned = [_strip_bistro(r["name"]) for r in recs]
+                _add_alt(ALT_CATS[cname], [x for x in cleaned if x], recs)
         def _ddup(seq):
             seen, out = set(), []
             for x in seq:
@@ -241,7 +284,11 @@ def build_menu(path, session="Lunch"):
                 " w/ " + ", ".join(components) if components else "")
             # Any further "Hot Lunch" recipes are separate choices for the day.
             if len(entrees) > 1:
-                _add_alt("Also Offered", entrees[1:])
+                extra_recs = [r for r in hot_recs
+                              if _clean(r["name"]) in entrees[1:]]
+                _add_alt("Also Offered", entrees[1:], extra_recs)
+                hot_recs = [r for r in hot_recs
+                            if _clean(r["name"]) not in entrees[1:]]
         else:
             cell["hot"] = ""
         if fruit:
@@ -250,9 +297,23 @@ def build_menu(path, session="Lunch"):
             cell["veg"] = ", ".join(veg)
         if extra:
             cell["extra"] = ", ".join(extra)
+
+        cell["allergens"] = _labels(hot_recs, "allergens", allergen_names)
+        cell["halal"] = bool(_labels(hot_recs, "religious", religious_names))
+        cell["side_allergens"] = _labels(side_recs, "allergens", allergen_names)
+
         if alts:
-            cell["alts"] = [{"label": lbl, "items": ", ".join(items)}
-                            for lbl, items in alts.items() if items]
+            cell["alts"] = []
+            for lbl, items in alts.items():
+                if not items:
+                    continue
+                recs = alt_allergens.get(lbl, [])
+                cell["alts"].append({
+                    "label": lbl,
+                    "items": ", ".join(items),
+                    "allergens": _labels(recs, "allergens", allergen_names),
+                    "halal": bool(_labels(recs, "religious", religious_names)),
+                })
             # Legacy alias: the elementary Bistro Box, when there is one.
             for a in cell["alts"]:
                 if a["label"] == "Bistro Box":
@@ -260,12 +321,23 @@ def build_menu(path, session="Lunch"):
                     break
         MENU[d] = cell
 
+    # Named no-school days for this month ({7: "Labor Day"}).
+    no_school = {}
+    for date, note in (academic or {}).items():
+        try:
+            am, ad, ay = (int(x) for x in date.split("/"))
+        except ValueError:
+            continue
+        if (am, ay) == (month, year):
+            no_school[ad] = note
+
     meta = {
         "month": month,
         "year": year,
         "plan_name": plan_name,
         "session": session_name,
         "school_days": sorted(MENU.keys()),
+        "no_school": no_school,
     }
     return MENU, meta
 

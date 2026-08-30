@@ -35,9 +35,32 @@ VEG_FG = HexColor("#5d4037")
 EXTRA_FG = HexColor("#6a1b9a")
 BISTRO_RED = HexColor("#c62828")
 
+ALLERGEN_FG = HexColor("#6b6b6b")
+
 MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July",
                "August", "September", "October", "November", "December"]
 DAY_NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+
+# Short codes keep allergens to one quiet line on the standard sheet. The
+# allergen sheet spells them out instead.
+ALLERGEN_CODES = {
+    "Egg": "E", "Milk": "M", "Wheat": "W", "Soy": "S",
+    "Sesame Seeds": "Se", "Sesame": "Se", "Fish": "F",
+    "Shellfish": "SF", "Peanut": "P", "Peanuts": "P",
+    "Tree Nuts": "TN", "Tree Nut": "TN",
+}
+
+
+def allergen_code(name):
+    return ALLERGEN_CODES.get(name) or name[:2].title()
+
+
+def legend_for(names):
+    """'E=Egg, M=Milk, ...' for whatever allergens appear this month."""
+    seen = {}
+    for n in names:
+        seen.setdefault(allergen_code(n), n)
+    return ", ".join(f"{c}={seen[c]}" for c in sorted(seen))
 
 
 def school_year(month, year):
@@ -74,7 +97,7 @@ def _wrap(c, text, font, size, max_w, max_lines):
 
 
 def build_pdf(MENU, month, year, school_name, out_path,
-              note="", last_posted_day=None, detail="full"):
+              note="", last_posted_day=None, detail="full", no_school=None):
     """Render one month for one school onto a single landscape page.
 
     MENU maps day-of-month -> cell dict (falsy for a no-school day). Weekdays
@@ -85,9 +108,22 @@ def build_pdf(MENU, month, year, school_name, out_path,
     Returns out_path, or None if the month has no menu data at all.
     """
     total_days = calendar.monthrange(year, month)[1]
+    no_school = no_school or {}
+    allergen_sheet = detail == "allergens"
     if last_posted_day is None:
         served = [d for d, v in MENU.items() if v]
         last_posted_day = max(served) if served else 0
+
+    # Only the allergens actually used this month go in the footer legend.
+    used_allergens = set()
+    for v in MENU.values():
+        if not v:
+            continue
+        used_allergens.update(v.get("allergens") or [])
+        for a in v.get("alts") or []:
+            used_allergens.update(a.get("allergens") or [])
+        if allergen_sheet:
+            used_allergens.update(v.get("side_allergens") or [])
 
     # Build the Mon-Fri grid, dropping any week with no menu at all (spring
     # break, winter break) so the calendar stays on a single sheet.
@@ -108,7 +144,8 @@ def build_pdf(MENU, month, year, school_name, out_path,
     ux = MARGIN
     uw = PAGE_W - 2 * MARGIN
     header_h = 0.42 * inch
-    footer_h = 0.2 * inch
+    # The allergen legend needs a second footer line.
+    footer_h = (0.34 if used_allergens else 0.2) * inch
     day_header_h = 0.2 * inch
     grid_top = PAGE_H - MARGIN - header_h
     grid_bottom = MARGIN + footer_h
@@ -128,8 +165,9 @@ def build_pdf(MENU, month, year, school_name, out_path,
     c.setFillColor(TEAL)
     c.drawString(ux, PAGE_H - MARGIN - 16, school_name)
     c.setFont("Helvetica", 10)
-    c.setFillColor(black)
-    c.drawString(ux, PAGE_H - MARGIN - 29, "Lunch Menu")
+    c.setFillColor(BISTRO_RED if allergen_sheet else black)
+    c.drawString(ux, PAGE_H - MARGIN - 29,
+                 "Lunch Menu: Allergens" if allergen_sheet else "Lunch Menu")
 
     c.setFont("Helvetica-Bold", 17)
     c.setFillColor(TEAL)
@@ -180,8 +218,16 @@ def build_pdf(MENU, month, year, school_name, out_path,
             if not cell:
                 c.setFont("Helvetica-Bold", 8)
                 c.setFillColor(GRAY_TEXT if pending else NO_SCHOOL_FG)
-                c.drawCentredString(x + cell_w / 2, y + cell_h / 2 - 2,
-                                    "NOT YET POSTED" if pending else "NO SCHOOL")
+                label = "NOT YET POSTED" if pending else "NO SCHOOL"
+                reason = None if pending else no_school.get(day_num)
+                c.drawCentredString(x + cell_w / 2,
+                                    y + cell_h / 2 + (2 if reason else -2), label)
+                if reason:
+                    # The district names its closures, so say why.
+                    c.setFont("Helvetica", 7)
+                    c.setFillColor(GRAY_TEXT)
+                    c.drawCentredString(x + cell_w / 2, y + cell_h / 2 - 8,
+                                        reason)
                 continue
 
             pad_x = x + 4
@@ -193,15 +239,39 @@ def build_pdf(MENU, month, year, school_name, out_path,
             # school day carries an entree plus two or three alternatives, and
             # at a fixed font that overruns the cell and clips a line
             # mid-phrase ("Build Your Own: BYO Mac and").
-            blocks = [(cell.get("hot", ""), 8.5, HOT_FG, True, 3)]
-            if detail == "full":
-                blocks.append((cell.get("fruit", ""), 7.2, FRUIT_FG, False, 2))
-                blocks.append((cell.get("veg", ""), 7.2, VEG_FG, False, 2))
-                blocks.append((cell.get("extra", ""), 7.2, EXTRA_FG, False, 2))
-            if detail in ("full", "hot+bistro"):
+            def halal_tag(item):
+                return " (Halal)" if item.get("halal") else ""
+
+            blocks = [(cell.get("hot", "") + halal_tag(cell),
+                       8.5, HOT_FG, True, 3)]
+            if allergen_sheet:
+                # This sheet exists to make allergens readable, so they are
+                # spelled out and the fruit/vegetable detail is dropped.
+                if cell.get("allergens"):
+                    blocks.append(("Contains: " + ", ".join(cell["allergens"]),
+                                   7.5, BISTRO_RED, True, 3))
                 for alt in cell.get("alts") or []:
-                    blocks.append((alt["label"] + ": " + alt["items"],
-                                   8, BISTRO_RED, True, 2))
+                    blocks.append((alt["label"] + ": " + alt["items"]
+                                   + halal_tag(alt), 7.6, HOT_FG, True, 2))
+                    if alt.get("allergens"):
+                        blocks.append(("Contains: " + ", ".join(alt["allergens"]),
+                                       7, BISTRO_RED, False, 3))
+                if cell.get("side_allergens"):
+                    blocks.append(("Sides: " + ", ".join(cell["side_allergens"]),
+                                   6.8, ALLERGEN_FG, False, 3))
+            else:
+                if detail == "full":
+                    blocks.append((cell.get("fruit", ""), 7.2, FRUIT_FG, False, 2))
+                    blocks.append((cell.get("veg", ""), 7.2, VEG_FG, False, 2))
+                    blocks.append((cell.get("extra", ""), 7.2, EXTRA_FG, False, 2))
+                for alt in cell.get("alts") or []:
+                    blocks.append((alt["label"] + ": " + alt["items"]
+                                   + halal_tag(alt), 8, BISTRO_RED, True, 2))
+                # Allergens stay secondary here: one small grey line of codes,
+                # with the legend in the footer.
+                if cell.get("allergens"):
+                    codes = ", ".join(allergen_code(a) for a in cell["allergens"])
+                    blocks.append(("Contains " + codes, 6.4, ALLERGEN_FG, False, 2))
             blocks = [b for b in blocks if b[0]]
 
             def layout(scale):
@@ -239,12 +309,30 @@ def build_pdf(MENU, month, year, school_name, out_path,
     # Footer
     c.setFont("Helvetica", 6)
     c.setFillColor(GRAY_TEXT)
+    base_y = MARGIN + 2
+
+    if used_allergens:
+        legend_y = base_y + 8
+        if allergen_sheet:
+            legend = ("Allergen and Halal information comes from the district "
+                      "and can change. Confirm with the school before relying "
+                      "on it.")
+        else:
+            legend = (legend_for(used_allergens)
+                      + ". Codes cover the hot lunch; see the allergen sheet "
+                        "for every item. Confirm with the school.")
+        while c.stringWidth(legend, "Helvetica", 6) > uw and len(legend) > 10:
+            legend = legend[:-2]
+        c.setFillColor(ALLERGEN_FG)
+        c.drawString(ux, legend_y, legend)
+        c.setFillColor(GRAY_TEXT)
+
     if note:
         flat = " • ".join(x.strip() for x in note.splitlines() if x.strip())
         while c.stringWidth(flat, "Helvetica", 6) > uw * 0.72 and len(flat) > 10:
             flat = flat[:-2]
-        c.drawString(ux, MARGIN + 2, flat)
-    c.drawRightString(ux + uw, MARGIN + 2,
+        c.drawString(ux, base_y, flat)
+    c.drawRightString(ux + uw, base_y,
                       "Hamilton School District • LinqConnect")
 
     c.save()

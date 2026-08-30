@@ -7,225 +7,273 @@ X-WR-CALNAME:Templeton Middle School Lunch
 X-WR-TIMEZONE:America/Chicago
 BEGIN:VEVENT
 UID:df85d1522fca758b@linqconnect-menu.local
-DTSTAMP:20260830T182548Z
+DTSTAMP:20260830T185959Z
 DTSTART;VALUE=DATE:20260901
 DTEND;VALUE=DATE:20260902
 SUMMARY:🍴 Chicken Sandwich Sliders
-DESCRIPTION:Hot Lunch: Chicken Sandwich Sliders\nFruit: Seasonal Fresh Fr
- uit\, Pear\nVegetable: Baked Beans\nExtra: Oreo Cookies\nGrab & Go: Pizz
- a Bagel Bites
+DESCRIPTION:Hot Lunch: Chicken Sandwich Sliders (contains Sesame Seeds\, 
+ Soy\, Wheat)\nFruit: Seasonal Fresh Fruit\, Pear\nVegetable: Baked Beans
+ \nExtra: Oreo Cookies\nGrab & Go: Pizza Bagel Bites (contains Milk\, Soy
+ \, Wheat)\nSides contain: Soy\, Wheat\nAllergen info comes from the dist
+ rict and can change. Confirm with the school before relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:47ed8bb754005dee@linqconnect-menu.local
-DTSTAMP:20260830T182548Z
+DTSTAMP:20260830T185959Z
 DTSTART;VALUE=DATE:20260902
 DTEND;VALUE=DATE:20260903
 SUMMARY:🍴 French Toast Sticks w/ Sausage Links (2)
-DESCRIPTION:Hot Lunch: French Toast Sticks w/ Sausage Links (2)\nFruit: S
- easonal Fresh Fruit\, Apple Juice\nVegetable: Emoji Potatoes\nExtra: Syr
- up\nGrab & Go: Stuffed Crust Pepperoni Pizza
+DESCRIPTION:Hot Lunch: French Toast Sticks w/ Sausage Links (2) (contains
+  Egg\, Milk\, Soy\, Wheat)\nFruit: Seasonal Fresh Fruit\, Apple Juice\nV
+ egetable: Emoji Potatoes\nExtra: Syrup\nGrab & Go: Stuffed Crust Peppero
+ ni Pizza (contains Milk\, Soy\, Wheat)\nAllergen info comes from the dis
+ trict and can change. Confirm with the school before relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:efd3de016f02a547@linqconnect-menu.local
-DTSTAMP:20260830T182548Z
+DTSTAMP:20260830T185959Z
 DTSTART;VALUE=DATE:20260903
 DTEND;VALUE=DATE:20260904
 SUMMARY:🍴 General Tso's Rice Box
 DESCRIPTION:Hot Lunch: General Tso's Rice Box\nFruit: Seasonal Fresh Frui
  t\, Pineapple\nVegetable: Broccoli\nExtra: Fortune Cookie\nGrab & Go: Pe
- rsonal Pan Pizza
+ rsonal Pan Pizza (contains Milk\, Soy\, Wheat)\nSides contain: Soy\, Whe
+ at\nAllergen info comes from the district and can change. Confirm with t
+ he school before relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:a6076171d6a67d7d@linqconnect-menu.local
-DTSTAMP:20260830T182548Z
+DTSTAMP:20260830T185959Z
 DTSTART;VALUE=DATE:20260904
 DTEND;VALUE=DATE:20260905
 SUMMARY:🍴 Domino's Pizza Slice (Cheese)
-DESCRIPTION:Hot Lunch: Domino's Pizza Slice (Cheese)\nFruit: Seasonal Fre
- sh Fruit\nVegetable: Baby Carrots
+DESCRIPTION:Hot Lunch: Domino's Pizza Slice (Cheese) (contains Milk\, Soy
+ \, Wheat)\nFruit: Seasonal Fresh Fruit\nVegetable: Baby Carrots\nAllerge
+ n info comes from the district and can change. Confirm with the school b
+ efore relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:e5ebe962f15b8eca@linqconnect-menu.local
-DTSTAMP:20260830T182548Z
+DTSTAMP:20260830T185959Z
 DTSTART;VALUE=DATE:20260908
 DTEND;VALUE=DATE:20260909
 SUMMARY:🍴 Taco Quesadilla Bites
-DESCRIPTION:Hot Lunch: Taco Quesadilla Bites\nFruit: Seasonal Fresh Fruit
- \, Banana\nVegetable: Black Beans\nGrab & Go: Mini Cheese Calzones
+DESCRIPTION:Hot Lunch: Taco Quesadilla Bites (contains Milk\, Soy\, Wheat
+ )\nFruit: Seasonal Fresh Fruit\, Banana\nVegetable: Black Beans\nGrab & 
+ Go: Mini Cheese Calzones (contains Milk\, Soy\, Wheat)\nAllergen info co
+ mes from the district and can change. Confirm with the school before rel
+ ying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:5a28089352e5da96@linqconnect-menu.local
-DTSTAMP:20260830T182548Z
+DTSTAMP:20260830T185959Z
 DTSTART;VALUE=DATE:20260909
 DTEND;VALUE=DATE:20260910
 SUMMARY:🍴 Bacon Cheeseburger on Bun
-DESCRIPTION:Hot Lunch: Bacon Cheeseburger on Bun\nFruit: Seasonal Fresh F
- ruit\, Apple Slices\nVegetable: Carrot Coins\nGrab & Go: Buffalo Chicken
-  Pizza
+DESCRIPTION:Hot Lunch: Bacon Cheeseburger on Bun (contains Milk\, Sesame 
+ Seeds\, Soy\, Wheat)\nFruit: Seasonal Fresh Fruit\, Apple Slices\nVegeta
+ ble: Carrot Coins\nGrab & Go: Buffalo Chicken Pizza\nAllergen info comes
+  from the district and can change. Confirm with the school before relyin
+ g on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:8e041018997e4106@linqconnect-menu.local
-DTSTAMP:20260830T182548Z
+DTSTAMP:20260830T185959Z
 DTSTART;VALUE=DATE:20260910
 DTEND;VALUE=DATE:20260911
 SUMMARY:🍴 Boneless Chicken Wings w/ Dinner Roll
-DESCRIPTION:Hot Lunch: Boneless Chicken Wings w/ Dinner Roll\nFruit: Seas
- onal Fresh Fruit\, Orange Slices\nVegetable: Waffle Fries\nGrab & Go: Gr
- illed Cheese Sandwich
+DESCRIPTION:Hot Lunch: Boneless Chicken Wings w/ Dinner Roll (contains So
+ y\, Wheat)\nFruit: Seasonal Fresh Fruit\, Orange Slices\nVegetable: Waff
+ le Fries\nGrab & Go: Grilled Cheese Sandwich (contains Milk\, Soy\, Whea
+ t)\nSides contain: Wheat\nAllergen info comes from the district and can 
+ change. Confirm with the school before relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:fb7be4606a1f527d@linqconnect-menu.local
-DTSTAMP:20260830T182548Z
+DTSTAMP:20260830T185959Z
 DTSTART;VALUE=DATE:20260911
 DTEND;VALUE=DATE:20260912
 SUMMARY:🍴 Brat on Bun
-DESCRIPTION:Hot Lunch: Brat on Bun\nFruit: Seasonal Fresh Fruit\nVegetabl
- e: Celery Sticks\nExtra: String Cheese\nGrab & Go: Grab and Go- Soft Pre
- tzel with Cheese Dip
+DESCRIPTION:Hot Lunch: Brat on Bun (contains Sesame Seeds\, Wheat)\nFruit
+ : Seasonal Fresh Fruit\nVegetable: Celery Sticks\nExtra: String Cheese\n
+ Grab & Go: Grab and Go- Soft Pretzel with Cheese Dip (contains Milk\, Wh
+ eat)\nAllergen info comes from the district and can change. Confirm with
+  the school before relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:77e3370bfdaee4ad@linqconnect-menu.local
-DTSTAMP:20260830T182548Z
+DTSTAMP:20260830T185959Z
 DTSTART;VALUE=DATE:20260914
 DTEND;VALUE=DATE:20260915
 SUMMARY:🍴 Spicy Chicken Sandwich
-DESCRIPTION:Hot Lunch: Spicy Chicken Sandwich\nFruit: Seasonal Fresh Frui
- t\, Apple Slices\nVegetable: Waffle Fries\nExtra: Chocolate Chip Cookie\
- nGrab & Go: Pizza Bagel Bites
+DESCRIPTION:Hot Lunch: Spicy Chicken Sandwich (contains Sesame Seeds\, So
+ y\, Wheat)\nFruit: Seasonal Fresh Fruit\, Apple Slices\nVegetable: Waffl
+ e Fries\nExtra: Chocolate Chip Cookie\nGrab & Go: Pizza Bagel Bites (con
+ tains Milk\, Soy\, Wheat)\nSides contain: Egg\, Milk\, Soy\, Wheat\nAlle
+ rgen info comes from the district and can change. Confirm with the schoo
+ l before relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:8535377738ab95d6@linqconnect-menu.local
-DTSTAMP:20260830T182548Z
+DTSTAMP:20260830T185959Z
 DTSTART;VALUE=DATE:20260915
 DTEND;VALUE=DATE:20260916
 SUMMARY:🍴 Loaded Tots
-DESCRIPTION:Hot Lunch: Loaded Tots\nFruit: Seasonal Fresh Fruit\, Grapes\
- nVegetable: Black Beans\nAlso Offered: Mini Cheese Calzones
+DESCRIPTION:Hot Lunch: Loaded Tots (contains Milk)\nFruit: Seasonal Fresh
+  Fruit\, Grapes\nVegetable: Black Beans\nAlso Offered: Mini Cheese Calzo
+ nes (contains Milk\, Soy\, Wheat)\nAllergen info comes from the district
+  and can change. Confirm with the school before relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:17e25f4c41c5ec43@linqconnect-menu.local
-DTSTAMP:20260830T182548Z
+DTSTAMP:20260830T185959Z
 DTSTART;VALUE=DATE:20260916
 DTEND;VALUE=DATE:20260917
 SUMMARY:🍴 Chicken Nuggets w/ Mac & Cheese
-DESCRIPTION:Hot Lunch: Chicken Nuggets w/ Mac & Cheese\nFruit: Seasonal F
- resh Fruit\, Mixed Berry Cup\nVegetable: Broccoli\nGrab & Go: Hamburger
+DESCRIPTION:Hot Lunch: Chicken Nuggets w/ Mac & Cheese (Halal\; contains 
+ Egg\, Milk\, Soy\, Wheat)\nFruit: Seasonal Fresh Fruit\, Mixed Berry Cup
+ \nVegetable: Broccoli\nGrab & Go: Hamburger (contains Sesame Seeds\, Soy
+ \, Wheat)\nAllergen info comes from the district and can change. Confirm
+  with the school before relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:bb7275b67c73f4b1@linqconnect-menu.local
-DTSTAMP:20260830T182548Z
+DTSTAMP:20260830T185959Z
 DTSTART;VALUE=DATE:20260917
 DTEND;VALUE=DATE:20260918
 SUMMARY:🍴 Crispy Chicken Sandwich w/ Chick-fil-A Sauce
-DESCRIPTION:Hot Lunch: Crispy Chicken Sandwich w/ Chick-fil-A Sauce\nFrui
- t: Seasonal Fresh Fruit\, Banana\nVegetable: Carrot Coins\nExtra: Vanill
- a Ice Cream Cup\nGrab & Go: Mozzarella Dippers
+DESCRIPTION:Hot Lunch: Crispy Chicken Sandwich w/ Chick-fil-A Sauce (Hala
+ l\; contains Egg\, Sesame Seeds\, Soy\, Wheat)\nFruit: Seasonal Fresh Fr
+ uit\, Banana\nVegetable: Carrot Coins\nExtra: Vanilla Ice Cream Cup\nGra
+ b & Go: Mozzarella Dippers (contains Milk\, Soy\, Wheat)\nAllergen info 
+ comes from the district and can change. Confirm with the school before r
+ elying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:f7db67085881aa18@linqconnect-menu.local
-DTSTAMP:20260830T182548Z
+DTSTAMP:20260830T185959Z
 DTSTART;VALUE=DATE:20260918
 DTEND;VALUE=DATE:20260919
 SUMMARY:🍴 Four Cheese Pizza Slice: Big Daddy's
-DESCRIPTION:Hot Lunch: Four Cheese Pizza Slice: Big Daddy's\nFruit: Seaso
- nal Fresh Fruit\nVegetable: Celery Sticks\nGrab & Go: Hot Dog on Bun
+DESCRIPTION:Hot Lunch: Four Cheese Pizza Slice: Big Daddy's (contains Mil
+ k\, Soy\, Wheat)\nFruit: Seasonal Fresh Fruit\nVegetable: Celery Sticks\
+ nGrab & Go: Hot Dog on Bun (contains Sesame Seeds\, Wheat)\nAllergen inf
+ o comes from the district and can change. Confirm with the school before
+  relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:685e676eb4c93f56@linqconnect-menu.local
-DTSTAMP:20260830T182548Z
+DTSTAMP:20260830T185959Z
 DTSTART;VALUE=DATE:20260921
 DTEND;VALUE=DATE:20260922
 SUMMARY:🍴 Chicken Tenders w/ Waffle
-DESCRIPTION:Hot Lunch: Chicken Tenders w/ Waffle\nFruit: Seasonal Fresh F
- ruit\, Strawberries\nVegetable: Sweet Potato Fries\nExtra: Syrup\nGrab &
-  Go: Personal Pan Pizza
+DESCRIPTION:Hot Lunch: Chicken Tenders w/ Waffle (contains Egg\, Milk\, S
+ oy\, Wheat)\nFruit: Seasonal Fresh Fruit\, Strawberries\nVegetable: Swee
+ t Potato Fries\nExtra: Syrup\nGrab & Go: Personal Pan Pizza (contains Mi
+ lk\, Soy\, Wheat)\nAllergen info comes from the district and can change.
+  Confirm with the school before relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:5ac8061202ee4347@linqconnect-menu.local
-DTSTAMP:20260830T182548Z
+DTSTAMP:20260830T185959Z
 DTSTART;VALUE=DATE:20260922
 DTEND;VALUE=DATE:20260923
 SUMMARY:🍴 Nachos
-DESCRIPTION:Hot Lunch: Nachos\nFruit: Seasonal Fresh Fruit\, Mandarin Ora
- nges\nVegetable: Refried Beans\nGrab & Go: Cheese Quesadilla
+DESCRIPTION:Hot Lunch: Nachos (contains Milk)\nFruit: Seasonal Fresh Frui
+ t\, Mandarin Oranges\nVegetable: Refried Beans\nGrab & Go: Cheese Quesad
+ illa (contains Milk\, Soy\, Wheat)\nAllergen info comes from the distric
+ t and can change. Confirm with the school before relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:ad12759752f3177c@linqconnect-menu.local
-DTSTAMP:20260830T182548Z
+DTSTAMP:20260830T185959Z
 DTSTART;VALUE=DATE:20260923
 DTEND;VALUE=DATE:20260924
 SUMMARY:🍴 Mini Corn Dogs
-DESCRIPTION:Hot Lunch: Mini Corn Dogs\nFruit: Seasonal Fresh Fruit\, Kiwi
- \nVegetable: Broccoli\nAlso Offered: Stuffed Crust Cheese Pizza
+DESCRIPTION:Hot Lunch: Mini Corn Dogs (contains Egg\, Milk\, Soy\, Wheat)
+ \nFruit: Seasonal Fresh Fruit\, Kiwi\nVegetable: Broccoli\nAlso Offered:
+  Stuffed Crust Cheese Pizza (contains Milk\, Soy\, Wheat)\nAllergen info
+  comes from the district and can change. Confirm with the school before 
+ relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:7c1eb6df58bf5c19@linqconnect-menu.local
-DTSTAMP:20260830T182548Z
+DTSTAMP:20260830T185959Z
 DTSTART;VALUE=DATE:20260924
 DTEND;VALUE=DATE:20260925
 SUMMARY:🍴 Mashed Potato Bowl with Popcorn Chicken w/ Dinner Roll
 DESCRIPTION:Hot Lunch: Mashed Potato Bowl with Popcorn Chicken w/ Dinner 
- Roll\nFruit: Seasonal Fresh Fruit\, Apple\nVegetable: Corn\nGrab & Go: B
- uffalo Chicken Pizza
+ Roll (Halal\; contains Milk\, Wheat)\nFruit: Seasonal Fresh Fruit\, Appl
+ e\nVegetable: Corn\nGrab & Go: Buffalo Chicken Pizza\nAllergen info come
+ s from the district and can change. Confirm with the school before relyi
+ ng on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:bbef0f7e1cdc8f04@linqconnect-menu.local
-DTSTAMP:20260830T182548Z
+DTSTAMP:20260830T185959Z
 DTSTART;VALUE=DATE:20260925
 DTEND;VALUE=DATE:20260926
 SUMMARY:🍴 Soft Pretzel with Cheese Dip w/ String Cheese
-DESCRIPTION:Hot Lunch: Soft Pretzel with Cheese Dip w/ String Cheese\nFru
- it: Seasonal Fresh Fruit\nVegetable: Baby Carrots\nGrab & Go: Stuffed Cr
- ust Pepperoni Pizza
+DESCRIPTION:Hot Lunch: Soft Pretzel with Cheese Dip w/ String Cheese (con
+ tains Milk\, Wheat)\nFruit: Seasonal Fresh Fruit\nVegetable: Baby Carrot
+ s\nGrab & Go: Stuffed Crust Pepperoni Pizza (contains Milk\, Soy\, Wheat
+ )\nAllergen info comes from the district and can change. Confirm with th
+ e school before relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:423978530b61e77f@linqconnect-menu.local
-DTSTAMP:20260830T182548Z
+DTSTAMP:20260830T185959Z
 DTSTART;VALUE=DATE:20260928
 DTEND;VALUE=DATE:20260929
 SUMMARY:🍴 Mozzarella Dippers
-DESCRIPTION:Hot Lunch: Mozzarella Dippers\nFruit: Banana\, Seasonal Fresh
-  Fruit\nVegetable: Broccoli\nExtra: Chocolate Pudding Cup\nAlso Offered:
-  Corn Dog on a Stick (Chicken)
+DESCRIPTION:Hot Lunch: Mozzarella Dippers (contains Milk\, Soy\, Wheat)\n
+ Fruit: Banana\, Seasonal Fresh Fruit\nVegetable: Broccoli\nExtra: Chocol
+ ate Pudding Cup\nAlso Offered: Corn Dog on a Stick (Chicken) (contains E
+ gg\, Soy\, Wheat)\nSides contain: Milk\nAllergen info comes from the dis
+ trict and can change. Confirm with the school before relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:f774b73ad17fd5a8@linqconnect-menu.local
-DTSTAMP:20260830T182548Z
+DTSTAMP:20260830T185959Z
 DTSTART;VALUE=DATE:20260929
 DTEND;VALUE=DATE:20260930
 SUMMARY:🍴 Walking Taco
-DESCRIPTION:Hot Lunch: Walking Taco\nFruit: Seasonal Fresh Fruit\, Pear\n
- Vegetable: Black Beans\nGrab & Go: Personal Pan Pizza
+DESCRIPTION:Hot Lunch: Walking Taco (contains Milk)\nFruit: Seasonal Fres
+ h Fruit\, Pear\nVegetable: Black Beans\nGrab & Go: Personal Pan Pizza (c
+ ontains Milk\, Soy\, Wheat)\nAllergen info comes from the district and c
+ an change. Confirm with the school before relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:e05238953bfb5f81@linqconnect-menu.local
-DTSTAMP:20260830T182548Z
+DTSTAMP:20260830T185959Z
 DTSTART;VALUE=DATE:20260930
 DTEND;VALUE=DATE:20261001
 SUMMARY:🍴 WI Burger on Pretzel Bun
-DESCRIPTION:Hot Lunch: WI Burger on Pretzel Bun\nFruit: Seasonal Fresh Fr
- uit\, Apple Slices\nVegetable: Carrot Coins\nGrab & Go: Cheese Pizza Sli
- ce
+DESCRIPTION:Hot Lunch: WI Burger on Pretzel Bun (contains Milk\, Soy)\nFr
+ uit: Seasonal Fresh Fruit\, Apple Slices\nVegetable: Carrot Coins\nGrab 
+ & Go: Cheese Pizza Slice (contains Milk\, Soy\, Wheat)\nAllergen info co
+ mes from the district and can change. Confirm with the school before rel
+ ying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 END:VCALENDAR

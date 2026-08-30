@@ -61,6 +61,20 @@ def search_districts(text):
     return _get("FamilyDistrictSearch", searchText=text).get("Data") or []
 
 
+def district_lookups(district_id):
+    """GUID -> name maps for allergens and religious restrictions.
+
+    The menu response tags each recipe with allergen GUIDs and nothing else.
+    This endpoint is what turns them into "Milk", "Wheat", "Halal".
+    """
+    d = _get("FamilyMenuFilter", districtId=district_id)
+    return {
+        "allergens": d.get("Allergies") or {},
+        "religious": d.get("ReligiousRestrictions") or {},
+        "sessions": d.get("ServingSessions") or {},
+    }
+
+
 def district_buildings(identifier):
     """District code (e.g. 'ZHSWGT') -> {DistrictId, DistrictName, Buildings}."""
     d = _get("FamilyMenuIdentifier", identifier=identifier)
