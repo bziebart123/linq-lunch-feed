@@ -22,7 +22,14 @@ import sys
 import linq_api
 from linq_ics import build_ics
 from linq_parse import build_menu
-from linq_pdf import MONTH_NAMES, build_pdf
+
+try:
+    from linq_pdf import MONTH_NAMES, build_pdf
+except ImportError as _e:  # reportlab missing or broken
+    build_pdf = None
+    MONTH_NAMES = None
+    _PDF_ERROR = _e
+
 from validate_ics import validate
 
 CONFIG = "config.json"
@@ -129,6 +136,10 @@ def build_one(feed, months):
             os.remove(scratch)
             continue
         try:
+            if build_pdf is None:
+                raise RuntimeError(
+                    f"PDF support unavailable ({_PDF_ERROR}); "
+                    "install it with: pip install reportlab")
             MENU, meta = build_menu(scratch, session=feed.get("session", "Lunch"))
             base = os.path.splitext(feed["file"])[0]
             mname = MONTH_NAMES[meta["month"] - 1]
