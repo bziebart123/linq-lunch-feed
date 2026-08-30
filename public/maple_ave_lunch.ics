@@ -6,191 +6,34 @@ METHOD:PUBLISH
 X-WR-CALNAME:Maple Ave Lunch
 X-WR-TIMEZONE:America/Chicago
 BEGIN:VEVENT
-UID:2b23633eef23293a@linqconnect-menu.local
-DTSTAMP:20260830T164744Z
-DTSTART;VALUE=DATE:20260407
-DTEND;VALUE=DATE:20260408
-SUMMARY:🍴 Personal Pan Pizza
-DESCRIPTION:Hot Lunch: Personal Pan Pizza\nFruit: Apple Slices\nVegetable
- : Baby Carrots\nBistro Box: Cereal
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:dab28d3b13a4fd11@linqconnect-menu.local
-DTSTAMP:20260830T164744Z
-DTSTART;VALUE=DATE:20260408
-DTEND;VALUE=DATE:20260409
-SUMMARY:🍴 Crispy Chicken Sandwich
-DESCRIPTION:Hot Lunch: Crispy Chicken Sandwich\nFruit: Orange Slices\nVeg
- etable: Garden Salad\nBistro Box: Nachos
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:9fdddc635f6c8219@linqconnect-menu.local
-DTSTAMP:20260830T164744Z
-DTSTART;VALUE=DATE:20260409
-DTEND;VALUE=DATE:20260410
-SUMMARY:🍴 Pancakes (2) w/ Mini Chocolate Chips\, Sausage Links (2)
-DESCRIPTION:Hot Lunch: Pancakes (2) w/ Mini Chocolate Chips\, Sausage Lin
- ks (2)\nFruit: Banana\nVegetable: Paradise Punch (Tall)\nExtra: Syrup\nB
- istro Box: Pizza Kit
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:5bf946298ed1edec@linqconnect-menu.local
-DTSTAMP:20260830T164744Z
-DTSTART;VALUE=DATE:20260410
-DTEND;VALUE=DATE:20260411
-SUMMARY:🍴 WI Burger on Pretzel Bun
-DESCRIPTION:Hot Lunch: WI Burger on Pretzel Bun\nFruit: Peach Cup\nVegeta
- ble: Waffle Fries\nExtra: Dill Pickle Spear\nBistro Box: Uncrustable Sun
- Butter & Jelly
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:0e2fd41e00b54149@linqconnect-menu.local
-DTSTAMP:20260830T164744Z
-DTSTART;VALUE=DATE:20260413
-DTEND;VALUE=DATE:20260414
+UID:47ed8bb754005dee@linqconnect-menu.local
+DTSTAMP:20260830T171358Z
+DTSTART;VALUE=DATE:20260902
+DTEND;VALUE=DATE:20260903
 SUMMARY:🍴 Stuffed Crust Cheese Pizza
-DESCRIPTION:Hot Lunch: Stuffed Crust Cheese Pizza\nFruit: Mixed Berry Cup
- \nVegetable: Green Beans\nExtra: Chocolate Chip Cookie\nBistro Box: Cere
- al
+DESCRIPTION:Hot Lunch: Stuffed Crust Cheese Pizza\nFruit: Seasonal Fresh 
+ Fruit\nVegetable: Broccoli\nBistro Box: Cereal
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:bad0e61687fa983a@linqconnect-menu.local
-DTSTAMP:20260830T164744Z
-DTSTART;VALUE=DATE:20260414
-DTEND;VALUE=DATE:20260415
-SUMMARY:🍴 Walking Taco
-DESCRIPTION:Hot Lunch: Walking Taco\nFruit: Apple\nVegetable: Black Beans
- \nBistro Box: Rainbow Nachos
+UID:efd3de016f02a547@linqconnect-menu.local
+DTSTAMP:20260830T171358Z
+DTSTART;VALUE=DATE:20260903
+DTEND;VALUE=DATE:20260904
+SUMMARY:🍴 Mini Corn Dogs
+DESCRIPTION:Hot Lunch: Mini Corn Dogs\nFruit: Fresh Peach\nVegetable: Waf
+ fle Fries\nBistro Box: Nachos
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:cc49aa83b4b58cae@linqconnect-menu.local
-DTSTAMP:20260830T164744Z
-DTSTART;VALUE=DATE:20260415
-DTEND;VALUE=DATE:20260416
-SUMMARY:🍴 Chicken Tenders w/ Waffle
-DESCRIPTION:Hot Lunch: Chicken Tenders w/ Waffle\nFruit: Banana\nVegetabl
- e: Broccoli\nExtra: Syrup\nBistro Box: Protein Pack
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:e5b0f802e7ab90a0@linqconnect-menu.local
-DTSTAMP:20260830T164744Z
-DTSTART;VALUE=DATE:20260416
-DTEND;VALUE=DATE:20260417
-SUMMARY:🍴 Hot Dog on Bun
-DESCRIPTION:Hot Lunch: Hot Dog on Bun\nFruit: Blue Raspberry Lemon Slush 
- Cup\nVegetable: Waffle Fries\nBistro Box: Soft Pretzel
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:aac6ccbffef99d60@linqconnect-menu.local
-DTSTAMP:20260830T164744Z
-DTSTART;VALUE=DATE:20260417
-DTEND;VALUE=DATE:20260418
-SUMMARY:🍴 Mozzarella Dippers w/ Marinara Cup
-DESCRIPTION:Hot Lunch: Mozzarella Dippers w/ Marinara Cup\nFruit: Apple S
- lices\nVegetable: Fresh Carrots\nExtra: Chocolate Pudding Cup\nBistro Bo
- x: Bagel w/ Cream Cheese
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:579b9a1111607bd3@linqconnect-menu.local
-DTSTAMP:20260830T164744Z
-DTSTART;VALUE=DATE:20260420
-DTEND;VALUE=DATE:20260421
-SUMMARY:🍴 Four Cheese Pizza Slice: Big Daddy's
-DESCRIPTION:Hot Lunch: Four Cheese Pizza Slice: Big Daddy's\nFruit: Peach
-  Cup\nVegetable: Celery Sticks\nBistro Box: Belgian Waffle
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:a48a3e95211c3931@linqconnect-menu.local
-DTSTAMP:20260830T164744Z
-DTSTART;VALUE=DATE:20260421
-DTEND;VALUE=DATE:20260422
-SUMMARY:🍴 Chicken Nuggets w/ Mac & Cheese
-DESCRIPTION:Hot Lunch: Chicken Nuggets w/ Mac & Cheese\nFruit: Pear\nVege
- table: Broccoli\nBistro Box: Nachos
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:778c503147e98450@linqconnect-menu.local
-DTSTAMP:20260830T164744Z
-DTSTART;VALUE=DATE:20260422
-DTEND;VALUE=DATE:20260423
-SUMMARY:🍴 Corn Dog on a Stick (Chicken)
-DESCRIPTION:Hot Lunch: Corn Dog on a Stick (Chicken)\nFruit: Orange Slice
- s\nVegetable: Sweet Potato Fries\nBistro Box: Fruit and Yogurt Parfait
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:4d6b530afd361bc3@linqconnect-menu.local
-DTSTAMP:20260830T164744Z
-DTSTART;VALUE=DATE:20260423
-DTEND;VALUE=DATE:20260424
-SUMMARY:🍴 Scrambled Eggs w/ Turkey Bacon\, Blueberry Muffin
-DESCRIPTION:Hot Lunch: Scrambled Eggs w/ Turkey Bacon\, Blueberry Muffin\
- nFruit: Orange Juice Cup\nVegetable: Emoji Potatoes\nBistro Box: Cracker
-  Stacker
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:796205b327c7a862@linqconnect-menu.local
-DTSTAMP:20260830T164744Z
-DTSTART;VALUE=DATE:20260424
-DTEND;VALUE=DATE:20260425
-SUMMARY:🍴 BBQ Chicken Sandwich w/ Cornbread
-DESCRIPTION:Hot Lunch: BBQ Chicken Sandwich w/ Cornbread\nFruit: Apple Sl
- ices\nVegetable: Baked Beans\nExtra: Dill Pickle Spear\nBistro Box: Uncr
- ustable SunButter & Jelly
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:66c83372900a1c9a@linqconnect-menu.local
-DTSTAMP:20260830T164744Z
-DTSTART;VALUE=DATE:20260427
-DTEND;VALUE=DATE:20260428
-SUMMARY:🍴 Papa Murphy's Cheese Pizza
-DESCRIPTION:Hot Lunch: Papa Murphy's Cheese Pizza\nFruit: Applesauce Cup\
- nVegetable: Broccoli\nExtra: Sugar Cookie\nBistro Box: Cereal
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:2554fdd2aa63dd98@linqconnect-menu.local
-DTSTAMP:20260830T164744Z
-DTSTART;VALUE=DATE:20260428
-DTEND;VALUE=DATE:20260429
-SUMMARY:🍴 Mashed Potato Bowl with Popcorn Chicken w/ Dinner Roll
-DESCRIPTION:Hot Lunch: Mashed Potato Bowl with Popcorn Chicken w/ Dinner 
- Roll\nFruit: Apple Slices\nVegetable: Corn\nExtra: Gravy\nBistro Box: Un
- crustable SunButter & Jelly
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:7fc99482c772ebc5@linqconnect-menu.local
-DTSTAMP:20260830T164744Z
-DTSTART;VALUE=DATE:20260429
-DTEND;VALUE=DATE:20260430
-SUMMARY:🍴 French Toast Sticks w/ Egg Omelet Cheese Colby
-DESCRIPTION:Hot Lunch: French Toast Sticks w/ Egg Omelet Cheese Colby\nFr
- uit: Blueberries\nVegetable: Paradise Punch (Tall)\nBistro Box: Protein 
- Pack
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:8077bca76d45c2ee@linqconnect-menu.local
-DTSTAMP:20260830T164744Z
-DTSTART;VALUE=DATE:20260430
-DTEND;VALUE=DATE:20260501
-SUMMARY:🍴 Pasta with Meatballs
-DESCRIPTION:Hot Lunch: Pasta with Meatballs\nFruit: Fresh Strawberries\nV
- egetable: Garden Salad\nBistro Box: Pizza Kit
+UID:a6076171d6a67d7d@linqconnect-menu.local
+DTSTAMP:20260830T171358Z
+DTSTART;VALUE=DATE:20260904
+DTEND;VALUE=DATE:20260905
+SUMMARY:🍴 Sandwich\, Grilled Cheese
+DESCRIPTION:Hot Lunch: Sandwich\, Grilled Cheese\nFruit: Blueberries\nVeg
+ etable: Fresh Carrots\nExtra: Ranch Dressing Cup\nBistro Box: Bagel w/ C
+ ream Cheese
 TRANSP:TRANSPARENT
 END:VEVENT
 END:VCALENDAR
