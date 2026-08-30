@@ -21,9 +21,12 @@ import sys
 
 import linq_api
 from linq_ics import build_ics
+from linq_parse import build_menu
+from linq_pdf import MONTH_NAMES, build_pdf
 from validate_ics import validate
 
 CONFIG = "config.json"
+DISTRICT_NOTE = ""
 CRLF = chr(13) + chr(10)
 PUBLIC = "public"
 
@@ -84,6 +87,8 @@ def load_config():
     if not os.path.exists(CONFIG):
         sys.exit(f"No {CONFIG}. Run: python discover.py --search \"<district>\"")
     cfg = json.load(open(CONFIG, encoding="utf-8"))
+    global DISTRICT_NOTE
+    DISTRICT_NOTE = (cfg.get("district") or {}).get("note", "")
     feeds = cfg.get("feeds") or []
     if not feeds:
         sys.exit(f"{CONFIG} has no feeds. "
@@ -97,7 +102,10 @@ def build_one(feed, months):
     out = os.path.join(PUBLIC, feed["file"])
     print(f"\n{name}")
 
-    parts, got = [], []
+    parts, got, pdfs = [], [], []
+    # The calendar name carries "Lunch"; the PDF header should not repeat it.
+    school_label = name[:-6] if name.endswith(" Lunch") else name
+    note = feed.get("note", DISTRICT_NOTE)
     scratch = "_menu.json"
     for month in months:
         try:
@@ -120,6 +128,28 @@ def build_one(feed, months):
             print(f"  {month}: could not build calendar: {e}")
             os.remove(scratch)
             continue
+        try:
+            MENU, meta = build_menu(scratch, session=feed.get("session", "Lunch"))
+            base = os.path.splitext(feed["file"])[0]
+            mname = MONTH_NAMES[meta["month"] - 1]
+            pdf_name = f"{base}_{mname}_{meta['year']}.pdf"
+            pdf_tmp = os.path.join(PUBLIC, pdf_name + ".tmp")
+            os.makedirs(PUBLIC, exist_ok=True)
+            if build_pdf(MENU, meta["month"], meta["year"], school_label,
+                         pdf_tmp, note=note,
+                         detail=feed.get("detail", "full")):
+                pdf_out = os.path.join(PUBLIC, pdf_name)
+                new = open(pdf_tmp, "rb").read()
+                if os.path.exists(pdf_out) and open(pdf_out, "rb").read() == new:
+                    os.remove(pdf_tmp)
+                else:
+                    os.replace(pdf_tmp, pdf_out)
+                pdfs.append((f"{mname} {meta['year']}", pdf_out))
+            elif os.path.exists(pdf_tmp):
+                os.remove(pdf_tmp)
+        except Exception as e:
+            print(f"  {month}: could not build PDF: {e}")
+
         os.remove(scratch)
         print(f"  {month}: {n_days} school day(s)")
         parts.append(ics)
@@ -150,12 +180,12 @@ def build_one(feed, months):
         existing = open(out, encoding="utf-8", newline="").read()
         if _content_key(existing) == _content_key(ics):
             os.remove(tmp)
-            print(f"  -> unchanged ({n_events} events)")
-            return out, n_events, used
+            print(f"  -> unchanged ({n_events} events, {len(pdfs)} PDF)")
+            return out, n_events, used, pdfs
 
     os.replace(tmp, out)
-    print(f"  -> {out} ({n_events} events, updated)")
-    return out, n_events, used
+    print(f"  -> {out} ({n_events} events updated, {len(pdfs)} PDF)")
+    return out, n_events, used, pdfs
 
 
 def write_index(results, repo_url, base_url):
@@ -165,8 +195,14 @@ def write_index(results, repo_url, base_url):
     or copy it without having to assemble it from a prefix.
     """
     items = []
-    for name, path, ev, mo in results:
+    for name, path, ev, mo, pdfs in results:
         url = base_url.rstrip("/") + "/" + os.path.basename(path)
+        links = " ".join(
+            '<a class="pdf" href="{}">{}</a>'.format(
+                base_url.rstrip("/") + "/" + os.path.basename(p), label)
+            for label, p in pdfs)
+        pdf_row = ('      <div class="row pdfs"><span class="lbl">Printable:</span> '
+                   + links + "</div>") if links else ""
         items.append(f"""    <li>
       <div class="school">{name}</div>
       <div class="meta">{ev} school days &middot; {mo.replace('-1-', '/')}</div>
@@ -174,6 +210,7 @@ def write_index(results, repo_url, base_url):
         <code>{url}</code>
         <button type="button" data-url="{url}">Copy</button>
       </div>
+{pdf_row}
     </li>""")
     rows = chr(10).join(items)
     html = f"""<!doctype html>
@@ -202,13 +239,19 @@ def write_index(results, repo_url, base_url):
             border: 1px solid var(--line); border-radius: 4px;
             background: var(--soft); cursor: pointer; }}
   button:hover {{ background: rgba(128,128,128,.22); }}
+  .pdfs {{ margin-top: .35rem; }}
+  .lbl {{ font-size: .85em; opacity: .65; }}
+  a.pdf {{ font-size: .85em; text-decoration: none; border: 1px solid var(--line);
+           border-radius: 4px; padding: .22em .6em; }}
+  a.pdf:hover {{ background: var(--soft); }}
   ol {{ padding-left: 1.3rem; }}
   footer {{ margin-top: 2.5rem; font-size: .9em; opacity: .7;
             border-top: 1px solid var(--line); padding-top: 1rem; }}
 </style>
 <h1>School lunch calendar feeds</h1>
-<p class="lede">Hamilton School District. Copy your school's link below, then
-   add it to Skylight, Google Calendar, Apple Calendar, or Outlook.</p>
+<p class="lede">Hamilton School District. Copy your school's link below to add
+   the menu to Skylight, Google Calendar, Apple Calendar, or Outlook &mdash; or
+   grab the one-page <strong>printable PDF</strong> for the fridge.</p>
 <ul>
 {rows}
 </ul>
@@ -275,9 +318,9 @@ def main():
     for feed in feeds:
         r = build_one(feed, months)
         if r:
-            path, ev, mo = r
+            path, ev, mo, pdfs = r
             built.append(path)
-            results.append((feed["name"], path, ev, mo))
+            results.append((feed["name"], path, ev, mo, pdfs))
 
     if not built:
         print("\nNothing was rebuilt.")

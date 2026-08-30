@@ -1,3 +1,4 @@
 # iCalendar requires CRLF (RFC 5545 §3.1). Treat .ics as binary so no platform
 # ever normalizes line endings on commit or checkout.
 *.ics -text
+*.pdf -text
