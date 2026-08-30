@@ -4,102 +4,207 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>School Lunch Calendar Feeds</title>
 <style>
-  :root { color-scheme: light dark; --line: rgba(128,128,128,.28);
-           --soft: rgba(128,128,128,.12); }
+  :root { color-scheme: light dark;
+           --line: rgba(128,128,128,.26);
+           --soft: rgba(128,128,128,.11);
+           --accent: #00838f; }
+  @media (prefers-color-scheme: dark) { :root { --accent: #4dd0e1; } }
+  * { box-sizing: border-box; }
   body { font: 16px/1.6 system-ui, -apple-system, sans-serif;
-         max-width: 46rem; margin: 3rem auto; padding: 0 1.25rem; }
-  h1 { font-size: 1.5rem; margin-bottom: .25rem; }
-  h2 { font-size: 1.05rem; margin-top: 2.5rem; }
-  .lede { opacity: .8; margin-top: 0; }
-  ul { list-style: none; padding: 0; }
-  li { border: 1px solid var(--line); border-radius: 8px;
-        padding: .85rem 1rem; margin: .7rem 0; }
-  .school { font-weight: 600; }
-  .meta { opacity: .6; font-size: .85em; }
-  .row { display: flex; gap: .5rem; align-items: center;
-          margin-top: .5rem; flex-wrap: wrap; }
-  code { background: var(--soft); padding: .3em .5em; border-radius: 4px;
-          font-size: .8em; word-break: break-all; flex: 1 1 20rem; }
-  button { font: inherit; font-size: .85em; padding: .3em .9em;
-            border: 1px solid var(--line); border-radius: 4px;
-            background: var(--soft); cursor: pointer; }
-  button:hover { background: rgba(128,128,128,.22); }
-  .pdfs { margin-top: .35rem; }
-  .lbl { font-size: .85em; opacity: .65; }
-  a.pdf { font-size: .85em; text-decoration: none; border: 1px solid var(--line);
-           border-radius: 4px; padding: .22em .6em; }
-  a.pdf:hover { background: var(--soft); }
+         max-width: 44rem; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+  h1 { font-size: 1.6rem; margin: 0 0 .3rem; color: var(--accent); }
+  h2 { font-size: 1.05rem; margin: 2.75rem 0 .6rem; }
+  h3 { font-size: 1.02rem; margin: 0; }
+  .lede { opacity: .85; margin-top: 0; }
+
+  .legend { display: grid; gap: .5rem; margin: 1.5rem 0 2rem; padding: .9rem 1rem;
+             border: 1px solid var(--line); border-radius: 10px;
+             background: var(--soft); font-size: .92em; }
+  .legend div { display: grid; grid-template-columns: 5rem 1fr; gap: .55rem; }
+  .legend b { color: var(--accent); }
+  @media (max-width: 30rem) {
+    .legend div { grid-template-columns: 1fr; gap: .1rem; }
+  }
+
+  ul.schools { list-style: none; padding: 0; margin: 0; }
+  ul.schools > li { border: 1px solid var(--line); border-radius: 10px;
+        padding: 1rem 1.1rem; margin: .8rem 0; }
+  .head { display: flex; justify-content: space-between; align-items: baseline;
+           gap: .75rem; flex-wrap: wrap; margin-bottom: .8rem; }
+  .meta { opacity: .55; font-size: .82em; white-space: nowrap; }
+
+  .opt + .opt { margin-top: .85rem; padding-top: .85rem;
+                 border-top: 1px dashed var(--line); }
+  .opt-label { font-size: .72em; letter-spacing: .09em; text-transform: uppercase;
+                opacity: .75; font-weight: 600; margin-bottom: .4rem; }
+  .hint { text-transform: none; letter-spacing: 0; font-weight: 400;
+           opacity: .75; }
+
+  .urlrow { display: flex; gap: .5rem; align-items: stretch; flex-wrap: wrap;
+             min-width: 0; }
+  /* min-width:0 matters: a flex child defaults to min-width:auto, which stops
+     the long URL shrinking and pushes the whole page wider than the phone. */
+  code { background: var(--soft); padding: .45em .6em; border-radius: 6px;
+          font-size: .78em; overflow-wrap: anywhere; word-break: break-word;
+          flex: 1 1 12rem; min-width: 0; border: 1px solid var(--line); }
+  button { font: inherit; font-size: .85em; padding: .4em 1.1em;
+            border: 1px solid var(--accent); border-radius: 6px; color: var(--accent);
+            background: transparent; cursor: pointer; font-weight: 600;
+            white-space: nowrap; flex: 0 0 auto; }
+  button:hover { background: var(--soft); }
+  button.done { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  a.chip { display: inline-flex; align-items: center; gap: .5rem;
+            font-size: .88em; text-decoration: none; color: inherit;
+            border: 1px solid var(--line); border-radius: 6px;
+            padding: .4em .5em .4em .8em; margin: 0 .4rem .4rem 0; }
+  a.chip:hover { background: var(--soft); border-color: var(--accent); }
+  .ext { font-size: .72em; font-weight: 700; letter-spacing: .05em;
+          background: var(--soft); border-radius: 4px; padding: .15em .45em;
+          opacity: .8; }
+
   ol { padding-left: 1.3rem; }
-  footer { margin-top: 2.5rem; font-size: .9em; opacity: .7;
+  ol li { margin: .3rem 0; }
+  footer { margin-top: 3rem; font-size: .88em; opacity: .7;
             border-top: 1px solid var(--line); padding-top: 1rem; }
 </style>
-<h1>School lunch calendar feeds</h1>
-<p class="lede">Hamilton School District. Copy your school's link below to add
-   the menu to Skylight, Google Calendar, Apple Calendar, or Outlook &mdash; or
-   grab the one-page <strong>printable PDF</strong> for the fridge.</p>
-<ul>
+<h1>School lunch menus</h1>
+<p class="lede">Hamilton School District &mdash; every school, two ways to use
+   it.</p>
+
+<div class="legend">
+  <div><b>Subscribe</b><span>Add the menu to Skylight, Google, Apple, or Outlook.
+       Set it up once; it keeps itself current all year.</span></div>
+  <div><b>Print</b><span>A one-page calendar for the fridge, one file per
+       month.</span></div>
+</div>
+
+<ul class="schools">
     <li>
-      <div class="school">Maple Avenue Elementary Lunch</div>
-      <div class="meta">20 school days &middot; 9/2026</div>
-      <div class="row">
-        <code>https://bziebart123.github.io/linq-lunch-feed/public/maple_ave_lunch.ics</code>
-        <button type="button" data-url="https://bziebart123.github.io/linq-lunch-feed/public/maple_ave_lunch.ics">Copy</button>
+      <div class="head">
+        <h3>Maple Avenue Elementary</h3>
+        <span class="meta">20 school days</span>
       </div>
-      <div class="row pdfs"><span class="lbl">Printable:</span> <a class="pdf" href="https://bziebart123.github.io/linq-lunch-feed/public/maple_ave_lunch_September_2026.pdf">September 2026</a></div>
+      <div class="opt">
+        <div class="opt-label">Subscribe <span class="hint">&mdash; stays up to date</span></div>
+        <div class="urlrow">
+          <code>https://bziebart123.github.io/linq-lunch-feed/public/maple_ave_lunch.ics</code>
+          <button type="button" data-url="https://bziebart123.github.io/linq-lunch-feed/public/maple_ave_lunch.ics"
+                  aria-label="Copy the Maple Avenue Elementary calendar link">Copy</button>
+        </div>
+      </div>
+        <div class="opt">
+          <div class="opt-label">Print</div>
+          <a class="chip" href="https://bziebart123.github.io/linq-lunch-feed/public/maple_ave_lunch_September_2026.pdf">September 2026<span class="ext">PDF</span></a>
+        </div>
     </li>
     <li>
-      <div class="school">Hamilton High School Lunch</div>
-      <div class="meta">21 school days &middot; 9/2026</div>
-      <div class="row">
-        <code>https://bziebart123.github.io/linq-lunch-feed/public/hamilton_high_school_lunch.ics</code>
-        <button type="button" data-url="https://bziebart123.github.io/linq-lunch-feed/public/hamilton_high_school_lunch.ics">Copy</button>
+      <div class="head">
+        <h3>Hamilton High School</h3>
+        <span class="meta">21 school days</span>
       </div>
-      <div class="row pdfs"><span class="lbl">Printable:</span> <a class="pdf" href="https://bziebart123.github.io/linq-lunch-feed/public/hamilton_high_school_lunch_September_2026.pdf">September 2026</a></div>
+      <div class="opt">
+        <div class="opt-label">Subscribe <span class="hint">&mdash; stays up to date</span></div>
+        <div class="urlrow">
+          <code>https://bziebart123.github.io/linq-lunch-feed/public/hamilton_high_school_lunch.ics</code>
+          <button type="button" data-url="https://bziebart123.github.io/linq-lunch-feed/public/hamilton_high_school_lunch.ics"
+                  aria-label="Copy the Hamilton High School calendar link">Copy</button>
+        </div>
+      </div>
+        <div class="opt">
+          <div class="opt-label">Print</div>
+          <a class="chip" href="https://bziebart123.github.io/linq-lunch-feed/public/hamilton_high_school_lunch_September_2026.pdf">September 2026<span class="ext">PDF</span></a>
+        </div>
     </li>
     <li>
-      <div class="school">Lannon Elementary School Lunch</div>
-      <div class="meta">20 school days &middot; 9/2026</div>
-      <div class="row">
-        <code>https://bziebart123.github.io/linq-lunch-feed/public/lannon_elementary_school_lunch.ics</code>
-        <button type="button" data-url="https://bziebart123.github.io/linq-lunch-feed/public/lannon_elementary_school_lunch.ics">Copy</button>
+      <div class="head">
+        <h3>Lannon Elementary School</h3>
+        <span class="meta">20 school days</span>
       </div>
-      <div class="row pdfs"><span class="lbl">Printable:</span> <a class="pdf" href="https://bziebart123.github.io/linq-lunch-feed/public/lannon_elementary_school_lunch_September_2026.pdf">September 2026</a></div>
+      <div class="opt">
+        <div class="opt-label">Subscribe <span class="hint">&mdash; stays up to date</span></div>
+        <div class="urlrow">
+          <code>https://bziebart123.github.io/linq-lunch-feed/public/lannon_elementary_school_lunch.ics</code>
+          <button type="button" data-url="https://bziebart123.github.io/linq-lunch-feed/public/lannon_elementary_school_lunch.ics"
+                  aria-label="Copy the Lannon Elementary School calendar link">Copy</button>
+        </div>
+      </div>
+        <div class="opt">
+          <div class="opt-label">Print</div>
+          <a class="chip" href="https://bziebart123.github.io/linq-lunch-feed/public/lannon_elementary_school_lunch_September_2026.pdf">September 2026<span class="ext">PDF</span></a>
+        </div>
     </li>
     <li>
-      <div class="school">Marcy Elementary School Lunch</div>
-      <div class="meta">20 school days &middot; 9/2026</div>
-      <div class="row">
-        <code>https://bziebart123.github.io/linq-lunch-feed/public/marcy_elementary_school_lunch.ics</code>
-        <button type="button" data-url="https://bziebart123.github.io/linq-lunch-feed/public/marcy_elementary_school_lunch.ics">Copy</button>
+      <div class="head">
+        <h3>Marcy Elementary School</h3>
+        <span class="meta">20 school days</span>
       </div>
-      <div class="row pdfs"><span class="lbl">Printable:</span> <a class="pdf" href="https://bziebart123.github.io/linq-lunch-feed/public/marcy_elementary_school_lunch_September_2026.pdf">September 2026</a></div>
+      <div class="opt">
+        <div class="opt-label">Subscribe <span class="hint">&mdash; stays up to date</span></div>
+        <div class="urlrow">
+          <code>https://bziebart123.github.io/linq-lunch-feed/public/marcy_elementary_school_lunch.ics</code>
+          <button type="button" data-url="https://bziebart123.github.io/linq-lunch-feed/public/marcy_elementary_school_lunch.ics"
+                  aria-label="Copy the Marcy Elementary School calendar link">Copy</button>
+        </div>
+      </div>
+        <div class="opt">
+          <div class="opt-label">Print</div>
+          <a class="chip" href="https://bziebart123.github.io/linq-lunch-feed/public/marcy_elementary_school_lunch_September_2026.pdf">September 2026<span class="ext">PDF</span></a>
+        </div>
     </li>
     <li>
-      <div class="school">Silver Spring Intermediate Lunch</div>
-      <div class="meta">20 school days &middot; 9/2026</div>
-      <div class="row">
-        <code>https://bziebart123.github.io/linq-lunch-feed/public/silver_spring_intermediate_lunch.ics</code>
-        <button type="button" data-url="https://bziebart123.github.io/linq-lunch-feed/public/silver_spring_intermediate_lunch.ics">Copy</button>
+      <div class="head">
+        <h3>Silver Spring Intermediate</h3>
+        <span class="meta">20 school days</span>
       </div>
-      <div class="row pdfs"><span class="lbl">Printable:</span> <a class="pdf" href="https://bziebart123.github.io/linq-lunch-feed/public/silver_spring_intermediate_lunch_September_2026.pdf">September 2026</a></div>
+      <div class="opt">
+        <div class="opt-label">Subscribe <span class="hint">&mdash; stays up to date</span></div>
+        <div class="urlrow">
+          <code>https://bziebart123.github.io/linq-lunch-feed/public/silver_spring_intermediate_lunch.ics</code>
+          <button type="button" data-url="https://bziebart123.github.io/linq-lunch-feed/public/silver_spring_intermediate_lunch.ics"
+                  aria-label="Copy the Silver Spring Intermediate calendar link">Copy</button>
+        </div>
+      </div>
+        <div class="opt">
+          <div class="opt-label">Print</div>
+          <a class="chip" href="https://bziebart123.github.io/linq-lunch-feed/public/silver_spring_intermediate_lunch_September_2026.pdf">September 2026<span class="ext">PDF</span></a>
+        </div>
     </li>
     <li>
-      <div class="school">Templeton Middle School Lunch</div>
-      <div class="meta">21 school days &middot; 9/2026</div>
-      <div class="row">
-        <code>https://bziebart123.github.io/linq-lunch-feed/public/templeton_middle_school_lunch.ics</code>
-        <button type="button" data-url="https://bziebart123.github.io/linq-lunch-feed/public/templeton_middle_school_lunch.ics">Copy</button>
+      <div class="head">
+        <h3>Templeton Middle School</h3>
+        <span class="meta">21 school days</span>
       </div>
-      <div class="row pdfs"><span class="lbl">Printable:</span> <a class="pdf" href="https://bziebart123.github.io/linq-lunch-feed/public/templeton_middle_school_lunch_September_2026.pdf">September 2026</a></div>
+      <div class="opt">
+        <div class="opt-label">Subscribe <span class="hint">&mdash; stays up to date</span></div>
+        <div class="urlrow">
+          <code>https://bziebart123.github.io/linq-lunch-feed/public/templeton_middle_school_lunch.ics</code>
+          <button type="button" data-url="https://bziebart123.github.io/linq-lunch-feed/public/templeton_middle_school_lunch.ics"
+                  aria-label="Copy the Templeton Middle School calendar link">Copy</button>
+        </div>
+      </div>
+        <div class="opt">
+          <div class="opt-label">Print</div>
+          <a class="chip" href="https://bziebart123.github.io/linq-lunch-feed/public/templeton_middle_school_lunch_September_2026.pdf">September 2026<span class="ext">PDF</span></a>
+        </div>
     </li>
     <li>
-      <div class="school">Woodside Elementary School Lunch</div>
-      <div class="meta">20 school days &middot; 9/2026</div>
-      <div class="row">
-        <code>https://bziebart123.github.io/linq-lunch-feed/public/woodside_elementary_school_lunch.ics</code>
-        <button type="button" data-url="https://bziebart123.github.io/linq-lunch-feed/public/woodside_elementary_school_lunch.ics">Copy</button>
+      <div class="head">
+        <h3>Woodside Elementary School</h3>
+        <span class="meta">20 school days</span>
       </div>
-      <div class="row pdfs"><span class="lbl">Printable:</span> <a class="pdf" href="https://bziebart123.github.io/linq-lunch-feed/public/woodside_elementary_school_lunch_September_2026.pdf">September 2026</a></div>
+      <div class="opt">
+        <div class="opt-label">Subscribe <span class="hint">&mdash; stays up to date</span></div>
+        <div class="urlrow">
+          <code>https://bziebart123.github.io/linq-lunch-feed/public/woodside_elementary_school_lunch.ics</code>
+          <button type="button" data-url="https://bziebart123.github.io/linq-lunch-feed/public/woodside_elementary_school_lunch.ics"
+                  aria-label="Copy the Woodside Elementary School calendar link">Copy</button>
+        </div>
+      </div>
+        <div class="opt">
+          <div class="opt-label">Print</div>
+          <a class="chip" href="https://bziebart123.github.io/linq-lunch-feed/public/woodside_elementary_school_lunch_September_2026.pdf">September 2026<span class="ext">PDF</span></a>
+        </div>
     </li>
 </ul>
 
@@ -113,22 +218,59 @@
       Outlook buttons.</li>
   <li>Paste the link, give it a name, and save.</li>
 </ol>
-<p>Skylight refetches on its own schedule, so new menus can take a few hours to
-   appear on the frame.</p>
+<p>Skylight refetches on its own schedule, so a new menu can take a few hours to
+   reach the frame.</p>
+
+<h2>What you will see each day</h2>
+<p>The hot lunch, plus the fruit, vegetable and any extra &mdash; and the
+   alternative your child can choose <em>instead</em> of the hot lunch. That
+   alternative is called <strong>Bistro Box</strong> at the elementary and
+   intermediate schools, <strong>Grab &amp; Go</strong> at Templeton, and
+   <strong>The Grill</strong> or <strong>Build Your Own</strong> at the high
+   school.</p>
 
 <footer>
-  Built from the LinqConnect public menu API. Menus are updated manually about
-  once a month, after the district posts them.
+  Built from the LinqConnect public menu API and refreshed weekly, so a newly
+  posted month appears within a few days.
   <a href="https://github.com/bziebart123/linq-lunch-feed">Source and setup instructions</a>.
 </footer>
 <script>
 document.querySelectorAll('button[data-url]').forEach(function (b) {
   b.addEventListener('click', function () {
-    navigator.clipboard.writeText(b.dataset.url).then(function () {
-      var t = b.textContent;
+    var done = function () {
       b.textContent = 'Copied';
-      setTimeout(function () { b.textContent = t; }, 1400);
-    });
+      b.classList.add('done');
+      setTimeout(function () {
+        b.textContent = 'Copy';
+        b.classList.remove('done');
+      }, 1600);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(b.dataset.url).then(done, fallback);
+    } else {
+      fallback();
+    }
+    // Older mobile browsers and any non-secure context land here.
+    function fallback() {
+      var ta = document.createElement('textarea');
+      ta.value = b.dataset.url;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); done(); } catch (e) {
+        var c = b.previousElementSibling;
+        if (c) {
+          var r = document.createRange();
+          r.selectNodeContents(c);
+          var s = window.getSelection();
+          s.removeAllRanges();
+          s.addRange(r);
+        }
+      }
+      document.body.removeChild(ta);
+    }
   });
 });
 </script>

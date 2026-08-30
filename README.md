@@ -8,22 +8,21 @@ day, in Skylight, Google Calendar, Apple Calendar, or Outlook.
 
 # For parents
 
-**Everything you need is on one page:
-[the feed list](https://bziebart123.github.io/linq-lunch-feed/).**
+**Everything is on one page: [the lunch menu
+page](https://bziebart123.github.io/linq-lunch-feed/).** Find your school and
+pick one of two things — you can stop reading here, the rest of this file is
+for people who want to run or change the code.
 
-Find your school, then either:
+| | What it is | Best for |
+|---|---|---|
+| **Subscribe** | A calendar link you add once. It stays current all year on its own. | Skylight frames, phone calendars |
+| **Print** | A one-page landscape calendar, one file per month. | The fridge |
 
-- **Copy the calendar link** to subscribe in Skylight, Google, Apple, or
-  Outlook — it updates itself, or
-- **Open the printable PDF** — a one-page landscape month you can print for the
-  fridge.
+### Calendar links
 
-You can stop reading here — the rest of this file is for people who want to run
-or change the code.
+These never change, so they are safe to bookmark or pass along:
 
-### Your school's link
-
-| School | Feed URL |
+| School | Calendar link |
 |---|---|
 | Maple Avenue Elementary | `https://bziebart123.github.io/linq-lunch-feed/public/maple_ave_lunch.ics` |
 | Hamilton High School | `https://bziebart123.github.io/linq-lunch-feed/public/hamilton_high_school_lunch.ics` |
@@ -32,6 +31,18 @@ or change the code.
 | Silver Spring Intermediate | `https://bziebart123.github.io/linq-lunch-feed/public/silver_spring_intermediate_lunch.ics` |
 | Templeton Middle School | `https://bziebart123.github.io/linq-lunch-feed/public/templeton_middle_school_lunch.ics` |
 | Woodside Elementary School | `https://bziebart123.github.io/linq-lunch-feed/public/woodside_elementary_school_lunch.ics` |
+
+### Printable PDFs
+
+PDF links are **not listed here on purpose** — each filename contains its month
+(`maple_ave_lunch_September_2026.pdf`), so any list written here goes stale the
+moment a new month is posted. The [menu
+page](https://bziebart123.github.io/linq-lunch-feed/) always shows the current
+ones.
+
+Same layout as the calendar, just on paper: hot lunch in bold, fruit in green,
+vegetable in brown, extras in purple, and the alternative option in red. Print
+at 100% scale (not "fit to page") on letter paper, landscape.
 
 ### The alternative lunch option
 
@@ -45,13 +56,6 @@ level names it differently, so the label follows the school:
 | Templeton Middle School | **Grab & Go** |
 | Hamilton High School | **The Grill**, **Build Your Own** |
 | Any school, on days with a second entree | **Also Offered** |
-
-### Printable PDFs
-
-Each school also gets a one-page landscape calendar per month, linked from the
-feed list page. Same layout as the calendar link, just on paper — hot lunch in
-bold, fruit in green, vegetable in brown, extras in purple, Bistro Box in red.
-Print it at 100% scale (not "fit to page") on letter paper, landscape.
 
 ### Adding it to Skylight
 
@@ -161,8 +165,8 @@ Three things that cost real debugging time:
 - **Datacenter IPs are blocked.** The same request returns 200 from a home
   connection and 403 from GitHub Actions, Render, or a VPN. A scheduled
   workflow was built and tested against this and failed every run, which is why
-  refreshing is a manual command rather than a cron job. If `refresh.py`
-  reports 403, check whether a VPN is on.
+  the refresh runs from a local Windows scheduled task rather than a cloud cron
+  job. If `refresh.py` reports 403, check whether a VPN is on.
 
 The district search and building list are undocumented endpoints found in the
 LinqConnect web app's JS bundle. They need no authentication today, but nothing
