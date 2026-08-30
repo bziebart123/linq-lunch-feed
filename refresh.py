@@ -188,8 +188,9 @@ document.querySelectorAll('button[data-url]').forEach(function (b) {{
 </script>
 </html>
 """
-    with open(os.path.join(PUBLIC, "index.html"), "w",
-              encoding="utf-8", newline=chr(10)) as f:
+    # Written to the repo root: GitHub Pages serves this repo from "/", so an
+    # index inside public/ would leave the bare URL showing the rendered README.
+    with open("index.html", "w", encoding="utf-8", newline=chr(10)) as f:
         f.write(html)
 
 
