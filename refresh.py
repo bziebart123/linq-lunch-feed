@@ -41,6 +41,16 @@ def candidate_months():
     return [f"{first.month}-1-{first.year}", f"{nxt.month}-1-{nxt.year}"]
 
 
+def _content_key(text):
+    """A calendar's meaning, ignoring DTSTAMP.
+
+    DTSTAMP is the generation time, so it changes on every run. Comparing on it
+    would make each weekly refresh look like a change and produce a pointless
+    commit, push, and Pages redeploy.
+    """
+    return [ln for ln in text.split(CRLF) if not ln.startswith("DTSTAMP:")]
+
+
 def merge_calendars(parts):
     """Splice several one-month calendars into a single VCALENDAR.
 
@@ -135,8 +145,16 @@ def build_one(feed, months):
         print("  -> failed validation; refusing to publish")
         os.remove(tmp)
         return None
+
+    if os.path.exists(out):
+        existing = open(out, encoding="utf-8", newline="").read()
+        if _content_key(existing) == _content_key(ics):
+            os.remove(tmp)
+            print(f"  -> unchanged ({n_events} events)")
+            return out, n_events, used
+
     os.replace(tmp, out)
-    print(f"  -> {out} ({n_events} events)")
+    print(f"  -> {out} ({n_events} events, updated)")
     return out, n_events, used
 
 
