@@ -1,0 +1,47 @@
+name: Update lunch menu ICS
+
+# Runs on the 25th of each month (to catch the next month's menu once posted)
+# and can also be triggered by hand from the Actions tab.
+on:
+  schedule:
+    - cron: "0 8 25 * *"   # 08:00 UTC on the 25th
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fetch this month's menu from LinqConnect
+        run: |
+          # Maple Avenue Elementary, Hamilton School District (WI).
+          # startDate is the 1st of the CURRENT month; the API returns the
+          # posted menu for that window. Adjust building/district IDs if needed.
+          BID="a513a71a-22d7-ee11-a71c-a811a99a3020"
+          DID="37aa0b35-eba0-ee11-839d-b338dc280a64"
+          START=$(date -u +%-m-1-%Y)
+          curl -sS -H "Accept: application/json" \
+            "https://api.linqconnect.com/api/FamilyMenu?buildingId=${BID}&districtId=${DID}&startDate=${START}" \
+            -o FamilyMenu.json
+
+      - name: Generate ICS
+        run: |
+          mkdir -p public
+          python3 linq_ics.py FamilyMenu.json -o public/maple_ave_lunch.ics \
+            --detail full --name "Maple Ave Lunch"
+
+      - name: Commit updated feed
+        run: |
+          git config user.name  "menu-bot"
+          git config user.email "menu-bot@users.noreply.github.com"
+          git add public/maple_ave_lunch.ics
+          git commit -m "Update lunch menu $(date -u +%Y-%m-%d)" || echo "no changes"
+          git push
