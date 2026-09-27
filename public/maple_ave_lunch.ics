@@ -7,7 +7,7 @@ X-WR-CALNAME:Maple Avenue Elementary Lunch
 X-WR-TIMEZONE:America/Chicago
 BEGIN:VEVENT
 UID:47ed8bb754005dee@linqconnect-menu.local
-DTSTAMP:20260920T140004Z
+DTSTAMP:20260927T140003Z
 DTSTART;VALUE=DATE:20260902
 DTEND;VALUE=DATE:20260903
 SUMMARY:🍴 Stuffed Crust Cheese Pizza
@@ -19,7 +19,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:efd3de016f02a547@linqconnect-menu.local
-DTSTAMP:20260920T140004Z
+DTSTAMP:20260927T140003Z
 DTSTART;VALUE=DATE:20260903
 DTEND;VALUE=DATE:20260904
 SUMMARY:🍴 Mini Corn Dogs
@@ -31,20 +31,20 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:a6076171d6a67d7d@linqconnect-menu.local
-DTSTAMP:20260920T140004Z
+DTSTAMP:20260927T140003Z
 DTSTART;VALUE=DATE:20260904
 DTEND;VALUE=DATE:20260905
 SUMMARY:🍴 Sandwich\, Grilled Cheese
 DESCRIPTION:Hot Lunch: Sandwich\, Grilled Cheese (contains Milk\, Soy\, W
  heat)\nFruit: Blueberries\nVegetable: Fresh Carrots\nExtra: Ranch Dressi
  ng Cup\nBistro Box: Bagel w/ Cream Cheese (contains Milk\, Wheat)\nSides
-  contain: Egg\, Milk\nAllergen info comes from the district and can chan
- ge. Confirm with the school before relying on it.
+  contain: Egg\, Fish\, Milk\nAllergen info comes from the district and c
+ an change. Confirm with the school before relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:e5ebe962f15b8eca@linqconnect-menu.local
-DTSTAMP:20260920T140004Z
+DTSTAMP:20260927T140003Z
 DTSTART;VALUE=DATE:20260908
 DTEND;VALUE=DATE:20260909
 SUMMARY:🍴 Personal Pan Pizza
@@ -56,7 +56,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:5a28089352e5da96@linqconnect-menu.local
-DTSTAMP:20260920T140004Z
+DTSTAMP:20260927T140003Z
 DTSTART;VALUE=DATE:20260909
 DTEND;VALUE=DATE:20260910
 SUMMARY:🍴 Crispy Chicken Sandwich
@@ -68,7 +68,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:8e041018997e4106@linqconnect-menu.local
-DTSTAMP:20260920T140004Z
+DTSTAMP:20260927T140003Z
 DTSTART;VALUE=DATE:20260910
 DTEND;VALUE=DATE:20260911
 SUMMARY:🍴 Pancakes (2) w/ Mini Chocolate Chips\, Sausage Links (2)
@@ -81,7 +81,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:fb7be4606a1f527d@linqconnect-menu.local
-DTSTAMP:20260920T140004Z
+DTSTAMP:20260927T140003Z
 DTSTART;VALUE=DATE:20260911
 DTEND;VALUE=DATE:20260912
 SUMMARY:🍴 WI Burger on Pretzel Bun
@@ -94,20 +94,19 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:77e3370bfdaee4ad@linqconnect-menu.local
-DTSTAMP:20260920T140004Z
+DTSTAMP:20260927T140003Z
 DTSTART;VALUE=DATE:20260914
 DTEND;VALUE=DATE:20260915
 SUMMARY:🍴 Stuffed Crust Cheese Pizza
 DESCRIPTION:Hot Lunch: Stuffed Crust Cheese Pizza (contains Milk\, Soy\, 
- Wheat)\nFruit: Mixed Berry Cup\nVegetable: Bush's Best Reduced Sodium Ve
- getarian Baked Beans\nBistro Box: Go Bananas (contains Egg\, Milk\, Soy\
- , Wheat)\nAllergen info comes from the district and can change. Confirm 
- with the school before relying on it.
+ Wheat)\nFruit: Mixed Berry Cup\nVegetable: Baked Beans\nBistro Box: Go B
+ ananas (contains Egg\, Milk\, Soy\, Wheat)\nAllergen info comes from the
+  district and can change. Confirm with the school before relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:8535377738ab95d6@linqconnect-menu.local
-DTSTAMP:20260920T140004Z
+DTSTAMP:20260927T140003Z
 DTSTART;VALUE=DATE:20260915
 DTEND;VALUE=DATE:20260916
 SUMMARY:🍴 Walking Taco
@@ -119,7 +118,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:17e25f4c41c5ec43@linqconnect-menu.local
-DTSTAMP:20260920T140004Z
+DTSTAMP:20260927T140003Z
 DTSTART;VALUE=DATE:20260916
 DTEND;VALUE=DATE:20260917
 SUMMARY:🍴 Tyson Chicken Tenders w/ Waffle
@@ -132,7 +131,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:bb7275b67c73f4b1@linqconnect-menu.local
-DTSTAMP:20260920T140004Z
+DTSTAMP:20260927T140003Z
 DTSTART;VALUE=DATE:20260917
 DTEND;VALUE=DATE:20260918
 SUMMARY:🍴 Buttered Noodles w/ Grilled Chicken Strips
@@ -145,7 +144,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:f7db67085881aa18@linqconnect-menu.local
-DTSTAMP:20260920T140004Z
+DTSTAMP:20260927T140003Z
 DTSTART;VALUE=DATE:20260918
 DTEND;VALUE=DATE:20260919
 SUMMARY:🍴 Mozzarella Dippers w/ Marinara Cup
@@ -158,7 +157,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:685e676eb4c93f56@linqconnect-menu.local
-DTSTAMP:20260920T140004Z
+DTSTAMP:20260927T140003Z
 DTSTART;VALUE=DATE:20260921
 DTEND;VALUE=DATE:20260922
 SUMMARY:🍴 Four Cheese Pizza Slice: Big Daddy's
@@ -172,7 +171,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:5ac8061202ee4347@linqconnect-menu.local
-DTSTAMP:20260920T140004Z
+DTSTAMP:20260927T140003Z
 DTSTART;VALUE=DATE:20260922
 DTEND;VALUE=DATE:20260923
 SUMMARY:🍴 Chicken Nuggets w/ Mac & Cheese
@@ -184,7 +183,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:ad12759752f3177c@linqconnect-menu.local
-DTSTAMP:20260920T140004Z
+DTSTAMP:20260927T140003Z
 DTSTART;VALUE=DATE:20260923
 DTEND;VALUE=DATE:20260924
 SUMMARY:🍴 Corn Dog on a Stick (Chicken)
@@ -197,33 +196,33 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:7c1eb6df58bf5c19@linqconnect-menu.local
-DTSTAMP:20260920T140004Z
+DTSTAMP:20260927T140003Z
 DTSTART;VALUE=DATE:20260924
 DTEND;VALUE=DATE:20260925
 SUMMARY:🍴 Scrambled Eggs w/ Turkey Bacon\, Blueberry Muffin
 DESCRIPTION:Hot Lunch: Scrambled Eggs w/ Turkey Bacon\, Blueberry Muffin 
  (contains Egg\, Milk\, Soy\, Wheat)\nFruit: Orange Juice Cup\nVegetable:
-  Emoji Potatoes\nBistro Box: Cracker Stacker (contains Milk\, Sesame See
- ds\, Soy\, Wheat)\nAllergen info comes from the district and can change.
-  Confirm with the school before relying on it.
+  Emoji Potatoes\nBistro Box: Cracker Stacker (contains Milk\, Soy\, Whea
+ t)\nAllergen info comes from the district and can change. Confirm with t
+ he school before relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:bbef0f7e1cdc8f04@linqconnect-menu.local
-DTSTAMP:20260920T140004Z
+DTSTAMP:20260927T140003Z
 DTSTART;VALUE=DATE:20260925
 DTEND;VALUE=DATE:20260926
 SUMMARY:🍴 Hot Dog on Bun
 DESCRIPTION:Hot Lunch: Hot Dog on Bun (contains Sesame Seeds\, Wheat)\nFr
- uit: Plum\nVegetable: Bush's Best Reduced Sodium Vegetarian Baked Beans\
- nBistro Box: Uncrustable SunButter & Jelly (contains Milk\, Soy\, Wheat)
- \nAllergen info comes from the district and can change. Confirm with the
-  school before relying on it.
+ uit: Seasonal Fresh Fruit\nVegetable: Baked Beans\nBistro Box: Uncrustab
+ le SunButter & Jelly (contains Milk\, Soy\, Wheat)\nAllergen info comes 
+ from the district and can change. Confirm with the school before relying
+  on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:423978530b61e77f@linqconnect-menu.local
-DTSTAMP:20260920T140004Z
+DTSTAMP:20260927T140003Z
 DTSTART;VALUE=DATE:20260928
 DTEND;VALUE=DATE:20260929
 SUMMARY:🍴 Papa Murphy's Cheese Pizza
@@ -236,7 +235,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:f774b73ad17fd5a8@linqconnect-menu.local
-DTSTAMP:20260920T140004Z
+DTSTAMP:20260927T140003Z
 DTSTART;VALUE=DATE:20260929
 DTEND;VALUE=DATE:20260930
 SUMMARY:🍴 Chicken Sandwich Sliders w/ Chick-fil-A Sauce
@@ -250,7 +249,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:e05238953bfb5f81@linqconnect-menu.local
-DTSTAMP:20260920T140004Z
+DTSTAMP:20260927T140003Z
 DTSTART;VALUE=DATE:20260930
 DTEND;VALUE=DATE:20261001
 SUMMARY:🍴 French Toast Sticks w/ Egg Omelet Cheese Colby
@@ -259,6 +258,249 @@ DESCRIPTION:Hot Lunch: French Toast Sticks w/ Egg Omelet Cheese Colby (co
  e Punch (Tall)\nBistro Box: Protein Pack (contains Egg\, Milk\, Sesame S
  eeds\, Soy\, Wheat)\nAllergen info comes from the district and can chang
  e. Confirm with the school before relying on it.
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:26882d178b5fb1aa@linqconnect-menu.local
+DTSTAMP:20260927T140007Z
+DTSTART;VALUE=DATE:20261001
+DTEND;VALUE=DATE:20261002
+SUMMARY:🍴 Pasta with Meatballs
+DESCRIPTION:Hot Lunch: Pasta with Meatballs (contains Egg\, Soy\, Wheat)\
+ nFruit: Fresh Strawberries\nVegetable: Garden Salad\nExtra: Ranch Dressi
+ ng Cup\nBistro Box: Pizza Kit (contains Milk\, Soy\, Wheat)\nSides conta
+ in: Egg\, Fish\, Milk\nAllergen info comes from the district and can cha
+ nge. Confirm with the school before relying on it.
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:fcaf1dd232444b3a@linqconnect-menu.local
+DTSTAMP:20260927T140007Z
+DTSTART;VALUE=DATE:20261002
+DTEND;VALUE=DATE:20261003
+SUMMARY:🍴 Taco Quesadilla Bites
+DESCRIPTION:Hot Lunch: Taco Quesadilla Bites (contains Milk\, Soy\, Wheat
+ )\nFruit: Apple\nVegetable: Black Beans\nBistro Box: Bagel w/ Cream Chee
+ se (contains Milk\, Wheat)\nAllergen info comes from the district and ca
+ n change. Confirm with the school before relying on it.
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2fde002f0c3f1b77@linqconnect-menu.local
+DTSTAMP:20260927T140007Z
+DTSTART;VALUE=DATE:20261005
+DTEND;VALUE=DATE:20261006
+SUMMARY:🍴 Stuffed Crust Cheese Pizza
+DESCRIPTION:Hot Lunch: Stuffed Crust Cheese Pizza (contains Milk\, Soy\, 
+ Wheat)\nFruit: Apple\nVegetable: Broccoli\nBistro Box: Cereal (contains 
+ Milk)\nAllergen info comes from the district and can change. Confirm wit
+ h the school before relying on it.
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:b7f23b8374a0b172@linqconnect-menu.local
+DTSTAMP:20260927T140007Z
+DTSTART;VALUE=DATE:20261006
+DTEND;VALUE=DATE:20261007
+SUMMARY:🍴 Mini Corn Dogs
+DESCRIPTION:Hot Lunch: Mini Corn Dogs (contains Egg\, Milk\, Soy\, Wheat)
+ \nFruit: Strawberry Cup\nVegetable: Sweet Potato Fries\nBistro Box: Nach
+ os (contains Milk)\nAllergen info comes from the district and can change
+ . Confirm with the school before relying on it.
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3a99f90ee915c5a4@linqconnect-menu.local
+DTSTAMP:20260927T140007Z
+DTSTART;VALUE=DATE:20261007
+DTEND;VALUE=DATE:20261008
+SUMMARY:🍴 Cheese Quesadilla
+DESCRIPTION:Hot Lunch: Cheese Quesadilla (contains Milk\, Soy\, Wheat)\nF
+ ruit: Apple Slices\nVegetable: Black Beans\nExtra: Caramel Cup\nBistro B
+ ox: Fruit and Yogurt Parfait (contains Egg\, Milk\, Soy\, Wheat)\nSides 
+ contain: Milk\nAllergen info comes from the district and can change. Con
+ firm with the school before relying on it.
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:41644ce113357e3d@linqconnect-menu.local
+DTSTAMP:20260927T140007Z
+DTSTART;VALUE=DATE:20261008
+DTEND;VALUE=DATE:20261009
+SUMMARY:🍴 Vegetable Dumplings w/ Vegetable Egg Fried Rice
+DESCRIPTION:Hot Lunch: Vegetable Dumplings w/ Vegetable Egg Fried Rice (c
+ ontains Egg\, Milk\, Sesame Seeds\, Soy\, Wheat)\nFruit: Clementine\nVeg
+ etable: Baby Carrots\nExtra: Fortune Cookie\nBistro Box: Cracker Stacker
+  (contains Milk\, Soy\, Wheat)\nSides contain: Soy\, Wheat\nAllergen inf
+ o comes from the district and can change. Confirm with the school before
+  relying on it.
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:253b57d0856535d5@linqconnect-menu.local
+DTSTAMP:20260927T140007Z
+DTSTART;VALUE=DATE:20261009
+DTEND;VALUE=DATE:20261010
+SUMMARY:🍴 Cheeseburger
+DESCRIPTION:Hot Lunch: Cheeseburger (contains Milk\, Sesame Seeds\, Soy\,
+  Wheat)\nFruit: Fresh Peach\nVegetable: Tator Tots\nBistro Box: Uncrusta
+ ble SunButter & Jelly (contains Milk\, Soy\, Wheat)\nSides contain: Soy\
+ nAllergen info comes from the district and can change. Confirm with the 
+ school before relying on it.
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:d0681e682beb8412@linqconnect-menu.local
+DTSTAMP:20260927T140007Z
+DTSTART;VALUE=DATE:20261012
+DTEND;VALUE=DATE:20261013
+SUMMARY:🍴 Personal Pan Pizza
+DESCRIPTION:Hot Lunch: Personal Pan Pizza (contains Milk\, Soy\, Wheat)\n
+ Fruit: Pear\nVegetable: Carrot Coins\nBistro Box: Go Bananas (contains E
+ gg\, Milk\, Soy\, Wheat)\nAllergen info comes from the district and can 
+ change. Confirm with the school before relying on it.
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:02ae8a5db952a444@linqconnect-menu.local
+DTSTAMP:20260927T140007Z
+DTSTART;VALUE=DATE:20261013
+DTEND;VALUE=DATE:20261014
+SUMMARY:🍴 Pancakes (2) w/ Mini Chocolate Chips\, Sausage Links (2)
+DESCRIPTION:Hot Lunch: Pancakes (2) w/ Mini Chocolate Chips\, Sausage Lin
+ ks (2) (contains Egg\, Milk\, Soy\, Wheat)\nFruit: Fresh Strawberries\nV
+ egetable: Paradise Punch (Tall)\nExtra: Syrup\nBistro Box: Pizza Kit (co
+ ntains Milk\, Soy\, Wheat)\nAllergen info comes from the district and ca
+ n change. Confirm with the school before relying on it.
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:5946f082a35a8484@linqconnect-menu.local
+DTSTAMP:20260927T140007Z
+DTSTART;VALUE=DATE:20261014
+DTEND;VALUE=DATE:20261015
+SUMMARY:🍴 Crispy Chicken Sandwich
+DESCRIPTION:Hot Lunch: Crispy Chicken Sandwich (Halal\; contains Sesame S
+ eeds\, Soy\, Wheat)\nFruit: Orange Slices\nVegetable: Garden Salad\nBist
+ ro Box: Greek (contains Egg\, Milk\, Sesame Seeds\, Soy\, Wheat)\nAllerg
+ en info comes from the district and can change. Confirm with the school 
+ before relying on it.
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:63d33b7aa730f766@linqconnect-menu.local
+DTSTAMP:20260927T140007Z
+DTSTART;VALUE=DATE:20261019
+DTEND;VALUE=DATE:20261020
+SUMMARY:🍴 Stuffed Crust Cheese Pizza
+DESCRIPTION:Hot Lunch: Stuffed Crust Cheese Pizza (contains Milk\, Soy\, 
+ Wheat)\nFruit: Mixed Berry Cup\nVegetable: Broccoli\nBistro Box: Cereal 
+ (contains Milk)\nAllergen info comes from the district and can change. C
+ onfirm with the school before relying on it.
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:fcf57f4157cf66bd@linqconnect-menu.local
+DTSTAMP:20260927T140007Z
+DTSTART;VALUE=DATE:20261020
+DTEND;VALUE=DATE:20261021
+SUMMARY:🍴 Swedish Meatballs in Sauce
+DESCRIPTION:Hot Lunch: Swedish Meatballs in Sauce (contains Milk\, Wheat)
+ \nFruit: Blueberries\nVegetable: Green Beans\nBistro Box: Nachos (contai
+ ns Milk)\nAlso Offered: Noodles (contains Egg\, Soy\, Wheat)\nAllergen i
+ nfo comes from the district and can change. Confirm with the school befo
+ re relying on it.
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:9e4579ecbec96b12@linqconnect-menu.local
+DTSTAMP:20260927T140007Z
+DTSTART;VALUE=DATE:20261021
+DTEND;VALUE=DATE:20261022
+SUMMARY:🍴 Mozzarella Dippers w/ Marinara Cup
+DESCRIPTION:Hot Lunch: Mozzarella Dippers w/ Marinara Cup (contains Milk\
+ , Soy\, Wheat)\nFruit: Apple Slices\nVegetable: Fresh Carrots\nExtra: Ch
+ ocolate Pudding Cup\nBistro Box: Protein Pack (contains Egg\, Milk\, Ses
+ ame Seeds\, Soy\, Wheat)\nSides contain: Milk\nAllergen info comes from 
+ the district and can change. Confirm with the school before relying on i
+ t.
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:a8e03e27321ebd22@linqconnect-menu.local
+DTSTAMP:20260927T140007Z
+DTSTART;VALUE=DATE:20261022
+DTEND;VALUE=DATE:20261023
+SUMMARY:🍴 Walking Taco
+DESCRIPTION:Hot Lunch: Walking Taco (contains Milk)\nFruit: Fresh Peach\n
+ Vegetable: Black Beans\nBistro Box: Cracker Stacker (contains Milk\, Soy
+ \, Wheat)\nAllergen info comes from the district and can change. Confirm
+  with the school before relying on it.
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2de36d6ac9ebb1e7@linqconnect-menu.local
+DTSTAMP:20260927T140007Z
+DTSTART;VALUE=DATE:20261023
+DTEND;VALUE=DATE:20261024
+SUMMARY:🍴 Fish Bites
+DESCRIPTION:Hot Lunch: Fish Bites (contains Fish\, Milk\, Soy\, Wheat)\nF
+ ruit: Applesauce Cup\nVegetable: French Fries\nExtra: Apple Pie Frudel\n
+ Bistro Box: Bagel w/ Cream Cheese (contains Milk\, Wheat)\nSides contain
+ : Milk\, Wheat\nAllergen info comes from the district and can change. Co
+ nfirm with the school before relying on it.
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:a9b50cbe81be3de0@linqconnect-menu.local
+DTSTAMP:20260927T140007Z
+DTSTART;VALUE=DATE:20261026
+DTEND;VALUE=DATE:20261027
+SUMMARY:🍴 Four Cheese Pizza Slice: Big Daddy's
+DESCRIPTION:Hot Lunch: Four Cheese Pizza Slice: Big Daddy's (contains Mil
+ k\, Soy\, Wheat)\nFruit: Peach Cup\nVegetable: Baked Beans\nExtra: Choco
+ late Chip Cookie\nBistro Box: Belgian Waffle (contains Egg\, Milk\, Soy\
+ , Wheat)\nSides contain: Egg\, Milk\, Soy\, Wheat\nAllergen info comes f
+ rom the district and can change. Confirm with the school before relying 
+ on it.
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:3e6f034206039ffb@linqconnect-menu.local
+DTSTAMP:20260927T140007Z
+DTSTART;VALUE=DATE:20261027
+DTEND;VALUE=DATE:20261028
+SUMMARY:🍴 Couscous w/ Shredded Chicken
+DESCRIPTION:Hot Lunch: Couscous w/ Shredded Chicken (contains Wheat)\nFru
+ it: Banana\nVegetable: Roasted Root Vegetable Blend\nBistro Box: Cereal 
+ (contains Milk)\nAllergen info comes from the district and can change. C
+ onfirm with the school before relying on it.
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:b189986f0519827c@linqconnect-menu.local
+DTSTAMP:20260927T140007Z
+DTSTART;VALUE=DATE:20261028
+DTEND;VALUE=DATE:20261029
+SUMMARY:🍴 Corn Dog on a Stick (Chicken)
+DESCRIPTION:Hot Lunch: Corn Dog on a Stick (Chicken) (contains Egg\, Soy\
+ , Wheat)\nFruit: Orange Slices\nVegetable: Sweet Potato Fries\nBistro Bo
+ x: Fruit and Yogurt Parfait (contains Egg\, Milk\, Soy\, Wheat)\nAllerge
+ n info comes from the district and can change. Confirm with the school b
+ efore relying on it.
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:bf6d78f900642792@linqconnect-menu.local
+DTSTAMP:20260927T140007Z
+DTSTART;VALUE=DATE:20261029
+DTEND;VALUE=DATE:20261030
+SUMMARY:🍴 Scrambled Eggs w/ Turkey Bacon\, Blueberry Muffin
+DESCRIPTION:Hot Lunch: Scrambled Eggs w/ Turkey Bacon\, Blueberry Muffin 
+ (contains Egg\, Milk\, Soy\, Wheat)\nFruit: Orange Juice Cup\nVegetable:
+  Emoji Potatoes\nBistro Box: Picnic Lunch (contains Milk\, Wheat)\nAller
+ gen info comes from the district and can change. Confirm with the school
+  before relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 END:VCALENDAR
