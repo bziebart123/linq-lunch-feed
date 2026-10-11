@@ -7,7 +7,7 @@ X-WR-CALNAME:Templeton Middle School Lunch
 X-WR-TIMEZONE:America/Chicago
 BEGIN:VEVENT
 UID:26882d178b5fb1aa@linqconnect-menu.local
-DTSTAMP:20261004T140006Z
+DTSTAMP:20261011T140007Z
 DTSTART;VALUE=DATE:20261001
 DTEND;VALUE=DATE:20261002
 SUMMARY:🍴 Boneless Chicken Wings w/ Dinner Roll
@@ -20,7 +20,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:fcaf1dd232444b3a@linqconnect-menu.local
-DTSTAMP:20261004T140006Z
+DTSTAMP:20261011T140007Z
 DTSTART;VALUE=DATE:20261002
 DTEND;VALUE=DATE:20261003
 SUMMARY:🍴 Domino's Pizza Slice (Cheese)
@@ -32,7 +32,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2fde002f0c3f1b77@linqconnect-menu.local
-DTSTAMP:20261004T140006Z
+DTSTAMP:20261011T140007Z
 DTSTART;VALUE=DATE:20261005
 DTEND;VALUE=DATE:20261006
 SUMMARY:🍴 Chicken Sandwich Sliders
@@ -46,7 +46,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:b7f23b8374a0b172@linqconnect-menu.local
-DTSTAMP:20261004T140006Z
+DTSTAMP:20261011T140007Z
 DTSTART;VALUE=DATE:20261006
 DTEND;VALUE=DATE:20261007
 SUMMARY:🍴 French Toast Sticks w/ Sausage Links (2)
@@ -59,7 +59,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:3a99f90ee915c5a4@linqconnect-menu.local
-DTSTAMP:20261004T140006Z
+DTSTAMP:20261011T140007Z
 DTSTART;VALUE=DATE:20261007
 DTEND;VALUE=DATE:20261008
 SUMMARY:🍴 Sweet and Sour Chicken with Rice
@@ -72,20 +72,21 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:41644ce113357e3d@linqconnect-menu.local
-DTSTAMP:20261004T140006Z
+DTSTAMP:20261011T140007Z
 DTSTART;VALUE=DATE:20261008
 DTEND;VALUE=DATE:20261009
 SUMMARY:🍴 Pulled Pork Sandwich
-DESCRIPTION:Hot Lunch: Pulled Pork Sandwich (contains Sesame Seeds\, Soy\
- , Wheat)\nFruit: Seasonal Fresh Fruit\, Apple Slices\nVegetable: Baby Ca
- rrots\nExtra: Caramel Cup\nGrab & Go: Grilled Cheese Sandwich (contains 
- Milk\, Soy\, Wheat)\nSides contain: Milk\nAllergen info comes from the d
- istrict and can change. Confirm with the school before relying on it.
+DESCRIPTION:Hot Lunch: Pulled Pork Sandwich (contains Milk\, Sesame Seeds
+ \, Soy\, Wheat)\nFruit: Seasonal Fresh Fruit\, Apple Slices\nVegetable: 
+ Baby Carrots\nExtra: Caramel Cup\nGrab & Go: Grilled Cheese Sandwich (co
+ ntains Milk\, Soy\, Wheat)\nSides contain: Milk\nAllergen info comes fro
+ m the district and can change. Confirm with the school before relying on
+  it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:253b57d0856535d5@linqconnect-menu.local
-DTSTAMP:20261004T140006Z
+DTSTAMP:20261011T140007Z
 DTSTART;VALUE=DATE:20261009
 DTEND;VALUE=DATE:20261010
 SUMMARY:🍴 Hot Dog on Bun
@@ -97,20 +98,20 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:d0681e682beb8412@linqconnect-menu.local
-DTSTAMP:20261004T140006Z
+DTSTAMP:20261011T140007Z
 DTSTART;VALUE=DATE:20261012
 DTEND;VALUE=DATE:20261013
-SUMMARY:🍴 Taco Quesadilla Bites
-DESCRIPTION:Hot Lunch: Taco Quesadilla Bites (contains Milk\, Soy\, Wheat
- )\nFruit: Seasonal Fresh Fruit\, Banana\nVegetable: Black Beans\nGrab & 
- Go: Mini Cheese Calzones (contains Milk\, Soy\, Wheat)\nAllergen info co
- mes from the district and can change. Confirm with the school before rel
- ying on it.
+SUMMARY:🍴 Taco Quesadilla Bites (Beef)
+DESCRIPTION:Hot Lunch: Taco Quesadilla Bites (Beef) (contains Milk\, Soy\
+ , Wheat)\nFruit: Seasonal Fresh Fruit\, Banana\nVegetable: Black Beans\n
+ Grab & Go: Mini Cheese Calzones (contains Milk\, Soy\, Wheat)\nAllergen 
+ info comes from the district and can change. Confirm with the school bef
+ ore relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:02ae8a5db952a444@linqconnect-menu.local
-DTSTAMP:20261004T140006Z
+DTSTAMP:20261011T140007Z
 DTSTART;VALUE=DATE:20261013
 DTEND;VALUE=DATE:20261014
 SUMMARY:🍴 Bacon Cheeseburger on Bun
@@ -123,7 +124,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:5946f082a35a8484@linqconnect-menu.local
-DTSTAMP:20261004T140006Z
+DTSTAMP:20261011T140007Z
 DTSTART;VALUE=DATE:20261014
 DTEND;VALUE=DATE:20261015
 SUMMARY:🍴 Vegetable Dumplings w/ Vegetable Egg Fried Rice
@@ -136,21 +137,21 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:63d33b7aa730f766@linqconnect-menu.local
-DTSTAMP:20261004T140006Z
+DTSTAMP:20261011T140007Z
 DTSTART;VALUE=DATE:20261019
 DTEND;VALUE=DATE:20261020
 SUMMARY:🍴 Spicy Chicken Sandwich
-DESCRIPTION:Hot Lunch: Spicy Chicken Sandwich (contains Sesame Seeds\, So
- y\, Wheat)\nFruit: Seasonal Fresh Fruit\, Clementine\nVegetable: Baked B
- eans\nExtra: Chocolate Chip Cookie\nGrab & Go: Pizza Bagel Bites (contai
- ns Milk\, Soy\, Wheat)\nSides contain: Egg\, Milk\, Soy\, Wheat\nAllerge
- n info comes from the district and can change. Confirm with the school b
- efore relying on it.
+DESCRIPTION:Hot Lunch: Spicy Chicken Sandwich (contains Milk\, Sesame See
+ ds\, Soy\, Wheat)\nFruit: Seasonal Fresh Fruit\, Clementine\nVegetable: 
+ Baked Beans\nExtra: Chocolate Chip Cookie\nGrab & Go: Pizza Bagel Bites 
+ (contains Milk\, Soy\, Wheat)\nSides contain: Egg\, Milk\, Soy\, Wheat\n
+ Allergen info comes from the district and can change. Confirm with the s
+ chool before relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:fcf57f4157cf66bd@linqconnect-menu.local
-DTSTAMP:20261004T140006Z
+DTSTAMP:20261011T140007Z
 DTSTART;VALUE=DATE:20261020
 DTEND;VALUE=DATE:20261021
 SUMMARY:🍴 Swedish Meatballs over Pasta
@@ -163,34 +164,34 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:9e4579ecbec96b12@linqconnect-menu.local
-DTSTAMP:20261004T140006Z
+DTSTAMP:20261011T140007Z
 DTSTART;VALUE=DATE:20261021
 DTEND;VALUE=DATE:20261022
 SUMMARY:🍴 Chicken Nuggets w/ Mac & Cheese
 DESCRIPTION:Hot Lunch: Chicken Nuggets w/ Mac & Cheese (Halal\; contains 
  Egg\, Milk\, Soy\, Wheat)\nFruit: Seasonal Fresh Fruit\, Mixed Berry Cup
- \nVegetable: Broccoli\nGrab & Go: Hamburger (contains Sesame Seeds\, Soy
- \, Wheat)\nAllergen info comes from the district and can change. Confirm
-  with the school before relying on it.
+ \nVegetable: Broccoli\nGrab & Go: Hamburger (contains Milk\, Sesame Seed
+ s\, Soy\, Wheat)\nAllergen info comes from the district and can change. 
+ Confirm with the school before relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:a8e03e27321ebd22@linqconnect-menu.local
-DTSTAMP:20261004T140006Z
+DTSTAMP:20261011T140007Z
 DTSTART;VALUE=DATE:20261022
 DTEND;VALUE=DATE:20261023
 SUMMARY:🍴 Crispy Chicken Sandwich w/ Chick-fil-A Sauce
 DESCRIPTION:Hot Lunch: Crispy Chicken Sandwich w/ Chick-fil-A Sauce (Hala
- l\; contains Egg\, Sesame Seeds\, Soy\, Wheat)\nFruit: Seasonal Fresh Fr
- uit\, Banana\nVegetable: Carrot Coins\nExtra: Vanilla Ice Cream Cup\nGra
- b & Go: Mozzarella Dippers (contains Milk\, Soy\, Wheat)\nSides contain:
-  Milk\nAllergen info comes from the district and can change. Confirm wit
- h the school before relying on it.
+ l\; contains Egg\, Milk\, Sesame Seeds\, Soy\, Wheat)\nFruit: Seasonal F
+ resh Fruit\, Banana\nVegetable: Carrot Coins\nExtra: Vanilla Ice Cream C
+ up\nGrab & Go: Mozzarella Dippers (contains Milk\, Soy\, Wheat)\nSides c
+ ontain: Milk\nAllergen info comes from the district and can change. Conf
+ irm with the school before relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2de36d6ac9ebb1e7@linqconnect-menu.local
-DTSTAMP:20261004T140006Z
+DTSTAMP:20261011T140007Z
 DTSTART;VALUE=DATE:20261023
 DTEND;VALUE=DATE:20261024
 SUMMARY:🍴 Four Cheese Pizza Slice: Big Daddy's
@@ -203,7 +204,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:a9b50cbe81be3de0@linqconnect-menu.local
-DTSTAMP:20261004T140006Z
+DTSTAMP:20261011T140007Z
 DTSTART;VALUE=DATE:20261026
 DTEND;VALUE=DATE:20261027
 SUMMARY:🍴 Tyson Chicken Tenders w/ Waffle
@@ -216,7 +217,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:3e6f034206039ffb@linqconnect-menu.local
-DTSTAMP:20261004T140006Z
+DTSTAMP:20261011T140007Z
 DTSTART;VALUE=DATE:20261027
 DTEND;VALUE=DATE:20261028
 SUMMARY:🍴 Nachos
@@ -228,7 +229,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:b189986f0519827c@linqconnect-menu.local
-DTSTAMP:20261004T140006Z
+DTSTAMP:20261011T140007Z
 DTSTART;VALUE=DATE:20261028
 DTEND;VALUE=DATE:20261029
 SUMMARY:🍴 Stuffed Crust Cheese Pizza
@@ -241,7 +242,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:bf6d78f900642792@linqconnect-menu.local
-DTSTAMP:20261004T140006Z
+DTSTAMP:20261011T140007Z
 DTSTART;VALUE=DATE:20261029
 DTEND;VALUE=DATE:20261030
 SUMMARY:🍴 Mashed Potato Bowl with Popcorn Chicken w/ Dinner Roll
@@ -254,7 +255,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:32cd19f9a3c57833@linqconnect-menu.local
-DTSTAMP:20261004T140006Z
+DTSTAMP:20261011T140007Z
 DTSTART;VALUE=DATE:20261030
 DTEND;VALUE=DATE:20261031
 SUMMARY:🍴 Soft Pretzel with Cheese Dip w/ String Cheese

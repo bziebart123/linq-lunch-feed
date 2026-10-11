@@ -7,32 +7,32 @@ X-WR-CALNAME:Marcy Elementary School Lunch
 X-WR-TIMEZONE:America/Chicago
 BEGIN:VEVENT
 UID:26882d178b5fb1aa@linqconnect-menu.local
-DTSTAMP:20261004T140005Z
+DTSTAMP:20261011T140005Z
 DTSTART;VALUE=DATE:20261001
 DTEND;VALUE=DATE:20261002
 SUMMARY:🍴 Pasta with Meatballs
-DESCRIPTION:Hot Lunch: Pasta with Meatballs (contains Egg\, Soy\, Wheat)\
- nFruit: Fresh Strawberries\nVegetable: Garden Salad\nExtra: Ranch Dressi
- ng Cup\nBistro Box: Pizza Kit (contains Milk\, Soy\, Wheat)\nSides conta
- in: Egg\, Fish\, Milk\nAllergen info comes from the district and can cha
- nge. Confirm with the school before relying on it.
+DESCRIPTION:Hot Lunch: Pasta with Meatballs (contains Egg\, Milk\, Soy\, 
+ Wheat)\nFruit: Fresh Strawberries\nVegetable: Garden Salad\nExtra: Ranch
+  Dressing Cup\nBistro Box: Pizza Kit (contains Milk\, Soy\, Wheat)\nSide
+ s contain: Egg\, Fish\, Milk\nAllergen info comes from the district and 
+ can change. Confirm with the school before relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:fcaf1dd232444b3a@linqconnect-menu.local
-DTSTAMP:20261004T140005Z
+DTSTAMP:20261011T140005Z
 DTSTART;VALUE=DATE:20261002
 DTEND;VALUE=DATE:20261003
-SUMMARY:🍴 Taco Quesadilla Bites
-DESCRIPTION:Hot Lunch: Taco Quesadilla Bites (contains Milk\, Soy\, Wheat
- )\nFruit: Apple\nVegetable: Black Beans\nBistro Box: Bagel w/ Cream Chee
- se (contains Milk\, Wheat)\nAllergen info comes from the district and ca
- n change. Confirm with the school before relying on it.
+SUMMARY:🍴 Taco Quesadilla Bites (Beef)
+DESCRIPTION:Hot Lunch: Taco Quesadilla Bites (Beef) (contains Milk\, Soy\
+ , Wheat)\nFruit: Apple\nVegetable: Black Beans\nBistro Box: Bagel w/ Cre
+ am Cheese (contains Milk\, Wheat)\nAllergen info comes from the district
+  and can change. Confirm with the school before relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2fde002f0c3f1b77@linqconnect-menu.local
-DTSTAMP:20261004T140005Z
+DTSTAMP:20261011T140005Z
 DTSTART;VALUE=DATE:20261005
 DTEND;VALUE=DATE:20261006
 SUMMARY:🍴 Stuffed Crust Cheese Pizza
@@ -44,7 +44,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:b7f23b8374a0b172@linqconnect-menu.local
-DTSTAMP:20261004T140005Z
+DTSTAMP:20261011T140005Z
 DTSTART;VALUE=DATE:20261006
 DTEND;VALUE=DATE:20261007
 SUMMARY:🍴 Mini Corn Dogs
@@ -56,7 +56,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:3a99f90ee915c5a4@linqconnect-menu.local
-DTSTAMP:20261004T140005Z
+DTSTAMP:20261011T140005Z
 DTSTART;VALUE=DATE:20261007
 DTEND;VALUE=DATE:20261008
 SUMMARY:🍴 Cheese Quesadilla
@@ -69,7 +69,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:41644ce113357e3d@linqconnect-menu.local
-DTSTAMP:20261004T140005Z
+DTSTAMP:20261011T140005Z
 DTSTART;VALUE=DATE:20261008
 DTEND;VALUE=DATE:20261009
 SUMMARY:🍴 Vegetable Dumplings w/ Vegetable Egg Fried Rice
@@ -83,7 +83,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:253b57d0856535d5@linqconnect-menu.local
-DTSTAMP:20261004T140005Z
+DTSTAMP:20261011T140005Z
 DTSTART;VALUE=DATE:20261009
 DTEND;VALUE=DATE:20261010
 SUMMARY:🍴 Cheeseburger
@@ -96,7 +96,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:d0681e682beb8412@linqconnect-menu.local
-DTSTAMP:20261004T140005Z
+DTSTAMP:20261011T140005Z
 DTSTART;VALUE=DATE:20261012
 DTEND;VALUE=DATE:20261013
 SUMMARY:🍴 Personal Pan Pizza
@@ -108,7 +108,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:02ae8a5db952a444@linqconnect-menu.local
-DTSTAMP:20261004T140005Z
+DTSTAMP:20261011T140005Z
 DTSTART;VALUE=DATE:20261013
 DTEND;VALUE=DATE:20261014
 SUMMARY:🍴 Pancakes (2) w/ Mini Chocolate Chips\, Sausage Links (2)
@@ -121,20 +121,20 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:5946f082a35a8484@linqconnect-menu.local
-DTSTAMP:20261004T140005Z
+DTSTAMP:20261011T140005Z
 DTSTART;VALUE=DATE:20261014
 DTEND;VALUE=DATE:20261015
 SUMMARY:🍴 Crispy Chicken Sandwich
-DESCRIPTION:Hot Lunch: Crispy Chicken Sandwich (Halal\; contains Sesame S
- eeds\, Soy\, Wheat)\nFruit: Orange Slices\nVegetable: Garden Salad\nBist
- ro Box: Greek (contains Egg\, Milk\, Sesame Seeds\, Soy\, Wheat)\nAllerg
- en info comes from the district and can change. Confirm with the school 
- before relying on it.
+DESCRIPTION:Hot Lunch: Crispy Chicken Sandwich (Halal\; contains Milk\, S
+ esame Seeds\, Soy\, Wheat)\nFruit: Orange Slices\nVegetable: Garden Sala
+ d\nBistro Box: Greek (contains Egg\, Milk\, Sesame Seeds\, Soy\, Wheat)\
+ nAllergen info comes from the district and can change. Confirm with the 
+ school before relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:63d33b7aa730f766@linqconnect-menu.local
-DTSTAMP:20261004T140005Z
+DTSTAMP:20261011T140005Z
 DTSTART;VALUE=DATE:20261019
 DTEND;VALUE=DATE:20261020
 SUMMARY:🍴 Stuffed Crust Cheese Pizza
@@ -146,20 +146,20 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:fcf57f4157cf66bd@linqconnect-menu.local
-DTSTAMP:20261004T140005Z
+DTSTAMP:20261011T140005Z
 DTSTART;VALUE=DATE:20261020
 DTEND;VALUE=DATE:20261021
 SUMMARY:🍴 Swedish Meatballs in Sauce
-DESCRIPTION:Hot Lunch: Swedish Meatballs in Sauce (contains Milk\, Wheat)
- \nFruit: Blueberries\nVegetable: Green Beans\nBistro Box: Nachos (contai
- ns Milk)\nAlso Offered: Noodles (contains Egg\, Soy\, Wheat)\nAllergen i
- nfo comes from the district and can change. Confirm with the school befo
- re relying on it.
+DESCRIPTION:Hot Lunch: Swedish Meatballs in Sauce (contains Milk\, Soy\, 
+ Wheat)\nFruit: Blueberries\nVegetable: Green Beans\nBistro Box: Nachos (
+ contains Milk)\nAlso Offered: Noodles (contains Egg\, Soy\, Wheat)\nAlle
+ rgen info comes from the district and can change. Confirm with the schoo
+ l before relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:9e4579ecbec96b12@linqconnect-menu.local
-DTSTAMP:20261004T140005Z
+DTSTAMP:20261011T140005Z
 DTSTART;VALUE=DATE:20261021
 DTEND;VALUE=DATE:20261022
 SUMMARY:🍴 Mozzarella Dippers w/ Marinara Cup
@@ -173,7 +173,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:a8e03e27321ebd22@linqconnect-menu.local
-DTSTAMP:20261004T140005Z
+DTSTAMP:20261011T140005Z
 DTSTART;VALUE=DATE:20261022
 DTEND;VALUE=DATE:20261023
 SUMMARY:🍴 Walking Taco
@@ -185,7 +185,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2de36d6ac9ebb1e7@linqconnect-menu.local
-DTSTAMP:20261004T140005Z
+DTSTAMP:20261011T140005Z
 DTSTART;VALUE=DATE:20261023
 DTEND;VALUE=DATE:20261024
 SUMMARY:🍴 Fish Bites
@@ -198,7 +198,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:a9b50cbe81be3de0@linqconnect-menu.local
-DTSTAMP:20261004T140005Z
+DTSTAMP:20261011T140005Z
 DTSTART;VALUE=DATE:20261026
 DTEND;VALUE=DATE:20261027
 SUMMARY:🍴 Four Cheese Pizza Slice: Big Daddy's
@@ -212,7 +212,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:3e6f034206039ffb@linqconnect-menu.local
-DTSTAMP:20261004T140005Z
+DTSTAMP:20261011T140005Z
 DTSTART;VALUE=DATE:20261027
 DTEND;VALUE=DATE:20261028
 SUMMARY:🍴 Couscous w/ Shredded Chicken
@@ -224,7 +224,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:b189986f0519827c@linqconnect-menu.local
-DTSTAMP:20261004T140005Z
+DTSTAMP:20261011T140005Z
 DTSTART;VALUE=DATE:20261028
 DTEND;VALUE=DATE:20261029
 SUMMARY:🍴 Corn Dog on a Stick (Chicken)
@@ -237,7 +237,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:bf6d78f900642792@linqconnect-menu.local
-DTSTAMP:20261004T140005Z
+DTSTAMP:20261011T140005Z
 DTSTART;VALUE=DATE:20261029
 DTEND;VALUE=DATE:20261030
 SUMMARY:🍴 Scrambled Eggs w/ Turkey Bacon\, Blueberry Muffin
