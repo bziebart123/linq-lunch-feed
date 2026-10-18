@@ -7,7 +7,7 @@ X-WR-CALNAME:Hamilton High School Lunch
 X-WR-TIMEZONE:America/Chicago
 BEGIN:VEVENT
 UID:26882d178b5fb1aa@linqconnect-menu.local
-DTSTAMP:20261011T140003Z
+DTSTAMP:20261018T140004Z
 DTSTART;VALUE=DATE:20261001
 DTEND;VALUE=DATE:20261002
 SUMMARY:🍴 Boneless Chicken Wings w/ Dinner Roll
@@ -22,7 +22,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:fcaf1dd232444b3a@linqconnect-menu.local
-DTSTAMP:20261011T140003Z
+DTSTAMP:20261018T140004Z
 DTSTART;VALUE=DATE:20261002
 DTEND;VALUE=DATE:20261003
 SUMMARY:🍴 Domino's Pizza Slice (Cheese)
@@ -35,43 +35,43 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2fde002f0c3f1b77@linqconnect-menu.local
-DTSTAMP:20261011T140003Z
+DTSTAMP:20261018T140004Z
 DTSTART;VALUE=DATE:20261005
 DTEND;VALUE=DATE:20261006
 SUMMARY:🍴 Chicken Sandwich Sliders
 DESCRIPTION:Hot Lunch: Chicken Sandwich Sliders (contains Sesame Seeds\, 
  Soy\, Wheat)\nFruit: Seasonal Fresh Fruit\, Pear\nVegetable: Baked Beans
- \nBuild Your Own: Waffle Bar (contains Egg\, Milk\, Soy\, Wheat)\nThe Gr
- ill: Cheese Pizza Slice\, Stuffed Crust Pepperoni Pizza (contains Milk\,
+ \nThe Grill: Cheese Pizza Slice\, Stuffed Crust Pepperoni Pizza (contain
+ s Milk\, Soy\, Wheat)\nBuild Your Own: Waffle Bar (contains Egg\, Milk\,
   Soy\, Wheat)\nAllergen info comes from the district and can change. Con
  firm with the school before relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:b7f23b8374a0b172@linqconnect-menu.local
-DTSTAMP:20261011T140003Z
+DTSTAMP:20261018T140004Z
 DTSTART;VALUE=DATE:20261006
 DTEND;VALUE=DATE:20261007
 SUMMARY:🍴 French Toast Sticks w/ Sausage Links (2)
 DESCRIPTION:Hot Lunch: French Toast Sticks w/ Sausage Links (2) (contains
   Egg\, Milk\, Soy\, Wheat)\nFruit: Seasonal Fresh Fruit\, Apple Juice\nV
- egetable: Smile Potatoes\nExtra: Syrup\nBuild Your Own: Waffle Bar (cont
- ains Egg\, Milk\, Soy\, Wheat)\nThe Grill: Cheese Pizza Slice\, Stuffed 
- Crust Pepperoni Pizza (contains Milk\, Soy\, Wheat)\nAllergen info comes
+ egetable: Smile Potatoes\nExtra: Syrup\nThe Grill: Cheese Pizza Slice\, 
+ Stuffed Crust Pepperoni Pizza (contains Milk\, Soy\, Wheat)\nBuild Your 
+ Own: Waffle Bar (contains Egg\, Milk\, Soy\, Wheat)\nAllergen info comes
   from the district and can change. Confirm with the school before relyin
  g on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:3a99f90ee915c5a4@linqconnect-menu.local
-DTSTAMP:20261011T140003Z
+DTSTAMP:20261018T140004Z
 DTSTART;VALUE=DATE:20261007
 DTEND;VALUE=DATE:20261008
 SUMMARY:🍴 Sweet and Sour Chicken with Rice
 DESCRIPTION:Hot Lunch: Sweet and Sour Chicken with Rice (Halal)\nFruit: S
  easonal Fresh Fruit\, Pineapple\nVegetable: Broccoli\nExtra: Fortune Coo
- kie\nBuild Your Own: Waffle Bar (contains Egg\, Milk\, Soy\, Wheat)\nThe
-  Grill: Cheese Pizza Slice\, Stuffed Crust Pepperoni Pizza (contains Mil
+ kie\nThe Grill: Cheese Pizza Slice\, Stuffed Crust Pepperoni Pizza (cont
+ ains Milk\, Soy\, Wheat)\nBuild Your Own: Waffle Bar (contains Egg\, Mil
  k\, Soy\, Wheat)\nSides contain: Soy\, Wheat\nAllergen info comes from t
  he district and can change. Confirm with the school before relying on it
  .
@@ -79,22 +79,22 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:41644ce113357e3d@linqconnect-menu.local
-DTSTAMP:20261011T140003Z
+DTSTAMP:20261018T140004Z
 DTSTART;VALUE=DATE:20261008
 DTEND;VALUE=DATE:20261009
 SUMMARY:🍴 Pulled Pork Sandwich
 DESCRIPTION:Hot Lunch: Pulled Pork Sandwich (contains Milk\, Sesame Seeds
  \, Soy\, Wheat)\nFruit: Seasonal Fresh Fruit\, Apple Slices\nVegetable: 
- Baby Carrots\nExtra: Caramel Cup\nBuild Your Own: Waffle Bar (contains E
- gg\, Milk\, Soy\, Wheat)\nThe Grill: Cheese Pizza Slice\, Stuffed Crust 
- Pepperoni Pizza (contains Milk\, Soy\, Wheat)\nSides contain: Milk\nAlle
+ Baby Carrots\nExtra: Caramel Cup\nThe Grill: Cheese Pizza Slice\, Stuffe
+ d Crust Pepperoni Pizza (contains Milk\, Soy\, Wheat)\nBuild Your Own: W
+ affle Bar (contains Egg\, Milk\, Soy\, Wheat)\nSides contain: Milk\nAlle
  rgen info comes from the district and can change. Confirm with the schoo
  l before relying on it.
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:253b57d0856535d5@linqconnect-menu.local
-DTSTAMP:20261011T140003Z
+DTSTAMP:20261018T140004Z
 DTSTART;VALUE=DATE:20261009
 DTEND;VALUE=DATE:20261010
 SUMMARY:🍴 Domino's Pizza Slice (Cheese) w/ String Cheese
@@ -107,7 +107,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:d0681e682beb8412@linqconnect-menu.local
-DTSTAMP:20261011T140003Z
+DTSTAMP:20261018T140004Z
 DTSTART;VALUE=DATE:20261012
 DTEND;VALUE=DATE:20261013
 SUMMARY:🍴 Taco Quesadilla Bites (Beef)
@@ -120,7 +120,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:02ae8a5db952a444@linqconnect-menu.local
-DTSTAMP:20261011T140003Z
+DTSTAMP:20261018T140004Z
 DTSTART;VALUE=DATE:20261013
 DTEND;VALUE=DATE:20261014
 SUMMARY:🍴 Bacon Cheeseburger on Bun
@@ -133,7 +133,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:5946f082a35a8484@linqconnect-menu.local
-DTSTAMP:20261011T140003Z
+DTSTAMP:20261018T140004Z
 DTSTART;VALUE=DATE:20261014
 DTEND;VALUE=DATE:20261015
 SUMMARY:🍴 Vegetable Dumplings w/ Vegetable Egg Fried Rice
@@ -147,7 +147,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:63d33b7aa730f766@linqconnect-menu.local
-DTSTAMP:20261011T140003Z
+DTSTAMP:20261018T140004Z
 DTSTART;VALUE=DATE:20261019
 DTEND;VALUE=DATE:20261020
 SUMMARY:🍴 Spicy Chicken Sandwich
@@ -162,7 +162,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:fcf57f4157cf66bd@linqconnect-menu.local
-DTSTAMP:20261011T140003Z
+DTSTAMP:20261018T140004Z
 DTSTART;VALUE=DATE:20261020
 DTEND;VALUE=DATE:20261021
 SUMMARY:🍴 Swedish Meatballs over Pasta
@@ -176,7 +176,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:9e4579ecbec96b12@linqconnect-menu.local
-DTSTAMP:20261011T140003Z
+DTSTAMP:20261018T140004Z
 DTSTART;VALUE=DATE:20261021
 DTEND;VALUE=DATE:20261022
 SUMMARY:🍴 Chicken Nuggets w/ Mac & Cheese
@@ -190,7 +190,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:a8e03e27321ebd22@linqconnect-menu.local
-DTSTAMP:20261011T140003Z
+DTSTAMP:20261018T140004Z
 DTSTART;VALUE=DATE:20261022
 DTEND;VALUE=DATE:20261023
 SUMMARY:🍴 Crispy Chicken Sandwich w/ Chick-fil-A Sauce
@@ -205,7 +205,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2de36d6ac9ebb1e7@linqconnect-menu.local
-DTSTAMP:20261011T140003Z
+DTSTAMP:20261018T140004Z
 DTSTART;VALUE=DATE:20261023
 DTEND;VALUE=DATE:20261024
 SUMMARY:🍴 Domino's 14 inch whole grain
@@ -218,7 +218,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:a9b50cbe81be3de0@linqconnect-menu.local
-DTSTAMP:20261011T140003Z
+DTSTAMP:20261018T140004Z
 DTSTART;VALUE=DATE:20261026
 DTEND;VALUE=DATE:20261027
 SUMMARY:🍴 Tyson Chicken Tenders w/ Waffle
@@ -232,7 +232,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:3e6f034206039ffb@linqconnect-menu.local
-DTSTAMP:20261011T140003Z
+DTSTAMP:20261018T140004Z
 DTSTART;VALUE=DATE:20261027
 DTEND;VALUE=DATE:20261028
 SUMMARY:🍴 Nachos
@@ -245,7 +245,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:b189986f0519827c@linqconnect-menu.local
-DTSTAMP:20261011T140003Z
+DTSTAMP:20261018T140004Z
 DTSTART;VALUE=DATE:20261028
 DTEND;VALUE=DATE:20261029
 SUMMARY:🍴 Fish and Chips
@@ -258,7 +258,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:bf6d78f900642792@linqconnect-menu.local
-DTSTAMP:20261011T140003Z
+DTSTAMP:20261018T140004Z
 DTSTART;VALUE=DATE:20261029
 DTEND;VALUE=DATE:20261030
 SUMMARY:🍴 Mashed Potato Bowl with Popcorn Chicken w/ Dinner Roll
@@ -272,7 +272,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:32cd19f9a3c57833@linqconnect-menu.local
-DTSTAMP:20261011T140003Z
+DTSTAMP:20261018T140004Z
 DTSTART;VALUE=DATE:20261030
 DTEND;VALUE=DATE:20261031
 SUMMARY:🍴 Domino's Pizza Slice (Cheese)
