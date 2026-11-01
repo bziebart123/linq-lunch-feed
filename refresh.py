@@ -36,6 +36,7 @@ CONFIG = "config.json"
 DISTRICT_NOTE = ""
 CRLF = chr(13) + chr(10)
 PUBLIC = "public"
+INDEX = "index.html"
 
 
 def candidate_months():
@@ -475,7 +476,9 @@ def main():
         print("--no-push set; not committing.")
         return 0
 
-    subprocess.run(["git", "add", PUBLIC], check=True)
+    # INDEX lives in the repo root, not PUBLIC, so it needs staging of its own;
+    # without it the published page keeps pointing at last month's PDFs.
+    subprocess.run(["git", "add", PUBLIC, INDEX], check=True)
     if subprocess.run(["git", "diff", "--cached", "--quiet"]).returncode == 0:
         print("No changes since last publish; nothing to push.")
         return 0
